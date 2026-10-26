@@ -225,6 +225,11 @@ function renderStepDetails(step: StepNode, u: LanguagePack["ui"]): string {
             </div>`
           : ""
       }
+      <div style="font-size:12px;color:var(--mut);padding:2px 0">
+        Invariante I2 (<code>missing</code>): <code>${esc(
+          step.missing && step.missing.length > 0 ? step.missing.join(", ") : "nessuno"
+        )}</code>${step.lean.hash ? ` · sha256: <code>${esc(step.lean.hash.slice(0, 12))}…</code>` : ""}
+      </div>
       ${subHtml}
     </details>
   `;
@@ -264,14 +269,17 @@ function renderBreadcrumbs(code: string, u: LanguagePack["ui"]): string {
 
 // Raccoglie i nodi del sottografo selezionato (o del nodo/sezione corrente) e li disegna per livelli (DAG stratificato)
 function renderStratifiedGraph(container: HTMLElement, contextCode: string, u: LanguagePack["ui"]): void {
-  const selectedIds = Object.keys(sel).filter((k) => sel[k]);
+  const selectedIds = Object.keys(sel)
+    .filter((k) => sel[k])
+    .map((k) => k.replace(/-XX$/i, ""));
+  const normContext = contextCode.replace(/-XX$/i, "");
   const allGraphNodes = bundle.graph.nodes;
   const allGraphEdges = bundle.graph.edges;
 
   let activeSet = new Set<string>();
 
   if (selectedIds.length > 0) {
-    // Include tutti i nodi selezionati (e se è selezionata una sezione MSC, tutti i nodi in quella sezione)
+    // Include tutti i nodi selezionati (e se è selezionata una sezione MSC es. 11 o 11-XX, tutti i nodi in quella sezione)
     for (const sId of selectedIds) {
       for (const gn of allGraphNodes) {
         if (gn.id === sId || gn.id.startsWith(sId + ".") || gn.msc.startsWith(sId)) {
@@ -283,10 +291,10 @@ function renderStratifiedGraph(container: HTMLElement, contextCode: string, u: L
     for (const edge of allGraphEdges) {
       if (activeSet.has(edge.to)) activeSet.add(edge.from);
     }
-  } else if (contextCode && contextCode !== "docs") {
+  } else if (normContext && normContext !== "docs") {
     // Nessuna casella spuntata: proietta il nodo corrente o la sezione MSC corrente
     for (const gn of allGraphNodes) {
-      if (gn.id === contextCode || gn.id.startsWith(contextCode + ".") || gn.msc.startsWith(contextCode)) {
+      if (gn.id === normContext || gn.id.startsWith(normContext + ".") || gn.msc.startsWith(normContext)) {
         activeSet.add(gn.id);
       }
     }
@@ -749,7 +757,7 @@ function renderMain(): void {
 
     const hasSubgraphNodes = bundle.graph.nodes.some((gn) => gn.msc.startsWith(mscItem.code));
 
-    mainEl.innerHTML = `
+    const secTextHtml = `
       <div class="crumb">${renderBreadcrumbs(mscItem.code, u)}</div>
       <div class="code">MSC2020 · ${esc(mscItem.official)}</div>
       <h1>${esc(tr(mscItem.title))}</h1>
@@ -763,8 +771,34 @@ function renderMain(): void {
       ${childLinks ? `<h2>Sotto-sezioni MSC2020</h2><ul>${childLinks}</ul>` : ""}
       ${nodeLinks ? `<h2>Proposizioni, lemmi e dimostrazioni (${mscItem.nodeIds.length})</h2><ul>${nodeLinks}</ul>` : ""}
       ${!childLinks && !nodeLinks ? `<p class="empty">${esc(u.empty_section)}</p>` : ""}
-      ${hasSubgraphNodes ? `<h2>Grafo della sezione ${esc(mscItem.official)}</h2><div class="box" id="gv"></div>` : ""}
     `;
+
+    if (view === "g") {
+      mainEl.innerHTML = `
+        <div class="crumb">${renderBreadcrumbs(mscItem.code, u)}</div>
+        <div class="code">MSC2020 · ${esc(mscItem.official)}</div>
+        <h1>${esc(tr(mscItem.title))}</h1>
+        <div class="bar">
+          <button type="button" id="sec-back-text">${esc(u.view_text)}</button>
+        </div>
+        <div class="box" id="gv"></div>
+      `;
+    } else if (view === "h") {
+      mainEl.innerHTML = `
+        <div class="hybrid-grid">
+          <div>${secTextHtml}</div>
+          <div style="position:sticky;top:16px">
+            <h2>Grafo della sezione ${esc(mscItem.official)}</h2>
+            <div class="box" id="gv"></div>
+          </div>
+        </div>
+      `;
+    } else {
+      mainEl.innerHTML = `
+        ${secTextHtml}
+        ${hasSubgraphNodes ? `<h2>Grafo della sezione ${esc(mscItem.official)}</h2><div class="box" id="gv"></div>` : ""}
+      `;
+    }
 
     const secCheck = document.getElementById("sel-msc-sec") as HTMLInputElement | null;
     if (secCheck) {
@@ -778,6 +812,13 @@ function renderMain(): void {
     if (secGraphBtn) {
       secGraphBtn.onclick = () => {
         view = "g";
+        renderMain();
+      };
+    }
+    const secBackText = document.getElementById("sec-back-text");
+    if (secBackText) {
+      secBackText.onclick = () => {
+        view = "t";
         renderMain();
       };
     }

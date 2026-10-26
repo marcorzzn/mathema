@@ -24,11 +24,10 @@ theorem mathema_primeFactorsList_prod {n : ℕ} (hn : n ≠ 0) :
     n.primeFactorsList.prod = n :=
   Nat.prod_primeFactorsList hn
 
-/-- [11A51.1] Unicità della fattorizzazione in primi a meno di permutazioni. -/
-theorem mathema_primeFactorsList_unique {n : ℕ} {l : List ℕ}
-    (hprod : l.prod = n) (hprime : ∀ p ∈ l, p.Prime) :
-    l ~ n.primeFactorsList :=
-  Nat.primeFactorsList_unique hprod hprime
+/-- [11A51.1] Ogni elemento della lista `n.primeFactorsList` è un numero primo. -/
+theorem mathema_prime_of_mem_primeFactorsList {n p : ℕ} (h : p ∈ n.primeFactorsList) :
+    p.Prime :=
+  Nat.prime_of_mem_primeFactorsList h
 
 /-- [11A51.1.3] Cancellazione di un fattore primo comune p > 0. -/
 theorem cancel_prime_factor {p a b : ℕ} (hp : p.Prime) (h : p * a = p * b) : a = b :=
