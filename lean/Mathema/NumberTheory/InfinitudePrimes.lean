@@ -15,11 +15,7 @@ theorem mathema_exists_prime_dvd {n : ℕ} (hn : n ≠ 1) :
     ∃ p : ℕ, p.Prime ∧ p ∣ n :=
   Nat.exists_prime_and_dvd hn
 
-/-- [11A41.1] Teorema di Euclide: l'insieme dei numeri primi è infinito. -/
-theorem mathema_infinite_primes : Set.Infinite {p : ℕ | p.Prime} :=
-  Nat.infinite_setOf_prime
-
-/-- [11A41.1] Formulazione illimitata: per ogni n esiste un primo p ≥ n. -/
+/-- [11A41.1] Teorema di Euclide: per ogni soglia n esiste un numero primo p ≥ n. -/
 theorem mathema_exists_infinite_primes (n : ℕ) : ∃ p ≥ n, Nat.Prime p :=
   Nat.exists_infinite_primes n
 

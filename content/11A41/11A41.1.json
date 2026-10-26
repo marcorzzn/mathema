@@ -16,14 +16,14 @@
   },
   "symbolic": "Set.Infinite { p ∈ ℕ ∣ Prime(p) }  ⇔  ∀ n ∈ ℕ, ∃ p ≥ n, Prime(p)",
   "lean": {
-    "code": "import Mathlib.Data.Nat.Prime.Infinite\n\n/-- Teorema di Euclide: l'insieme dei numeri primi è infinito. -/\ntheorem mathema_infinite_primes : Set.Infinite {p : ℕ | p.Prime} :=\n  Nat.infinite_setOf_prime\n\n/-- Formulazione costruttiva tramite fattoriale N = n! + 1. -/\ntheorem mathema_exists_infinite_primes (n : ℕ) : ∃ p ≥ n, Nat.Prime p :=\n  Nat.exists_infinite_primes n",
+    "code": "import Mathlib.Data.Nat.Prime.Infinite\n\n/-- Teorema di Euclide: per ogni soglia n esiste un numero primo p ≥ n. -/\ntheorem mathema_exists_infinite_primes (n : ℕ) : ∃ p ≥ n, Nat.Prime p :=\n  Nat.exists_infinite_primes n",
     "status": "unverified",
     "mathlib_version": "v4.15.0",
-    "mathlib_name": "Nat.infinite_setOf_prime",
+    "mathlib_name": "Nat.exists_infinite_primes",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
     "verified_at": null,
-    "hash": "9a0d8893e7416a91d53a74687979aed39902ff732004c97f31383fe3ef9cb7b4",
-    "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+    "hash": "2353d9cc2ee56881d0dbbb4fa048755605d02b8f1d87045cafe73573d67bc8b1",
+    "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
   },
   "deps": [
     {
@@ -62,7 +62,7 @@
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
         "verified_at": null,
         "hash": "f4437de500ae3713a648575358c62e2f3bf5d87372453ab6c3185da38503a65d",
-        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+        "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },
       "deps": [],
       "missing": [
@@ -98,7 +98,7 @@
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
         "verified_at": null,
         "hash": "689bede4a4765d8a2ddcc7610f263e496991c4c2d2888b6f092cd7ece1e150fd",
-        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+        "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },
       "deps": [
         {
@@ -143,7 +143,7 @@
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
         "verified_at": null,
         "hash": "a6f110d01ac503b52f90596663a263f07386970542c5dced5d63a1151caced55",
-        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+        "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },
       "deps": [
         {
@@ -180,7 +180,7 @@
             "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
             "verified_at": null,
             "hash": "c44e46064a65288bdceda46b1240b8995472a0328ea6f0d381a0479b9e0dc079",
-            "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+            "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
           },
           "deps": [],
           "missing": [
@@ -226,7 +226,7 @@
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
         "verified_at": null,
         "hash": "f1d55d946d95e9cea4ce2b4b2669bd5a828b3dd912236ce3d4993b970b832a79",
-        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
+        "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },
       "deps": [
         {
@@ -293,7 +293,7 @@
   "formalization_yaml": {
     "project": "mathema",
     "msc": "11A41",
-    "target_theorem": "Nat.infinite_setOf_prime",
+    "target_theorem": "Nat.exists_infinite_primes",
     "comparator_setup": {
       "lean_toolchain": "leanprover/lean4:v4.15.0",
       "mathlib_rev": "v4.15.0",
