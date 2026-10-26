@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LanguageCode } from "./data/mathemaData";
+import { MscHierarchicalExplorer } from "./components/MscHierarchicalExplorer";
 import { KnowledgeGraphSection } from "./components/KnowledgeGraphSection";
 import { BridgeWorkbenchSection } from "./components/BridgeWorkbenchSection";
 import { PedagogyMatrixSection } from "./components/PedagogyMatrixSection";
@@ -42,6 +43,12 @@ export default function App() {
           {/* Zone 2: 5 concise single-line text navigation links */}
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#57534E]">
             <a
+              href="#msc-explorer"
+              className="hover:text-[#1C1917] hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0"
+            >
+              Gerarchia MSC
+            </a>
+            <a
               href="#grafo"
               className="hover:text-[#1C1917] hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0"
             >
@@ -65,21 +72,15 @@ export default function App() {
             >
               Architettura
             </a>
-            <a
-              href="#manifesto"
-              className="hover:text-[#1C1917] hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0"
-            >
-              Manifesto
-            </a>
           </nav>
 
           {/* Zone 3: 1 primary action */}
           <div className="flex items-center shrink-0">
             <button
-              onClick={() => scrollToSection("grafo")}
+              onClick={() => scrollToSection("msc-explorer")}
               className="px-4 py-2 text-xs font-medium text-white bg-[#1E3A8A] rounded-lg hover:bg-[#172554] transition-colors whitespace-nowrap shrink-0"
             >
-              Esplora il Grafo
+              Esplora Sistema MSC
             </button>
           </div>
         </div>
@@ -101,11 +102,11 @@ export default function App() {
                       Marco Razzano
                     </span>
                     <span aria-hidden="true">·</span>
-                    <span>Manifesto e Blueprint v0.1</span>
+                    <span>Sistema Gerarchico MSC2020</span>
                     <span aria-hidden="true">·</span>
-                    <span>17 Ottobre 2026</span>
+                    <span>Tripla Corrispondenza (NL · Simbolico · Lean 4)</span>
                     <span aria-hidden="true">·</span>
-                    <span>Licenza CC BY-SA 4.0</span>
+                    <span>CC BY-SA 4.0</span>
                   </div>
 
                   <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold text-[#1C1917] leading-[1.12] tracking-tight text-balance">
@@ -114,22 +115,26 @@ export default function App() {
                   </h1>
 
                   <p className="mt-6 text-base lg:text-lg text-[#44403C] leading-relaxed max-w-2xl">
-                    <strong>Mathema</strong> è l&apos;infrastruttura aperta,
-                    multilingue, verificabile e navigabile della conoscenza
-                    matematica, fisica e informatica — dall&apos;asilo al
-                    post-doc. Unisce un grafo multi-relazionale di concetti a un
-                    ponte bidirezionale tra linguaggio naturale e dimostrazioni
-                    formali in <strong>Lean 4 / Mathlib</strong>.
+                    <strong>Mathema</strong> organizza ogni disciplina,
+                    sezione, teorema e micro-passaggio secondo la numerazione
+                    gerarchica{" "}
+                    <strong>Mathematics Subject Classification (MSC2020)</strong>
+                    . Ad ogni enunciato e singolo passaggio corrispondono
+                    simultaneamente la formulazione in{" "}
+                    <strong>linguaggio naturale multilingue</strong>, la{" "}
+                    <strong>sintassi simbolica formale</strong> e la{" "}
+                    <strong>verifica in Lean 4</strong>, ispezionabili sia come
+                    testo espandibile sia come grafo con grafici 2D e 3D.
                   </p>
                 </div>
 
                 {/* Primary & Secondary Actions */}
                 <div className="mt-8 pt-6 border-t border-[#E5DEC9] flex flex-wrap items-center gap-4">
                   <button
-                    onClick={() => scrollToSection("grafo")}
+                    onClick={() => scrollToSection("msc-explorer")}
                     className="px-5 py-2.5 text-sm font-medium bg-[#1E3A8A] text-white rounded-lg hover:bg-[#172554] transition-colors flex items-center gap-2 whitespace-nowrap shrink-0"
                   >
-                    Naviga il Grafo della Conoscenza
+                    Apri Esposizione Gerarchica MSC
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
@@ -137,7 +142,7 @@ export default function App() {
                     onClick={() => scrollToSection("ponte")}
                     className="px-5 py-2.5 text-sm font-medium bg-[#F3EFE6] text-[#1C1917] border border-[#D6CEBE] rounded-lg hover:bg-[#EBE6DF] transition-colors whitespace-nowrap shrink-0"
                   >
-                    Prova il Ponte NL ↔ Lean 4
+                    Ponte NL ↔ Simbolico ↔ Lean 4
                   </button>
 
                   <a
@@ -155,9 +160,9 @@ export default function App() {
               {/* Right Column: Interactive Architectural Diagram Card (5 cols) */}
               <div className="lg:col-span-5 bg-[#F3EFE6] border border-[#D6CEBE] rounded-lg p-6 flex flex-col justify-between">
                 <div className="flex items-center justify-between text-xs font-mono text-[#57534E] pb-3 border-b border-[#E5DEC9]">
-                  <span>ARCHITETTURA DEL CICLO MATHEMA</span>
+                  <span>TRIPLA CORRISPONDENZA &amp; NUMERAZIONE MSC2020</span>
                   <span className="text-[#14532D] font-semibold">
-                    ✓ Lean 4 + Mathlib4
+                    ✓ [11J68.3.2.a]
                   </span>
                 </div>
 
@@ -167,7 +172,7 @@ export default function App() {
                     viewBox="0 0 420 230"
                     className="w-full h-[205px]"
                     role="img"
-                    aria-label="Diagramma commutativo del ponte NL e Lean 4 in Mathema"
+                    aria-label="Diagramma della tripla corrispondenza NL, Sintassi Simbolica e Lean 4 su gerarchia MSC2020"
                   >
                     <defs>
                       <marker
@@ -185,115 +190,133 @@ export default function App() {
 
                     {/* Top Left: Linguaggio Naturale */}
                     <rect
-                      x="16"
-                      y="20"
-                      width="155"
+                      x="12"
+                      y="18"
+                      width="124"
                       height="64"
-                      rx="6"
+                      rx="5"
                       fill="#F3EFE6"
                       stroke="#1C1917"
-                      strokeWidth="1.5"
+                      strokeWidth="1.4"
                     />
                     <text
-                      x="93"
-                      y="43"
+                      x="74"
+                      y="40"
                       textAnchor="middle"
-                      fontSize="11"
+                      fontSize="10"
                       fontWeight="700"
                       fill="#1C1917"
                     >
-                      Linguaggio Naturale
+                      1. Linguaggio Naturale
                     </text>
                     <text
-                      x="93"
-                      y="60"
+                      x="74"
+                      y="56"
                       textAnchor="middle"
-                      fontSize="9.5"
+                      fontSize="8.5"
                       fontFamily="IBM Plex Mono"
                       fill="#57534E"
                     >
-                      &ldquo;√2 è irrazionale&rdquo; (10 lingue)
+                      IT · EN · ES · ZH · AR
+                    </text>
+                    <text
+                      x="74"
+                      y="70"
+                      textAnchor="middle"
+                      fontSize="8"
+                      fill="#78716C"
+                    >
+                      Passaggi a comparsa
+                    </text>
+
+                    {/* Top Center: Sintassi Simbolica Formale */}
+                    <rect
+                      x="148"
+                      y="18"
+                      width="124"
+                      height="64"
+                      rx="5"
+                      fill="#FFF7ED"
+                      stroke="#9A3412"
+                      strokeWidth="1.4"
+                    />
+                    <text
+                      x="210"
+                      y="40"
+                      textAnchor="middle"
+                      fontSize="10"
+                      fontWeight="700"
+                      fill="#9A3412"
+                    >
+                      2. Sintassi Simbolica
+                    </text>
+                    <text
+                      x="210"
+                      y="56"
+                      textAnchor="middle"
+                      fontSize="8.5"
+                      fontFamily="IBM Plex Mono"
+                      fill="#1C1917"
+                    >
+                      ∀ p,q, gcd(p,q)=1 ⇒ ...
+                    </text>
+                    <text
+                      x="210"
+                      y="70"
+                      textAnchor="middle"
+                      fontSize="8"
+                      fill="#78716C"
+                    >
+                      Sequenti Γ ⊢ φ
                     </text>
 
                     {/* Top Right: Lean 4 / Mathlib */}
                     <rect
-                      x="248"
-                      y="20"
-                      width="155"
+                      x="284"
+                      y="18"
+                      width="124"
                       height="64"
-                      rx="6"
+                      rx="5"
                       fill="#1E3A8A"
                       stroke="#1E3A8A"
-                      strokeWidth="1.5"
+                      strokeWidth="1.4"
                     />
                     <text
-                      x="325"
-                      y="43"
+                      x="346"
+                      y="40"
                       textAnchor="middle"
-                      fontSize="11"
+                      fontSize="10"
                       fontWeight="700"
                       fill="#FFFFFF"
                     >
-                      Formalizzazione Lean 4
+                      3. Codice Lean 4
                     </text>
                     <text
-                      x="325"
-                      y="60"
+                      x="346"
+                      y="56"
                       textAnchor="middle"
-                      fontSize="9.5"
+                      fontSize="8.5"
                       fontFamily="IBM Plex Mono"
                       fill="#DBEAFE"
                     >
-                      Irrational (Real.sqrt 2)
+                      Irrational (sqrt 2)
                     </text>
-
-                    {/* Horizontal Bidirectional Arrows */}
-                    <line
-                      x1="176"
-                      y1="42"
-                      x2="242"
-                      y2="42"
-                      stroke="#1E3A8A"
-                      strokeWidth="1.75"
-                      markerEnd="url(#hero-arrow)"
-                    />
                     <text
-                      x="209"
-                      y="35"
+                      x="346"
+                      y="70"
                       textAnchor="middle"
-                      fontSize="8.5"
-                      fontFamily="IBM Plex Mono"
-                      fill="#1E3A8A"
+                      fontSize="8"
+                      fill="#93C5FD"
                     >
-                      LoC-Decomp
+                      Mathlib / Tau Ceti
                     </text>
 
-                    <line
-                      x1="242"
-                      y1="64"
-                      x2="176"
-                      y2="64"
-                      stroke="#1E3A8A"
-                      strokeWidth="1.75"
-                      markerEnd="url(#hero-arrow)"
-                    />
-                    <text
-                      x="209"
-                      y="78"
-                      textAnchor="middle"
-                      fontSize="8.5"
-                      fontFamily="IBM Plex Mono"
-                      fill="#9A3412"
-                    >
-                      Herald / Sketch
-                    </text>
-
-                    {/* Bottom Center: Multi-Relational Knowledge Graph */}
+                    {/* Bottom Center: MSC2020 Tree + Dynamic Graph + 2D/3D Plots */}
                     <rect
-                      x="75"
-                      y="142"
-                      width="270"
-                      height="68"
+                      x="35"
+                      y="138"
+                      width="350"
+                      height="74"
                       rx="6"
                       fill="#FBF9F5"
                       stroke="#14532D"
@@ -301,50 +324,58 @@ export default function App() {
                     />
                     <text
                       x="210"
-                      y="166"
+                      y="160"
                       textAnchor="middle"
-                      fontSize="11"
+                      fontSize="10.5"
                       fontWeight="700"
                       fill="#1C1917"
                     >
-                      Grafo Multi-Relazionale &amp; Pedagogia (L0–L7)
+                      Numerazione MSC2020: [11-XX] → [11J68] → [11J68.3] → [11J68.3.2.a]
                     </text>
                     <text
                       x="210"
-                      y="184"
+                      y="178"
                       textAnchor="middle"
-                      fontSize="9.5"
+                      fontSize="9"
                       fontFamily="IBM Plex Mono"
                       fill="#14532D"
                     >
-                      urn:mathema:concept:sqrt2-irrationality
+                      Vista Testuale Espandibile ⇄ Vista Grafo di Porzioni ⇄ Grafici 2D/3D
                     </text>
                     <text
                       x="210"
-                      y="198"
+                      y="196"
                       textAnchor="middle"
-                      fontSize="9"
+                      fontSize="8.5"
                       fill="#57534E"
                     >
-                      Prerequisiti · Multiprova · 8 Stili · Diagnosi LeanTutor
+                      Infrastruttura minimale zero-bloat · Rendering vettoriale istantaneo
                     </text>
 
-                    {/* Diagonal Connections */}
+                    {/* Connecting Lines */}
                     <line
-                      x1="95"
-                      y1="88"
-                      x2="155"
-                      y2="138"
+                      x1="74"
+                      y1="84"
+                      x2="135"
+                      y2="136"
                       stroke="#57534E"
-                      strokeWidth="1.4"
+                      strokeWidth="1.3"
                       strokeDasharray="3 2"
                     />
                     <line
-                      x1="325"
-                      y1="88"
-                      x2="265"
-                      y2="138"
-                      stroke="#14532D"
+                      x1="210"
+                      y1="84"
+                      x2="210"
+                      y2="136"
+                      stroke="#9A3412"
+                      strokeWidth="1.4"
+                    />
+                    <line
+                      x1="346"
+                      y1="84"
+                      x2="285"
+                      y2="136"
+                      stroke="#1E3A8A"
                       strokeWidth="1.4"
                     />
                   </svg>
@@ -353,13 +384,13 @@ export default function App() {
                 <div className="text-xs text-[#44403C] flex items-center justify-between pt-2 border-t border-[#E5DEC9]">
                   <span className="inline-flex items-center gap-1.5 text-[#14532D] font-medium">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    Verifica sintattica, semantica e curatoriale
+                    Allineato a MSC2020, Mathlib4 e Palomar
                   </span>
                   <button
                     onClick={() => scrollToSection("manifesto")}
                     className="text-[#1E3A8A] font-medium hover:underline"
                   >
-                    Leggi nota su OpenMath →
+                    Leggi il Manifesto →
                   </button>
                 </div>
               </div>
@@ -369,60 +400,71 @@ export default function App() {
             <div className="mt-10 pt-8 border-t border-[#E5DEC9] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="p-4 bg-[#F3EFE6]/60 border border-[#E5DEC9] rounded-lg">
                 <div className="text-2xl font-bold font-mono tabular-nums text-[#1C1917]">
-                  96,7% · 93,09%
+                  MSC2020 · 5 Livelli
                 </div>
                 <div className="text-xs font-semibold text-[#1C1917] mt-1">
-                  Benchmark Ponte NL ↔ Lean 4
+                  Numerazione Gerarchica Totale
                 </div>
                 <p className="text-xs text-[#57534E] mt-1">
-                  Herald Translator (96,7% su miniF2F-test) e LoC-Decomp (93,09%
-                  su PutnamBench con coerenza semantica, ICLR 2026).
+                  Disciplina (<code>11-XX</code>), Sezione (<code>11J68</code>),
+                  Proposizione (<code>11J68.3</code>), Passo (
+                  <code>11J68.3.2</code>) e Micro-risultato (
+                  <code>11J68.3.2.a</code>).
                 </p>
               </div>
 
               <div className="p-4 bg-[#F3EFE6]/60 border border-[#E5DEC9] rounded-lg">
                 <div className="text-2xl font-bold font-mono tabular-nums text-[#1C1917]">
-                  8 Livelli × 8 Stili
+                  1 : 1 : 1
                 </div>
                 <div className="text-xs font-semibold text-[#1C1917] mt-1">
-                  Architettura Pedagogica Adattiva
+                  Tripla Corrispondenza Garantita
                 </div>
                 <p className="text-xs text-[#57534E] mt-1">
-                  Dall&apos;asilo (Livello 0) al post-doc (Livello 7) con stili
-                  Feynman, Bourbaki, Pólya, storico, computazionale e formale.
+                  Ogni proposizione e ogni micro-passaggio unisce Linguaggio
+                  Naturale (5 lingue), Sintassi Simbolica Formale e codice Lean
+                  4.
                 </p>
               </div>
 
               <div className="p-4 bg-[#F3EFE6]/60 border border-[#E5DEC9] rounded-lg">
                 <div className="text-2xl font-bold font-mono tabular-nums text-[#1C1917]">
-                  10 Strati · 5 Verifiche
+                  Testo ⇄ Grafo ⇄ 2D/3D
                 </div>
                 <div className="text-xs font-semibold text-[#1C1917] mt-1">
-                  Oltre la Compilazione Senza Sorry
+                  Proiezione Selettiva Istantanea
                 </div>
                 <p className="text-xs text-[#57534E] mt-1">
-                  Verifica sintattica (Lean REPL), semantica (SAGE/LoC-Decomp),
-                  pedagogica, curatoriale umana e comunitaria (ICML 2026).
+                  Seleziona un singolo frammento di prova o un&apos;intera
+                  sezione MSC per visualizzarla come grafo deduttivo con
+                  superfici 2D e 3D.
                 </p>
               </div>
 
               <div className="p-4 bg-[#F3EFE6]/60 border border-[#E5DEC9] rounded-lg">
                 <div className="text-2xl font-bold font-mono tabular-nums text-[#1C1917]">
-                  CC BY-SA 4.0 · CC0
+                  Mathlib · Tau Ceti
                 </div>
                 <div className="text-xs font-semibold text-[#1C1917] mt-1">
-                  Apertura Radicale e Federazione
+                  Verifica e Standard Palomar
                 </div>
                 <p className="text-xs text-[#57534E] mt-1">
-                  Zero paywall, zero pubblicità, interoperabile con Wikidata,
-                  Mathlib, OpenMath Content Dictionaries e zbMATH Open KG.
+                  Conforme ai 10 valori delle librerie formali (Avigad, Buzzard
+                  et al. 2026) con <code>formalization.yaml</code> e Comparator.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 1. Interactive Knowledge Graph Explorer */}
+        {/* 0. Hierarchical Numbered MSC2020 Exposition (Text + Collapsible Micro-Steps + Dynamic Subgraph + 2D/3D Plots) */}
+        <MscHierarchicalExplorer
+          activeLang={activeLang}
+          setActiveLang={setActiveLang}
+          onSendToBridge={handleInspectInBridge}
+        />
+
+        {/* 1. Interactive Global Knowledge Graph Explorer */}
         <KnowledgeGraphSection
           activeLang={activeLang}
           setActiveLang={setActiveLang}
@@ -438,7 +480,7 @@ export default function App() {
         {/* 3. Multi-Level & Multi-Style Pedagogical Matrix + Tennenbaum Simulator */}
         <PedagogyMatrixSection activeLang={activeLang} />
 
-        {/* 4. 10-Layer Architecture, Ecosystem Resource Catalog & Roadmap */}
+        {/* 4. 10-Layer Architecture, Formal Alignment (Tau Ceti/Formal Frontier/Palomar) & Roadmap */}
         <ArchitectureAndCatalogSection />
 
         {/* 5. Complete Manifesto & Blueprint Reader + BibTeX */}
@@ -460,6 +502,8 @@ export default function App() {
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-4 shrink-0">
+            <span>Classificazione: MSC2020</span>
+            <span aria-hidden="true">·</span>
             <span>Testi: CC BY-SA 4.0</span>
             <span aria-hidden="true">·</span>
             <span>Codice &amp; Lean 4: Apache 2.0</span>

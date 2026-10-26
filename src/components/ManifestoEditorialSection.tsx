@@ -9,7 +9,7 @@ export const ManifestoEditorialSection: React.FC = () => {
   author = {Razzano, Marco and Mathema Consortium},
   year   = {2026},
   url    = {https://github.com/marcorzzn/Mathema},
-  note   = {Manifesto and Blueprint, v0.1 — CC BY-SA 4.0}
+  note   = {Manifesto and Blueprint, v0.1 — Aligned with Mathlib, Tau Ceti, Formal Frontier & Palomar Standards (CC BY-SA 4.0)}
 }`;
 
   const handleCopyBibtex = () => {
@@ -24,7 +24,7 @@ export const ManifestoEditorialSection: React.FC = () => {
         {/* Editorial Kicker Header */}
         <div className="pb-8 border-b border-[#D6CEBE] mb-12">
           <div className="text-xs tracking-widest uppercase text-[#78716C]">
-            05. Documento Fondativo · Versione 0.1 · 17 Ottobre 2026 · Licenza CC BY-SA 4.0
+            05. Documento Fondativo · Versione 0.1 · Ottobre 2026 · Licenza CC BY-SA 4.0
           </div>
           <h2 className="text-3xl lg:text-5xl font-semibold text-[#1C1917] mt-2 tracking-tight text-balance">
             Mathema — Manifesto e Blueprint
@@ -34,7 +34,7 @@ export const ManifestoEditorialSection: React.FC = () => {
             <span aria-hidden="true">·</span>
             <span>Repository: github.com/marcorzzn/Mathema</span>
             <span aria-hidden="true">·</span>
-            <span>Codice &amp; Formalizzazioni Lean: Apache 2.0</span>
+            <span>Allineato a Mathlib · Tau Ceti · Formal Frontier · Palomar</span>
           </div>
         </div>
 
@@ -58,21 +58,22 @@ export const ManifestoEditorialSection: React.FC = () => {
                 il progetto adotta il nome <strong>Mathema</strong> (dal greco{" "}
                 <em>μάθημα</em>, ciò che viene appreso e conosciuto), ponendosi
                 in piena interoperabilità con gli standard OpenMath 2 e 3,
-                MathML, Wikidata e Lean 4.
+                MathML, Wikidata, Mathlib e Palomar.
               </p>
             </div>
 
-            {/* Pull Quote (Editorial Reference Section 4: Top/Bottom Hairline Dividers, NO thick left border) */}
+            {/* Pull Quote */}
             <blockquote className="py-6 border-t border-b border-[#D6CEBE] text-2xl lg:text-3xl font-serif italic text-[#1C1917] text-balance">
-              &ldquo;La matematica non è un libro da leggere. È un grafo da
-              esplorare. Non è un corso, non è una wiki, non è un motore di
-              ricerca: è tutte queste cose simultaneamente.&rdquo;
+              &ldquo;La conoscenza non vale la pena di essere posseduta finché
+              non contribuisce alla nostra comprensione; il valore di una
+              formalizzazione nasce dalla nostra capacità di usare i dati e
+              interagire con essi.&rdquo;
             </blockquote>
 
-            {/* Sette Fratture Sistemiche */}
+            {/* Sette Fratture Sistemiche + Allineamento Avigad-Buzzard et al. */}
             <div>
               <h3 className="text-xl font-semibold text-[#1C1917] mb-3">
-                2. Le Sette Fratture che Mathema Risolve
+                2. Le Sette Fratture e il Problema dell&apos;Allineamento Formale
               </h3>
               <div className="space-y-4 text-sm text-[#1C1917] leading-relaxed">
                 <p>
@@ -90,20 +91,30 @@ export const ManifestoEditorialSection: React.FC = () => {
                   dati, non pagine separate e disallineate.
                 </p>
                 <p>
-                  <strong>2.4 Divario pedagogico e 2.5 Divario formale:</strong>{" "}
-                  I testi tradizionali espongono <em>cosa</em> è vero in forma
-                  compatta, nascondendo il <em>perché</em>, le scelte euristiche
-                  e gli errori fecondi. Contemporaneamente, la matematica
-                  informale e i proof assistant (Lean 4, Coq, Isabelle) vivono in
-                  due mondi separati: il primo comprensibile ma non
-                  verificabile, il secondo verificabile ma illeggibile.
+                  <strong>
+                    2.4 Divario pedagogico, 2.5 Divario formale e il rischio dei
+                    &ldquo;Code Dump&rdquo;:
+                  </strong>{" "}
+                  Come evidenziato da Jeremy Avigad, Kevin Buzzard, Johan
+                  Commelin, Rémy Degenne, Kim Morrison, Oliver Nash e Adam Topaz
+                  (2026), una formalizzazione scadente o monolitica (come i 13
+                  milioni di righe non riutilizzabili per FLT o i dump in cui le
+                  prove in linguaggio naturale sono impenetrabili o divergono dal
+                  codice Lean, come nel caso Navier–Stokes) è peggio di nessuna
+                  formalizzazione. Formalizzare serve a <em>fare più matematica e
+                  capirla meglio</em>: esplorare generalizzazioni, collegare
+                  rami diversi e rifattorizzare i concetti.
                 </p>
                 <p>
-                  <strong>2.6 Ricerca vs. Didattica e 2.7 Obsolescenza:</strong>{" "}
-                  Mathlib formalizza la matematica di ricerca ma non ha
-                  architettura pedagogica; molti progetti didattici open source
-                  eccellenti muoiono per assenza di governance federata e
-                  manutenzione continua.
+                  <strong>2.6 Sinergia con Mathlib, Tau Ceti, Formal Frontier e Palomar:</strong>{" "}
+                  Mathema integra le pipeline <em>source-to-library</em> di{" "}
+                  <strong>Formal Frontier</strong> (41 librerie da manuali), le
+                  roadmap curate e revisionate avversariamente di{" "}
+                  <strong>Tau Ceti</strong> (&gt;3M righe sopra Mathlib), le
+                  definizioni di frontiera di <strong>The Annals Challenge</strong>{" "}
+                  e <strong>Formal Conjectures</strong>, e richiede per ogni nodo
+                  lo standard <strong>Palomar</strong> (<code>formalization.yaml</code>{" "}
+                  + Comparator setup).
                 </p>
               </div>
             </div>
@@ -120,12 +131,13 @@ export const ManifestoEditorialSection: React.FC = () => {
                   </div>
                   <p className="leading-relaxed">
                     1. Apertura radicale (CC BY-SA 4.0, Apache 2.0, CC0) · 2.
-                    Verificabilità formale · 3. Multilinguismo nativo · 4.
-                    Pedagogia multilivello integrata · 5. Grafo come struttura
-                    primaria · 6. Curatela umana sovrana · 7. Interoperabilità
-                    Wikidata/Mathlib · 8. Accessibilità WCAG 2.2 AA · 9.
-                    Sostenibilità federata · 10. Non-neutralità dichiarata: la
-                    conoscenza deve essere libera.
+                    Verificabilità formale e deferenza a Mathlib · 3.
+                    Multilinguismo nativo · 4. Pedagogia multilivello integrata
+                    · 5. Grafo come struttura primaria · 6. Curatela umana e
+                    controllo dei matematici · 7. Interoperabilità Wikidata /
+                    Mathlib / Palomar · 8. Accessibilità WCAG 2.2 AA · 9.
+                    Sostenibilità non-profit e accademica · 10. La conoscenza
+                    libera e comprensibile come diritto.
                   </p>
                 </div>
                 <div className="p-4 bg-[#F3EFE6] border border-[#E5DEC9] rounded-md space-y-1.5">
@@ -133,11 +145,13 @@ export const ManifestoEditorialSection: React.FC = () => {
                     Cosa NON È Mathema
                   </div>
                   <p className="leading-relaxed">
-                    Non è uno scraping indiscriminato che ignora le licenze. Non
-                    è un&apos;AI che inventa matematica senza verifica. Non è un
-                    sostituto dell&apos;insegnante umano ma un&apos;infrastruttura
-                    che lo potenzia. Non impone un&apos;unica ontologia rigida.
-                    Non ha paywall, pubblicità né tracciamento commerciale.
+                    Non è un &ldquo;code dump&rdquo; AI non revisionato da
+                    milioni di righe che nessuno usa. Non è uno scraping che
+                    ignora le licenze o la provenienza delle idee. Non sostituisce
+                    l&apos;insegnante né il matematico. Non lascia divergere
+                    l&apos;enunciato informale da quello formale (grazie al
+                    Comparator Palomar e a LoC-Decomp). Non ha paywall né
+                    tracciamento commerciale.
                   </p>
                 </div>
               </div>
@@ -169,6 +183,12 @@ export const ManifestoEditorialSection: React.FC = () => {
                   </dd>
                 </div>
                 <div className="py-2 flex justify-between gap-2">
+                  <dt className="text-[#57534E]">Standard Registro</dt>
+                  <dd className="font-mono text-[#1C1917]">
+                    Palomar formalization.yaml
+                  </dd>
+                </div>
+                <div className="py-2 flex justify-between gap-2">
                   <dt className="text-[#57534E]">Licenza Testi / Dati</dt>
                   <dd className="font-mono text-[#1C1917]">
                     CC BY-SA 4.0 / CC0
@@ -192,12 +212,27 @@ export const ManifestoEditorialSection: React.FC = () => {
               </a>
             </div>
 
-            {/* Key Academic References (Section 16.1) */}
+            {/* Key Academic References (Section 16.1 + 2026 Formalization Alignment) */}
             <div className="p-6 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg space-y-3">
               <div className="text-xs font-semibold uppercase tracking-wider text-[#1C1917]">
-                16.1 Riferimenti Scientifici Fondamentali
+                16.1 Riferimenti Scientifici e Comunitari (2025–2026)
               </div>
               <ul className="space-y-2 text-xs text-[#44403C]">
+                <li>
+                  <strong className="text-[#1C1917]">
+                    Avigad, Buzzard, Commelin, Degenne, Morrison, Nash &amp; Topaz (2026):
+                  </strong>{" "}
+                  Allineamento della formalizzazione su larga scala, i 10 valori
+                  di Mathlib (Premio Demailly 2026), Tau Ceti, Formal Frontier e
+                  Palomar.
+                </li>
+                <li>
+                  <strong className="text-[#1C1917]">
+                    Sorries Are Not the Hard Part (ICML 2026):
+                  </strong>{" "}
+                  Valutazione della qualità delle definizioni e delle API oltre
+                  la compilazione senza <code>sorry</code>.
+                </li>
                 <li>
                   <strong className="text-[#1C1917]">LoC-Decomp (ICLR 2026):</strong>{" "}
                   Autoformalizzazione con controllo di coerenza semantica (93,09%
@@ -208,19 +243,8 @@ export const ManifestoEditorialSection: React.FC = () => {
                   Traduzione Mathlib → NL (96,7% su miniF2F-test per enunciati).
                 </li>
                 <li>
-                  <strong className="text-[#1C1917]">
-                    Sorries Are Not the Hard Part (ICML 2026):
-                  </strong>{" "}
-                  Valutazione della qualità delle definizioni oltre la
-                  compilazione senza sorry.
-                </li>
-                <li>
                   <strong className="text-[#1C1917]">LeanTutor (UC Berkeley, AAAI 2026):</strong>{" "}
                   Tutoring verificato con diagnosi formale dei passaggi.
-                </li>
-                <li>
-                  <strong className="text-[#1C1917]">Lean-Sketch &amp; AutoformBot (2025–2026):</strong>{" "}
-                  Deformalizzazione pedagogica e agenti per manuali.
                 </li>
               </ul>
             </div>

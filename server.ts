@@ -27,7 +27,7 @@ async function startServer() {
 
   app.use(express.json({ limit: "2mb" }));
 
-  // 1. Endpoint: Bidirectional NL <-> Lean 4 Autoformalization & Deformalization Pipeline
+  // 1. Endpoint: Bidirectional NL <-> Lean 4 Autoformalization, Tau Ceti Rubric & Palomar Comparator
   app.post("/api/bridge/formalize", async (req, res) => {
     try {
       const {
@@ -45,7 +45,7 @@ async function startServer() {
 
       const ai = getGeminiClient();
 
-      const prompt = `Sei il motore del ponte bidirezionale NL ↔ Lean 4 del progetto Mathema (ideato da Marco Razzano).
+      const prompt = `Sei il motore del ponte bidirezionale NL ↔ Lean 4 del progetto Mathema (ideato da Marco Razzano), allineato ai 10 valori di Mathlib, Tau Ceti, Formal Frontier e allo standard Palomar (Avigad, Buzzard, Commelin, Degenne, Morrison, Nash, Topaz — 2026).
 Modalità richiesta: ${mode === "nl_to_lean" ? "Autoformalizzazione (Linguaggio Naturale → Lean 4 + Deformalizzazione Pedagogica)" : "Deformalizzazione (Codice Lean 4 → Spiegazione Multilivello e Verifica Semantica)"}
 Lingua di output per i testi naturali: ${language}
 Livello pedagogico target (0=asilo, 1=elementari, 2=medie, 3=superiori, 4=università, 5=magistrale, 6=dottorato, 7=post-doc): Livello ${level}
@@ -56,11 +56,11 @@ Input dell'utente:
 ${statement}
 """
 
-Esegui l'intero ciclo a 7 stadi dell'architettura Mathema:
-1. Parser NL: estrai goal matematico, dominio (es. number_theory, real_analysis, abstract_algebra, linear_algebra, logic_cs, physics), e lista di URN dei prerequisiti nel formato urn:mathema:concept:<slug>.
-2. Autoformalizzatore Lean 4: scrivi il codice formale Lean 4 idiomatico con import Mathlib pertinenti, senza sorry se possibile o con struttura tattica rigorosa.
+Esegui l'intero ciclo a 7 stadi dell'architettura Mathema integrata con Tau Ceti & Palomar:
+1. Parser NL: estrai goal matematico, dominio, e lista di URN dei prerequisiti nel formato urn:mathema:concept:<slug>.
+2. Autoformalizzatore Lean 4: scrivi il codice formale Lean 4 idiomatico che deferisce alle definizioni di Mathlib4 (senza ridefinire concetti standard e senza sorry se possibile).
 3. Simulazione stato Lean REPL: riporta i passaggi tattici principali e l'evoluzione dello stato dei goal.
-4. Verificatore Semantico (LoC-Decomp & SAGE): valuta se il codice Lean preserva davvero il significato matematico senza cadere nell'illusione del rigore (Sorries Are Not the Hard Part - ICML 2026).
+4. Verificatore Semantico & Rubrica Avversaria Tau Ceti (LoC-Decomp, SAGE & Mathlib Values): valuta se il codice rispetta i 10 principi di Avigad-Buzzard et al. (deferenza a Mathlib, generalità appropriata, assenza di duplicazione, convenzioni di naming) e genera il file Palomar formalization.yaml con Comparator setup.
 5. Deformalizzatore Pedagogico: genera la spiegazione passo-passo nella lingua (${language}), calibrata esattamente per il Livello ${level} e lo Stile ${style}.
 6. Curatore Pedagogico: proponi il nodo successivo nel grafo e un esercizio verificabile con contratto formale.`;
 
@@ -118,12 +118,31 @@ Esegui l'intero ciclo a 7 stadi dell'architettura Mathema:
                     type: Type.ARRAY,
                     items: { type: Type.STRING },
                   },
+                  tauCetiRubric: {
+                    type: Type.OBJECT,
+                    properties: {
+                      mathlibDeference: { type: Type.STRING },
+                      generalityAndReuse: { type: Type.STRING },
+                      noDuplicationCheck: { type: Type.STRING },
+                    },
+                    required: [
+                      "mathlibDeference",
+                      "generalityAndReuse",
+                      "noDuplicationCheck",
+                    ],
+                  },
+                  palomarMetadataYaml: {
+                    type: Type.STRING,
+                    description: "Contenuto del file formalization.yaml secondo lo standard Palomar",
+                  },
                 },
                 required: [
                   "coherencePreserved",
                   "locDecompSummary",
                   "potentialPitfalls",
                   "mathlibPremises",
+                  "tauCetiRubric",
+                  "palomarMetadataYaml",
                 ],
               },
               deformalizedExplanation: {

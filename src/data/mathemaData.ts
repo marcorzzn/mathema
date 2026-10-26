@@ -202,13 +202,13 @@ export const PEDAGOGICAL_LEVELS = [
   {
     level: 6,
     name: "Livello 6 · Dottorato",
-    focus: "Monografie di ricerca, formalizzazione Mathlib avanzata",
+    focus: "Monografie di ricerca, formalizzazione Mathlib / Tau Ceti",
     ageRange: "PhD",
   },
   {
     level: 7,
     name: "Livello 7 · Post-Doc & Frontiera",
-    focus: "Problemi aperti, congetture, autoformalizzazione di frontiera",
+    focus: "Annals Challenge, Formal Conjectures, autoformalizzazione di frontiera",
     ageRange: "Ricerca",
   },
 ];
@@ -313,7 +313,7 @@ theorem no_coprime_sq_eq_two (p q : ℕ) (hq : q ≠ 0) (hcop : Nat.Coprime p q)
   have hq_div : 2 ∣ q := Prime.dvd_of_dvd_pow Nat.prime_two hq_even
   have h_gcd : 2 ∣ Nat.gcd p q := Nat.dvd_gcd ⟨k, rfl⟩ hq_div
   rw [hcop.gcd_eq_one] at h_gcd
-   revert h_gcd; decide`,
+  revert h_gcd; decide`,
     },
     prerequisites: [
       "urn:mathema:concept:rational-number",
@@ -467,7 +467,7 @@ theorem no_coprime_sq_eq_two (p q : ℕ) (hq : q ≠ 0) (hcop : Nat.Coprime p q)
     2 * vp ≠ 1 + 2 * vq := by omega`,
         verified: true,
         verifier: "lean-repl-4.12 · omega",
-        semanticCheck: "LoC-Decomp: generalizzabile a √p per qualunque primo p",
+        semanticCheck: "LoC-Decomp: generalizzabile a √p per qualunque primo p (Mathlib: irrational_sqrt_nat_iff)",
       },
     ],
     explanations: [
@@ -605,12 +605,12 @@ theorem no_coprime_sq_eq_two (p q : ℕ) (hq : q ≠ 0) (hcop : Nat.Coprime p q)
         en: "Every integer n is either even (n = 2k) or odd (n = 2k + 1). Squaring preserves parity: n² is even if and only if n is even.",
         es: "Todo entero n es par (2k) o impar (2k + 1). El cuadrado conserva la paridad: n² es par si y solo si n es par.",
         zh: "每个整数 n 必为偶数 (2k) 或奇数 (2k + 1)。平方运算保持奇偶性：n² 为偶数当且仅当 n 为偶数。",
-        ar: "كل عدد صحيح n إما زوجي (2k) أو فردي (2k + 1). التربيع يحافظ على الزوجية: n² زوجي إذا وفقط إذا كان n زوجياً.",
+        ar: "كل عدد صحيح n إما زوجي (2k) أو فردي (2k + 1)。 التربيع يحافظ على الزوجية: n² زوجي إذا وفقط إذا كان n زوجياً.",
       },
       formalLean: `import Mathlib.Algebra.Ring.Parity
 
 theorem even_sq_iff (n : ℤ) : Even (n ^ 2) ↔ Even n := by
-   exact Int.even_pow.trans (by simp)`,
+  exact Int.even_pow.trans (by simp)`,
     },
     prerequisites: [],
     proofs: [],
@@ -1014,7 +1014,7 @@ theorem modus_ponens (P Q : Prop) (hpq : P → Q) (hp : P) : Q :=
       informal: {
         it: "Un gruppo è un insieme G dotato di un'operazione binaria associativa che ammette un elemento neutro e ed in cui ogni elemento possiede un inverso. È il linguaggio universale della simmetria.",
         en: "A group is a set G equipped with an associative binary operation, an identity element e, and an inverse for every element.",
-        es: "Un grupo es un conjunto G con una operación binaria asociativa, elemento neutro e inverso para cada elemento.",
+        es: "Un grupo es un conjunto G con una operación binaria associativa, elemento neutro e inverso para cada elemento.",
         zh: "群是配备了结合二元运算、单位元 e 以及每个元素逆元的集合 G，是描述对称性的通用语言。",
         ar: "الزمرة هي مجموعة G مزودة بعملية ثنائية تجميعية وعنصر حيادي e وعنصر نظير لكل عنصر فيها، وهي لغة التناظر الكونية.",
       },
@@ -1070,7 +1070,7 @@ theorem modus_ponens (P Q : Prop) (hpq : P → Q) (hp : P) : Q :=
         zh: "物理系统作用量的每一个连续可微对称性都对应一条守恒定律：时间平移对应能量守恒，空间平移对应动量守恒，旋转对应角动量守恒。",
         ar: "لكل تناظر مستمر وقابل للمفاضلة لفعل نظام فيزيائي قانون انحفاظ مقابل: التناظر الزمني يعطي انحفاظ الطاقة، والمكاني يعطي انحفاظ كمية الحركة.",
       },
-      formalLean: `-- Formalizzazione variazionale discreta/continua del carica di Noether:
+      formalLean: `-- Formalizzazione variazionale discreta/continua della carica di Noether:
 structure LagrangianSystem (Q : Type) where
   L : (ℝ → Q) → ℝ → ℝ`,
     },
@@ -1176,7 +1176,7 @@ export const MATHEMA_EDGES: MathemaEdge[] = [
     id: "edge-8",
     from: "urn:mathema:concept:sqrt2-irrationality",
     to: "urn:mathema:concept:dedekind-cuts",
-    type: "Requires" as any,
+    type: "requires",
     weight: 0.91,
     source: "human",
     confidence: 0.99,
@@ -1264,9 +1264,6 @@ export const MATHEMA_EDGES: MathemaEdge[] = [
   },
 ];
 
-// Normalize edge-8 type
-MATHEMA_EDGES[7].type = "requires";
-
 export interface BridgePreset {
   id: string;
   label: string;
@@ -1290,6 +1287,12 @@ export interface BridgePreset {
       locDecompSummary: string;
       potentialPitfalls: string[];
       mathlibPremises: string[];
+      tauCetiRubric?: {
+        mathlibDeference: string;
+        generalityAndReuse: string;
+        noDuplicationCheck: string;
+      };
+      palomarMetadataYaml?: string;
     };
     deformalizedExplanation: string;
     pedagogicalCurator: {
@@ -1324,7 +1327,7 @@ import Mathlib.Data.Nat.Prime.Basic
 theorem sqrt2_is_irrational : Irrational (Real.sqrt 2) := by
   exact irrational_sqrt_two
 
--- 2. nucleo aritmetico esplicito per la deformalizzazione pedagogica:
+-- 2. Nucleo aritmetico esplicito per la deformalizzazione pedagogica:
 theorem coprime_sq_ne_two_mul_sq (p q : ℕ) (hcop : Nat.Coprime p q) (hq : q ≠ 0) :
     p ^ 2 ≠ 2 * q ^ 2 := by
   intro h_eq
@@ -1371,6 +1374,25 @@ theorem coprime_sq_ne_two_mul_sq (p q : ℕ) (hcop : Nat.Coprime p q) (hq : q �
           "Nat.Prime.dvd_of_dvd_pow",
           "Nat.Coprime.gcd_eq_one",
         ],
+        tauCetiRubric: {
+          mathlibDeference:
+            "Conforme (Valore 1 Mathlib/Tau Ceti): utilizza direttamente il predicato canonico `Irrational` e `Real.sqrt` da `Mathlib.Data.Real.Irrational` senza ridefinire i reali o i razionali.",
+          generalityAndReuse:
+            "Conforme (Valore 3): collegato al teorema generale `irrational_sqrt_nat_iff` per il riuso immediato su qualsiasi intero non quadrato perfetto.",
+          noDuplicationCheck:
+            "Verificato: nessuna duplicazione di API esistenti; la prova aritmetica esplicita è marcata come vista pedagogica ausiliaria sul nodo `urn:mathema:concept:sqrt2-irrationality`.",
+        },
+        palomarMetadataYaml: `# Palomar Registry Standard — formalization.yaml
+project: "Mathema Knowledge Graph"
+urn: "urn:mathema:concept:sqrt2-irrationality"
+formalization_mode: "human_curated_with_ai_deformalization"
+authors_involvement: "Curated according to Mathema Blueprint v0.1 (Marco Razzano)"
+mathlib_compatibility: "Lean 4.12 / Mathlib4 master"
+comparator:
+  target_statement: "Irrational (Real.sqrt 2)"
+  canonical_mathlib_ref: "irrational_sqrt_two"
+  divergences: "none"
+  audit_status: "verified"`,
       },
       deformalizedExplanation:
         "Procediamo per contraddizione costruttiva (intro h_eq): supponiamo che esista una frazione ridotta ai minimi termini p/q (con gcd(p, q) = 1 e q ≠ 0) tale che p² = 2q². Dal fatto che p² è multiplo di 2 e 2 è primo, il lemma di Euclide (Nat.Prime.dvd_of_dvd_pow) garantisce che 2 divide p. Scrivendo p = 2k e sostituendo nell'equazione, otteniamo 4k² = 2q², ossia q² = 2k². Applicando lo stesso lemma a q², deduciamo che 2 divide anche q. Dunque 2 divide il massimo comun divisore gcd(p, q) = 1, il che è aritmeticamente impossibile.",
@@ -1404,7 +1426,7 @@ import Mathlib.Data.Nat.Factorial.Basic
 theorem mathema_infinite_primes (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by
   let p := Nat.minFac (Nat.factorial n + 1)
   have h_ne_one : Nat.factorial n + 1 ≠ 1 := by
-     exact Nat.ne_of_gt (Nat.succ_lt_succ (Nat.factorial_pos n))
+    exact Nat.ne_of_gt (Nat.succ_lt_succ (Nat.factorial_pos n))
   have hp_prime : Nat.Prime p := Nat.minFac_prime h_ne_one
   refine ⟨p, ?_, hp_prime⟩
   by_contra! h_lt
@@ -1442,13 +1464,31 @@ theorem mathema_infinite_primes (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by
           "Nat.dvd_factorial",
           "Nat.Prime.not_dvd_one",
         ],
+        tauCetiRubric: {
+          mathlibDeference:
+            "Conforme: usa `Nat.Prime`, `Nat.minFac` e `Nat.factorial` direttamente da Mathlib4 (`Nat.exists_infinite_primes`).",
+          generalityAndReuse:
+            "Conforme: l'enunciato `∀ n, ∃ p ≥ n, Nat.Prime p` permette di derivare immediatamente `{p | Nat.Prime p}.Infinite`.",
+          noDuplicationCheck:
+            "Verificato: allineato alle convenzioni di naming e modularità di Mathlib / Tau Ceti.",
+        },
+        palomarMetadataYaml: `# Palomar Registry Standard — formalization.yaml
+project: "Mathema Knowledge Graph"
+urn: "urn:mathema:concept:prime-infinitude"
+formalization_mode: "human_curated_with_ai_deformalization"
+mathlib_compatibility: "Lean 4.12 / Mathlib4 master"
+comparator:
+  target_statement: "∀ (n : ℕ), ∃ p, n ≤ p ∧ Nat.Prime p"
+  canonical_mathlib_ref: "Nat.exists_infinite_primes"
+  divergences: "none"
+  audit_status: "verified"`,
       },
       deformalizedExplanation:
         "Dato un qualunque intero n, costruiamo il numero N = n! + 1. Poiché n! ≥ 1, abbiamo N ≥ 2, dunque N possiede un minimo fattore primo p = minFac(n! + 1). Mostriamo che p ≥ n: se per assurdo fosse p < n, allora p comparirebbe tra i fattori di n! = 1 · 2 ··· n, quindi p dividerebbe sia n! sia n! + 1. Ma allora p dividerebbe la loro differenza, cioè 1, il che è impossibile perché ogni numero primo è ≥ 2.",
       pedagogicalCurator: {
         nextRecommendedNode: "urn:mathema:concept:sqrt2-irrationality",
         exercisePrompt:
-          "Dimostra che non esistono tre interi consecutivi maggiori di 3 tutti primi, oppure esplora i primi della forma 4k + 3.",
+          "Dimostra che esistono infiniti numeri primi della forma 4k + 3.",
         exerciseLeanContract:
           "theorem exists_infinite_primes_mod_four (n : ℕ) : ∃ p ≥ n, Nat.Prime p ∧ p % 4 = 3 := by sorry",
       },
@@ -1498,6 +1538,24 @@ theorem gauss_sum_twice (n : ℕ) :
           "Scrivere (n * (n + 1)) / 2 su ℕ in Lean è semanticamente più debole se non si affianca la parità di n(n+1); moltiplicare per 2 preserva l'uguaglianza esatta.",
         ],
         mathlibPremises: ["Finset.sum_range_succ", "mul_add"],
+        tauCetiRubric: {
+          mathlibDeference:
+            "Conforme: utilizza l'operatore canonico `Finset.sum` e `Finset.range` come in `Finset.sum_range_id_mul_two`.",
+          generalityAndReuse:
+            "Conforme: evita la divisione naturale troncata, rendendo il lemma riscrivibile con `rw` in qualsiasi anello commutativo.",
+          noDuplicationCheck:
+            "Verificato: collegato a `Finset.sum_range_id` in Mathlib4.",
+        },
+        palomarMetadataYaml: `# Palomar Registry Standard — formalization.yaml
+project: "Mathema Knowledge Graph"
+urn: "urn:mathema:concept:gauss-sum-formula"
+formalization_mode: "human_curated_with_ai_deformalization"
+mathlib_compatibility: "Lean 4.12 / Mathlib4 master"
+comparator:
+  target_statement: "2 * (∑ i ∈ range (n + 1), i) = n * (n + 1)"
+  canonical_mathlib_ref: "Finset.sum_range_id_mul_two"
+  divergences: "none"
+  audit_status: "verified"`,
       },
       deformalizedExplanation:
         "Affianchiamo due copie della scala 1 + 2 + … + n, una dritta e una capovolta: ogni colonna verticale vale (n + 1) e ci sono esattamente n colonne. Per induzione su n: per n = 0 entrambi i membri valgono 0; passando da k a k + 1 aggiungiamo due volte il nuovo gradino (k + 1) al rettangolo k(k + 1), ottenendo k(k + 1) + 2(k + 1) = (k + 1)(k + 2).",
@@ -1530,24 +1588,24 @@ export const TEN_LAYERS: ArchitecturalLayer[] = [
   },
   {
     layer: 1,
-    name: "Ontologia",
-    functionDesc: "ID condivisi (URN), schema nodi/archi tipati, licenze granulari e tracciabilità della provenienza.",
-    keyTechnologies: ["Wikidata Q-IDs", "OpenMath CDs", "zbMATH Open KG", "URN Schema"],
-    manifestoNotes: "Ammette costruzioni logiche multiple (es. reali via Dedekind o Cauchy) senza ontologia monolitica.",
+    name: "Ontologia & Registro Palomar",
+    functionDesc: "ID condivisi (URN), schema nodi/archi tipati, licenze granulari e metadati di provenienza Palomar (formalization.yaml).",
+    keyTechnologies: ["Palomar Registry", "Wikidata Q-IDs", "OpenMath CDs", "zbMATH Open KG"],
+    manifestoNotes: "Ogni formalizzazione dichiara come è stata prodotta, la relazione con la letteratura e un Comparator verificabile.",
   },
   {
     layer: 2,
-    name: "Contenuti",
-    functionDesc: "Definizioni, teoremi, prove multiple, esempi, controesempi, esercizi e tecniche euristiche.",
-    keyTechnologies: ["ProofWiki", "Tricki", "DLMF", "Stacks Project"],
-    manifestoNotes: "Ogni teorema possiede archi 'prova alternativa' (contraddizione, discesa infinita, strutturale).",
+    name: "Contenuti & Definizioni di Frontiera",
+    functionDesc: "Definizioni, teoremi, prove multiple, esempi, esercizi, congetture aperte e sfide sulle definizioni.",
+    keyTechnologies: ["The Annals Challenge", "Formal Conjectures", "ProofWiki", "Tricki"],
+    manifestoNotes: "Incentiva la formalizzazione di definizioni riusabili (Annals Challenge) e l'enunciazione certificata di problemi aperti.",
   },
   {
     layer: 3,
-    name: "Manuali",
-    functionDesc: "Testi pedagogici strutturati, percorsi curricolari e remix modulari di capitoli aperti.",
-    keyTechnologies: ["OpenStax", "LibreTexts", "Judson Algebra", "Lebl Analysis"],
-    manifestoNotes: "I manuali non sono silos statici ma percorsi curati sopra il grafo primario.",
+    name: "Manuali & Pipeline Source-to-Library",
+    functionDesc: "Testi pedagogici strutturati, corsi e conversione scalabile da manuali a librerie interconnesse.",
+    keyTechnologies: ["Formal Frontier (41 librerie)", "OpenStax", "LibreTexts", "Stacks Project"],
+    manifestoNotes: "Usa sciami di agenti coordinati (come Formal Frontier) per trasformare i manuali in librerie su cui altri possono costruire.",
   },
   {
     layer: 4,
@@ -1558,17 +1616,17 @@ export const TEN_LAYERS: ArchitecturalLayer[] = [
   },
   {
     layer: 5,
-    name: "Formalizzazione",
-    functionDesc: "Traduzione e ancoraggio formale in Lean 4 e Mathlib4 per garantire verificabilità meccanica.",
-    keyTechnologies: ["Lean 4", "Mathlib4", "LeanInteract", "Kimina Server", "LeanProbe"],
-    manifestoNotes: "Ponte bidirezionale NL ↔ Lean: autoformalizzazione e deformalizzazione pedagogica.",
+    name: "Formalizzazione (Mathlib & Tau Ceti)",
+    functionDesc: "Ancoraggio formale in Lean 4 deferendo a Mathlib (Premio Demailly 2026) ed estendendolo tramite roadmap esperte (Tau Ceti).",
+    keyTechnologies: ["Mathlib4 (950+ autori)", "Tau Ceti (3M+ LoC)", "Lean 4 Build Server", "LeanInteract"],
+    manifestoNotes: "Un artefatto formale ha valore solo se altri matematici possono capirlo, riusarlo e costruirci sopra.",
   },
   {
     layer: 6,
-    name: "Verifica Agentica & Semantica",
-    functionDesc: "Controllo indipendente di coerenza semantica oltre la semplice compilazione sintattica.",
-    keyTechnologies: ["Jacobian (morluto)", "LoC-Decomp", "SAGE Checker", "Expert Review"],
-    manifestoNotes: "Principio 'Sorries Are Not the Hard Part' (ICML 2026): compilare senza sorry non basta senza verifica semantica.",
+    name: "Verifica Avversaria & Comparator",
+    functionDesc: "Revisione avversaria tramite rubriche standard, controllo semantico e Palomar Comparator contro i 'code dump' inutilizzabili.",
+    keyTechnologies: ["Palomar Comparator", "Tau Ceti Adversarial Rubric", "Jacobian", "LoC-Decomp / SAGE"],
+    manifestoNotes: "Evita i dump monolitici da milioni di righe illeggibili: verifica generalità, assenza di duplicazione e fedeltà delle definizioni.",
   },
   {
     layer: 7,
@@ -1586,10 +1644,10 @@ export const TEN_LAYERS: ArchitecturalLayer[] = [
   },
   {
     layer: 9,
-    name: "Governance & Sostenibilità",
-    functionDesc: "Consorzio federato, licenze libere (CC BY-SA 4.0 / Apache 2.0 / CC0), crediti accademici e curatela umana.",
-    keyTechnologies: ["Lean FRO", "Wikimedia", "Università", "CC BY-SA 4.0"],
-    manifestoNotes: "Gli LLM assistono, gli umani decidono. La conoscenza matematica libera come diritto universale.",
+    name: "Governance & Allineamento Comunitario",
+    functionDesc: "Consorzio accademico/non-profit guidato dai matematici, 10 Valori condivisi di Mathlib e hosting pubblico dell'inferenza.",
+    keyTechnologies: ["Lean FRO", "Mathlib Initiative", "Wikimedia", "CC BY-SA 4.0 / Apache 2.0"],
+    manifestoNotes: "Risolve il problema dell'allineamento per la matematica: gli strumenti e le roadmap restano sotto il controllo della comunità scientifica.",
   },
 ];
 
@@ -1612,40 +1670,58 @@ export interface CatalogResource {
 
 export const RESOURCE_INVENTORY: CatalogResource[] = [
   {
-    name: "leanprover (Lean 4, Mathlib, Verso, cslib)",
+    name: "Mathlib4 (Premio Jean-Pierre Demailly 2026 per la Scienza Aperta)",
     category: "agentic",
-    authorOrOrg: "Lean FRO / Mathlib Community",
+    authorOrOrg: "Mathlib Community (65 revisori, 950 contributori)",
     license: "Apache-2.0",
     integrationPolicy: "direct_import",
-    role: "Kernel formale, libreria matematica unificata e documentazione verificata",
-    url: "https://github.com/leanprover",
+    role: "Fondazione curata dall'uomo dell'ecosistema formale; definisce gli standard di qualità, astrazione e riuso",
+    url: "https://github.com/leanprover-community/mathlib4",
   },
   {
-    name: "morluto/Jacobian",
+    name: "Tau Ceti (3M+ LoC · Lean FRO & Mathlib Initiative)",
     category: "agentic",
-    authorOrOrg: "morluto",
+    authorOrOrg: "Lean FRO / Mathlib Initiative",
+    license: "Apache-2.0",
+    integrationPolicy: "direct_import",
+    role: "Libreria coerente scritta da AI e revisionata avversariamente secondo roadmap esperte (Riemann-Roch, Schur-Weyl, Chebotarev)",
+    url: "https://github.com/TauCetiProject/TauCetiWorker",
+  },
+  {
+    name: "Formal Frontier (41 librerie · 200k LoC · Build Server Lean)",
+    category: "agentic",
+    authorOrOrg: "Mathlib Initiative",
+    license: "Apache-2.0",
+    integrationPolicy: "direct_import",
+    role: "Pipeline multi-agente source-to-library per convertire manuali in librerie formali interconnesse (Stone duality, Hairy ball, Kaplansky)",
+    url: "https://lean-fro.org/",
+  },
+  {
+    name: "Palomar (Registry & Comparator per la Matematica Formale)",
+    category: "standard",
+    authorOrOrg: "Comunità Mathlib / Lean FRO",
+    license: "Open Source / CC0",
+    integrationPolicy: "direct_import",
+    role: "Registro online che richiede formalization.yaml (provenienza e ruolo degli autori) e Comparator per l'audit degli enunciati",
+    url: "https://leanprover-community.github.io/",
+  },
+  {
+    name: "The Annals Challenge & Formal Conjectures",
+    category: "agentic",
+    authorOrOrg: "Kevin Buzzard et al. / Comunità Formale",
+    license: "Apache-2.0",
+    integrationPolicy: "direct_import",
+    role: "Formalizzazione degli enunciati di Annals of Mathematics (per sbloccare le definizioni di frontiera) e catalogo revisionato di problemi aperti",
+    url: "https://github.com/leanprover-community",
+  },
+  {
+    name: "morluto/Jacobian & K-Dense-AI/scientific-agent-skills",
+    category: "agentic",
+    authorOrOrg: "morluto / K-Dense-AI / alchaincyf (nuwa-skill)",
     license: "Open Source",
     integrationPolicy: "direct_import",
-    role: "Verifica indipendente per agenti matematici e controllo delle allucinazioni",
+    role: "Verifica indipendente per agenti, skill scientifiche e generazione di stili pedagogici",
     url: "https://github.com/morluto",
-  },
-  {
-    name: "K-Dense-AI/scientific-agent-skills",
-    category: "agentic",
-    authorOrOrg: "K-Dense-AI",
-    license: "Open Source",
-    integrationPolicy: "direct_import",
-    role: "Skill modulari per agenti scientifici e computazionali",
-    url: "https://github.com/K-Dense-AI/scientific-agent-skills",
-  },
-  {
-    name: "alchaincyf/nuwa-skill",
-    category: "agentic",
-    authorOrOrg: "alchaincyf",
-    license: "Open Source",
-    integrationPolicy: "direct_import",
-    role: "Generazione strutturata di prospettive e stili pedagogici cognitivi",
-    url: "https://github.com/alchaincyf/nuwa-skill",
   },
   {
     name: "ProofWiki",
@@ -1766,16 +1842,116 @@ export const RESOURCE_INVENTORY: CatalogResource[] = [
   },
 ];
 
+// The 10 Values of Formal Libraries (Avigad, Buzzard, Commelin, Degenne, Morrison, Nash, Topaz — 2026)
+export const FORMAL_LIBRARY_VALUES = [
+  {
+    index: "01",
+    title: "Deferire alle librerie curate dall'uomo (Mathlib)",
+    description:
+      "Seguire i principi progettuali e le convenzioni di Mathlib, facendo refactoring continuo per adottarne le decisioni architetturali.",
+  },
+  {
+    index: "02",
+    title: "Preferire completezza e ampiezza prima della profondità",
+    description:
+      "L'ampiezza e la solidità delle definizioni di base devono precedere i teoremi isolati, poiché sono ciò che abilita la vera profondità futura.",
+  },
+  {
+    index: "03",
+    title: "Evitare la duplicazione e massimizzare il riuso",
+    description:
+      "Generalizzare i teoremi al giusto livello di astrazione affinché ogni risultato sia riutilizzabile senza ridondanze.",
+  },
+  {
+    index: "04",
+    title: "Revisionare pubblicamente secondo standard condivisi",
+    description:
+      "Ogni aggiunta — umana o generata da agenti — è sottoposta ad audit pubblico o revisione avversaria trasparente.",
+  },
+  {
+    index: "05",
+    title: "Pubblicare liberamente (Open Source, Interoperabile, Esplorabile)",
+    description:
+      "Le librerie formali devono essere beni pubblici aperti, ispezionabili e navigabili dall'intera comunità.",
+  },
+  {
+    index: "06",
+    title: "Restare costantemente aggiornati con Lean e Mathlib",
+    description:
+      "Garantire la compatibilità continua ad ogni nuova release del compilatore Lean e di Mathlib, evitando codice orfano.",
+  },
+  {
+    index: "07",
+    title: "Restare aperti al cambiamento e al refactoring",
+    description:
+      "Se emerge una formulazione concettualmente più elegante o più adatta agli scopi della comunità, non è mai troppo tardi per rifattorizzare.",
+  },
+  {
+    index: "08",
+    title: "Documentare e organizzare sistematicamente",
+    description:
+      "I file devono essere coerenti, strutturati in modo leggibile e corredati di documentazione che spieghi il significato matematico.",
+  },
+  {
+    index: "09",
+    title: "Collegare esplicitamente alla letteratura esistente",
+    description:
+      "Ogni matematico deve poter verificare e fidarsi che i concetti descritti nella libreria corrispondano al significato atteso nei testi e negli articoli.",
+  },
+  {
+    index: "10",
+    title: "Fissare standard rigorosi e rispettarli subito",
+    description:
+      "Produrre codice scadente o non revisionato sperando di 'ripulirlo più tardi' è controproducente: una cattiva formalizzazione è peggio di nessuna formalizzazione.",
+  },
+];
+
+// Case studies from Avigad, Buzzard, Commelin, Degenne, Morrison, Nash, Topaz (2026)
+export const ALIGNMENT_CASE_STUDIES = [
+  {
+    title: "Imballaggio di Sfere in 8D (Viazovska) — Il costo del codice AI non curato",
+    category: "unaligned",
+    summary:
+      "Nel febbraio 2026 Math, Inc. ha tentato di scavalcare il team che stava formalizzando il risultato di Maryna Viazovska in dimensione 8. Il team originale ha scoperto che ripulire il codice generato dall'AI era più oneroso che buttarlo via e riscriverlo correttamente (sempre con l'ausilio mirato dell'AI).",
+    lesson:
+      "Un artefatto formale che compila ma è disorganizzato non aggiunge valore alla matematica.",
+  },
+  {
+    title: "Ultimo Teorema di Fermat (13 milioni di righe in 11 giorni vs. Blueprint moderno)",
+    category: "unaligned",
+    summary:
+      "L'annuncio di Anthropic su una verifica formale di FLT in 13 milioni di righe di codice scritte da Claude in 11 giorni ha mostrato una potenza tecnica impressionante, ma Kevin Buzzard ha confermato che il progetto umano-curato per la prova moderna prosegue: 13M di righe monolitiche hanno scarso valore duraturo per il riuso.",
+    lesson:
+      "Il valore di una formalizzazione risiede in ciò che otteniamo oltre la mera correttezza: astrazione, comprensione e riuso.",
+  },
+  {
+    title: "Blow-up in tempo finito per Navier–Stokes & Dump non allineati",
+    category: "unaligned",
+    summary:
+      "Nella soluzione di OpenAI per Navier–Stokes la prova in linguaggio naturale risultava quasi incomprensibile, mentre il certificato Lean garantiva la correttezza. Tuttavia, i successivi dump hanno mostrato divergenze sottili o gravi tra enunciati formali e informali, testi impenetrabili e problemi di attribuzione.",
+    lesson:
+      "La correttezza senza comprensibilità, provenienza (Palomar) e allineamento semantico tradisce lo spirito della ricerca matematica.",
+  },
+  {
+    title: "Unit Distance Conjecture & Densità degli Zeri della Zeta di Riemann",
+    category: "aligned",
+    summary:
+      "I lavori di OpenAI sulla congettura della distanza unitaria e di Anthropic sulla densità degli zeri della funzione zeta di Riemann sono stati condotti in modo esemplare: hanno contribuito alla comprensione umana e la comunità matematica ha potuto immediatamente costruire sopra quei risultati.",
+    lesson:
+      "Modello di partnership costruttiva tra laboratori AI e comunità di ricerca.",
+  },
+];
+
 export const ROADMAP_PHASES = [
   {
     phase: "Fase 0",
     window: "Mesi 0–3",
-    title: "Fondazione & Consorzio",
-    metrics: "Ontologia URN v0.1 · Schema Nodi/Archi · Identità Mathema",
+    title: "Fondazione, Standard Palomar & Consorzio",
+    metrics: "Ontologia URN v0.1 · Palomar formalization.yaml · 10 Valori Mathlib",
     deliverables: [
       "Definizione formale dello schema dati YAML/JSON per nodi e archi multi-relazionali.",
-      "Adozione del nome definitivo Mathema per superare l'ambiguità con lo standard XML OpenMath.",
-      "Politica di compatibilità delle licenze (CC BY-SA 4.0 per testi, Apache 2.0 per codice e Lean, CC0 per ontologia).",
+      "Adozione nativa dello standard Palomar (formalization.yaml + Comparator) per tracciare provenienza e fedeltà degli enunciati.",
+      "Recepimento dei 10 Valori condivisi di Mathlib, Tau Ceti e Formal Frontier (deferenza a Mathlib, zero duplicazione, revisione pubblica).",
       "Costituzione del nucleo federato iniziale di curatori matematici, pedagogisti e sviluppatori.",
     ],
   },
@@ -1794,33 +1970,33 @@ export const ROADMAP_PHASES = [
   {
     phase: "Fase 2",
     window: "Mesi 12–24",
-    title: "Espansione & Ponte Agentico",
-    metrics: "+5 Lingue (FR, DE, PT, AR, ZH) · LeanInteract & Jacobian · 10.000 Studenti",
+    title: "Espansione & Integrazione Tau Ceti / Formal Frontier",
+    metrics: "+5 Lingue (FR, DE, PT, AR, ZH) · Pipeline Formal Frontier · 10.000 Studenti",
     deliverables: [
       "Estensione completa a calcolo infinitesimale, algebra lineare e analisi reale.",
-      "Integrazione in produzione di LeanInteract, Jacobian e checker semantico LoC-Decomp/SAGE.",
+      "Integrazione con le pipeline source-to-library di Formal Frontier e le rubriche di revisione avversaria di Tau Ceti.",
       "Rilascio del modulo di tutoraggio verificato ispirato a LeanTutor (diagnosi del prerequisito mancante).",
       "Sperimentazione didattica con 10.000 studenti in scuole e università partner.",
     ],
   },
   {
     phase: "Fase 3",
-    window: "Mesi 24–48",
-    title: "Scala Interdisciplinare",
-    metrics: "+10 Lingue (RU, HI, JA, KO...) · Fisica & Informatica · 1.000.000 Studenti",
+    window: "Mesi 24–36",
+    title: "Scala Interdisciplinare & Orizzonte dei 3 Anni (Lean FRO)",
+    metrics: "+10 Lingue · Annals Challenge & Formal Conjectures · 1.000.000 Studenti",
     deliverables: [
-      "Copertura integrale dell'intero curriculum undergraduate di matematica, fisica e informatica teorica.",
-      "Traduzione concettuale curata da comunità locali in oltre 18 lingue.",
-      "Partnership istituzionali con università, ministeri dell'istruzione e fondazioni scientifiche.",
+      "Allineamento all'obiettivo triennale indicato da Avigad, Buzzard, Commelin et al.: formalizzare la maggior parte della matematica in forma esplorabile e riusabile.",
+      "Connessione dei nodi avanzati (Livelli 6–7) con The Annals Challenge e Formal Conjectures.",
+      "Hosting accademico/non-profit per matematici, ingegneri e inferenza sotto governance scientifica.",
     ],
   },
   {
     phase: "Fase 4",
-    window: "Mesi 48+",
+    window: "Mesi 36+",
     title: "Maturità & Frontiera della Ricerca",
     metrics: "Livelli 6–7 (PhD/Post-Doc) · Adozione in 10+ Paesi · Sostenibilità Piena",
     deliverables: [
-      "Copertura della matematica graduate e di frontiera in sincronia continua con Mathlib.",
+      "Copertura della matematica graduate e di frontiera in sincronia continua con Mathlib, Tau Ceti e Formal Frontier.",
       "Ponte bidirezionale NL ↔ Lean 4 di grado industriale per ricerca e didattica.",
       "Adozione curricolare pubblica in almeno 10 paesi e sostenibilità finanziaria autonoma del consorzio.",
     ],
@@ -1830,32 +2006,32 @@ export const ROADMAP_PHASES = [
 export const OPEN_QUESTIONS = [
   {
     number: "01",
-    question: "Chi possiede il grafo?",
-    tension: "Consorzio aperto federato contro rischio di cattura da parte di una piattaforma singola.",
-    blueprintDirection: "Dati e ontologia sotto CC0/CC BY-SA 4.0 con dump RDF/JSON pubblici e replicabili in ogni momento.",
+    question: "Come evitare librerie AI-generated che nessuno usa?",
+    tension: "Rischio di spendere milioni di dollari in 'code dump' illeggibili (es. 13M righe per FLT o codice non manutenibile).",
+    blueprintDirection: "Adottare i 10 Valori di Mathlib/Tau Ceti: deferenza a Mathlib, roadmap scritte da esperti umani e revisione avversaria rigorosa.",
   },
   {
     number: "02",
-    question: "Chi finanzia la curatela nel lungo periodo?",
-    tension: "Equilibrio tra grant pubblici (UE, NSF, Simons, Sloan), università e donazioni.",
-    blueprintDirection: "Finanziamento diversificato con crediti accademici ufficiali e stipendi per curatori a tempo pieno.",
+    question: "Come garantire che enunciato formale e informale coincidano?",
+    tension: "Nei dump non curati molte coppie formale/informale divergono in modo sottile o significativo.",
+    blueprintDirection: "Ogni nodo integra il registro Palomar (formalization.yaml + Comparator setup) insieme ai checker semantici LoC-Decomp e SAGE.",
   },
   {
     number: "03",
-    question: "Chi decide cosa è 'abbastanza buono'?",
-    tension: "Velocità di generazione agentica contro rigore matematico e chiarezza pedagogica.",
-    blueprintDirection: "Pipeline a 5 livelli di verifica (Sintattica, Semantica, Pedagogica, Curatoriale umana, Comunitaria).",
+    question: "Chi governa gli strumenti e l'inferenza per l'autoformalizzazione?",
+    tension: "Dipendenza da laboratori commerciali contro autonomia e norme sociali della comunità matematica.",
+    blueprintDirection: "Hosting non-profit o accademico per matematici, ingegneri e inferenza (es. worker distribuiti Tau Ceti) con comitati consultivi scientifici.",
   },
   {
     number: "04",
-    question: "Come si gestiscono le licenze miste?",
-    tension: "Incompatibilità tra GFDL, CC BY-SA, CC BY-NC e risorse sotto copyright.",
-    blueprintDirection: "Separazione netta nel modello dati: importazione diretta solo per licenze libere compatibili, link o parafrasi attribuita per il resto.",
+    question: "Come si sbloccano le definizioni mancanti alla frontiera?",
+    tension: "I modelli sono bravi a dimostrare teoremi noti, ma il vero collo di bottiglia sono le definizioni moderne.",
+    blueprintDirection: "Integrazione diretta con The Annals Challenge (Kevin Buzzard) e Formal Conjectures per dare priorità alle definizioni usate ai confini della ricerca.",
   },
   {
     number: "05",
-    question: "Come si realizza la traduzione concettuale?",
-    tension: "La matematica non è solo vocabolario ma struttura cognitiva, notazione e metafora culturale.",
-    blueprintDirection: "Un unico nodo URN con varianti concettuali curate da comunità linguistiche locali, non pagine wiki scollegate.",
+    question: "Come si unisce il rigore di ricerca alla comprensione pedagogica?",
+    tension: "Una prova verificata dal compilatore Lean ma incomprensibile in linguaggio naturale (caso Navier–Stokes) non costruisce comprensione.",
+    blueprintDirection: "Il ponte bidirezionale di Mathema accoppia sempre la prova formale a spiegazioni deformalizzate multilivello (L0–L7) e multistile.",
   },
 ];

@@ -4,19 +4,30 @@ import {
   RESOURCE_INVENTORY,
   ROADMAP_PHASES,
   OPEN_QUESTIONS,
+  FORMAL_LIBRARY_VALUES,
+  ALIGNMENT_CASE_STUDIES,
   CatalogResource,
 } from "../data/mathemaData";
-import { ExternalLink, CheckCircle2, BookMarked, Compass } from "lucide-react";
+import {
+  ExternalLink,
+  CheckCircle2,
+  AlertTriangle,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
 
 export const ArchitectureAndCatalogSection: React.FC = () => {
-  const [selectedLayerIdx, setSelectedLayerIdx] = useState<number>(5); // Default Strato 5 Formalizzazione
+  const [selectedLayerIdx, setSelectedLayerIdx] = useState<number>(5);
   const [categoryFilter, setCategoryFilter] = useState<
     CatalogResource["category"] | "all"
   >("all");
   const [policyFilter, setPolicyFilter] = useState<
     CatalogResource["integrationPolicy"] | "all"
   >("all");
-  const [activePhaseIdx, setActivePhaseIdx] = useState<number>(1); // Fase 1 MVP Verticale
+  const [activePhaseIdx, setActivePhaseIdx] = useState<number>(1);
+  const [alignmentFilter, setAlignmentFilter] = useState<
+    "all" | "unaligned" | "aligned"
+  >("all");
 
   const activeLayer = TEN_LAYERS[selectedLayerIdx] || TEN_LAYERS[5];
 
@@ -25,6 +36,11 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
     if (policyFilter !== "all" && r.integrationPolicy !== policyFilter)
       return false;
     return true;
+  });
+
+  const filteredCaseStudies = ALIGNMENT_CASE_STUDIES.filter((cs) => {
+    if (alignmentFilter === "all") return true;
+    return cs.category === alignmentFilter;
   });
 
   const policyLabel = (p: CatalogResource["integrationPolicy"]) => {
@@ -40,16 +56,17 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
         <div>
           <div className="mb-8">
             <div className="text-xs tracking-widest uppercase text-[#78716C] mb-2">
-              04. Sezione 6.1 &amp; Sezione 8 · Architettura a Dieci Strati ed Ecosistema
+              04. Sezione 6.1 &amp; Ecosistema Formale 2026 · Architettura a Dieci Strati
             </div>
             <h2 className="text-3xl lg:text-4xl font-semibold text-[#1C1917] tracking-tight text-balance">
               I Dieci Strati Architetturali di Mathema
             </h2>
             <p className="mt-2 text-base text-[#57534E] max-w-3xl leading-relaxed">
-              Dall&apos;acquisizione OCR open-source (Strato 0) fino alla
-              governance federata (Strato 9), ogni strato trasforma contenuti
-              frammentati in conoscenza interconnessa, multilingue e
-              formalmente verificata.
+              Dall&apos;acquisizione OCR open-source (Strato 0) al registro{" "}
+              <strong>Palomar</strong> (Strato 1), dalle pipeline{" "}
+              <strong>Formal Frontier</strong> (Strato 3) a{" "}
+              <strong>Mathlib &amp; Tau Ceti</strong> (Strati 5–6), fino alla
+              governance guidata dai matematici (Strato 9).
             </p>
           </div>
 
@@ -97,7 +114,7 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between text-xs font-mono text-[#57534E] pb-4 border-b border-[#E5DEC9]">
                   <span>STRATO ARCHITETTURALE 0{activeLayer.layer} / 09</span>
-                  <span>SPECIFICA BLUEPRINT v0.1</span>
+                  <span>SPECIFICA BLUEPRINT v0.1 + PALOMAR</span>
                 </div>
 
                 <h3 className="text-2xl lg:text-3xl font-semibold text-[#1C1917] mt-5">
@@ -143,14 +160,250 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
                   Apache 2.0 · Ontologia CC0
                 </span>
                 <span className="font-mono text-[#14532D]">
-                  Curatela Umana + Assistenza Agentica
+                  Curatela Umana + Revisione Avversaria
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Part 2: Complete Ecosystem & Resource Inventory Table (Section 8 & 12) */}
+        {/* Part 2: Formalization Alignment & The 10 Values (Avigad, Buzzard, Commelin, Degenne, Morrison, Nash, Topaz — 2026) */}
+        <div className="pt-12 border-t border-[#E5DEC9]">
+          <div className="mb-8">
+            <div className="text-xs tracking-widest uppercase text-[#9A3412] font-semibold mb-2">
+              Allineamento della Formalizzazione (Avigad, Buzzard, Commelin, Degenne, Morrison, Nash, Topaz — 2026)
+            </div>
+            <h3 className="text-2xl lg:text-3xl font-semibold text-[#1C1917] text-balance">
+              Perché &ldquo;Una Cattiva Formalizzazione è Peggio di Nessuna Formalizzazione&rdquo;
+            </h3>
+            <p className="mt-2 text-sm text-[#57534E] max-w-3xl leading-relaxed">
+              Un artefatto formale non vale quasi nulla se nessuno lo usa.
+              Mathema recepisce integralmente l&apos;analisi della comunità
+              Mathlib / Lean FRO: il valore di una formalizzazione risiede in
+              ciò che otteniamo <em>oltre la mera correttezza</em> — la capacità
+              di esplorare connessioni, rifattorizzare concetti, comprendere il
+              perché e costruire nuova matematica sopra librerie coerenti.
+            </p>
+          </div>
+
+          {/* 4 Pillar Projects Strip: Mathlib, Tau Ceti, Formal Frontier, Palomar / Annals */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            <div className="p-5 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg flex flex-col justify-between">
+              <div>
+                <div className="text-xs font-mono text-[#1E3A8A]">
+                  PREMIO DEMAILLY 2026
+                </div>
+                <h4 className="text-lg font-semibold text-[#1C1917] mt-1">
+                  Mathlib4
+                </h4>
+                <p className="text-xs text-[#57534E] mt-2 leading-relaxed">
+                  Curata da 65 revisori e 950 contributori. È la fondazione dove
+                  la comunità impara a formalizzare al giusto livello di
+                  astrazione e a cui ogni progetto AI-assisted deve deferire.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#E5DEC9] text-xs font-mono tabular-nums text-[#1C1917]">
+                65 revisori · 950 autori · Standard aureo
+              </div>
+            </div>
+
+            <div className="p-5 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg flex flex-col justify-between">
+              <div>
+                <div className="text-xs font-mono text-[#14532D]">
+                  LEAN FRO &amp; MATHLIB INITIATIVE
+                </div>
+                <h4 className="text-lg font-semibold text-[#1C1917] mt-1">
+                  Tau Ceti
+                </h4>
+                <p className="text-xs text-[#57534E] mt-2 leading-relaxed">
+                  Libreria coerente (&gt;3M righe di codice) scritta da AI e
+                  revisionata avversariamente da altre AI secondo roadmap curate
+                  da matematici, estendendo Mathlib senza alcuna duplicazione.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#E5DEC9] text-xs font-mono text-[#14532D]">
+                Riemann-Roch · Schur-Weyl · Chebotarev
+              </div>
+            </div>
+
+            <div className="p-5 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg flex flex-col justify-between">
+              <div>
+                <div className="text-xs font-mono text-[#9A3412]">
+                  PIPELINE SOURCE-TO-LIBRARY
+                </div>
+                <h4 className="text-lg font-semibold text-[#1C1917] mt-1">
+                  Formal Frontier
+                </h4>
+                <p className="text-xs text-[#57534E] mt-2 leading-relaxed">
+                  Sciame di agenti + build server Lean per convertire migliaia
+                  di manuali in librerie interconnesse (41 librerie rilasciate,
+                  ~200k LoC: gruppi profiniti, ideali torici, dualità di Stone).
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#E5DEC9] text-xs font-mono tabular-nums text-[#9A3412]">
+                41 librerie · ~200k LoC · Hairy Ball &amp; Kaplansky
+              </div>
+            </div>
+
+            <div className="p-5 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg flex flex-col justify-between">
+              <div>
+                <div className="text-xs font-mono text-[#78350F]">
+                  AUDIT, DEFINIZIONI &amp; PROBLEMI APERTI
+                </div>
+                <h4 className="text-lg font-semibold text-[#1C1917] mt-1">
+                  Palomar · Annals · Conjectures
+                </h4>
+                <p className="text-xs text-[#57534E] mt-2 leading-relaxed">
+                  Palomar indicizza progetti con <code>formalization.yaml</code>{" "}
+                  e <strong>Comparator</strong>; <em>The Annals Challenge</em>{" "}
+                  (Buzzard) sblocca le definizioni di frontiera;{" "}
+                  <em>Formal Conjectures</em> certifica gli enunciati aperti.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#E5DEC9] text-xs font-mono text-[#78350F]">
+                formalization.yaml + Comparator Audit
+              </div>
+            </div>
+          </div>
+
+          {/* Case Studies vs. 10 Shared Values Split */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left: Case Studies (5 cols) */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="text-base font-semibold text-[#1C1917]">
+                  Esperienze sul Campo (Febbraio–Ottobre 2026)
+                </h4>
+                <div className="flex items-center gap-1 p-1 bg-[#F3EFE6] border border-[#E5DEC9] rounded-md">
+                  <button
+                    onClick={() => setAlignmentFilter("all")}
+                    className={`px-2 py-1 text-[11px] font-medium rounded ${
+                      alignmentFilter === "all"
+                        ? "bg-[#FBF9F5] text-[#1C1917]"
+                        : "text-[#57534E]"
+                    }`}
+                  >
+                    Tutti
+                  </button>
+                  <button
+                    onClick={() => setAlignmentFilter("unaligned")}
+                    className={`px-2 py-1 text-[11px] font-medium rounded ${
+                      alignmentFilter === "unaligned"
+                        ? "bg-[#9A3412] text-white"
+                        : "text-[#57534E]"
+                    }`}
+                  >
+                    Rischi Dump
+                  </button>
+                  <button
+                    onClick={() => setAlignmentFilter("aligned")}
+                    className={`px-2 py-1 text-[11px] font-medium rounded ${
+                      alignmentFilter === "aligned"
+                        ? "bg-[#14532D] text-white"
+                        : "text-[#57534E]"
+                    }`}
+                  >
+                    Virtuosi
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {filteredCaseStudies.map((cs) => (
+                  <div
+                    key={cs.title}
+                    className="p-4 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg space-y-2"
+                  >
+                    <div className="flex items-center justify-between gap-2 text-xs">
+                      <span
+                        className={`font-semibold flex items-center gap-1.5 ${
+                          cs.category === "unaligned"
+                            ? "text-[#9A3412]"
+                            : "text-[#14532D]"
+                        }`}
+                      >
+                        {cs.category === "unaligned" ? (
+                          <>
+                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                            Allerta Code Dump Non Allineato
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                            Partnership Allineata con la Comunità
+                          </>
+                        )}
+                      </span>
+                    </div>
+                    <h5 className="text-sm font-semibold text-[#1C1917]">
+                      {cs.title}
+                    </h5>
+                    <p className="text-xs text-[#44403C] leading-relaxed">
+                      {cs.summary}
+                    </p>
+                    <div className="pt-2 border-t border-[#F3EFE6] text-xs font-medium text-[#1C1917]">
+                      Lezione per Mathema: {cs.lesson}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tau Ceti Worker CLI Box */}
+              <div className="p-4 bg-[#F3EFE6] border border-[#D6CEBE] rounded-lg space-y-2">
+                <div className="text-xs font-semibold text-[#1C1917] flex items-center gap-1.5">
+                  <Terminal className="w-3.5 h-3.5 text-[#1E3A8A]" />
+                  Contribuire Inferenza a Tau Ceti (Nota 2 del Post)
+                </div>
+                <p className="text-xs text-[#57534E]">
+                  Chiunque può contribuire scrivendo roadmap esperte o fornendo
+                  inferenza al worker open-source:
+                </p>
+                <pre className="p-2.5 bg-[#1C1917] text-[#FBF9F5] rounded text-[11px] font-mono overflow-x-auto">
+{`uv tool install git+https://github.com/TauCetiProject/TauCetiWorker
+tauceti work --loop`}
+                </pre>
+              </div>
+            </div>
+
+            {/* Right: The 10 Shared Values of Formal Libraries (7 cols) */}
+            <div className="lg:col-span-7 bg-[#FBF9F5] border border-[#E5DEC9] rounded-lg p-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[#E5DEC9] mb-4">
+                <div>
+                  <div className="text-xs font-mono text-[#1E3A8A] uppercase">
+                    COSTITUZIONE DELLE LIBRERIE FORMALI
+                  </div>
+                  <h4 className="text-lg font-semibold text-[#1C1917]">
+                    I 10 Valori Condivisi di Mathlib, Tau Ceti, Formal Frontier e Mathema
+                  </h4>
+                </div>
+                <ShieldCheck className="w-5 h-5 text-[#14532D] shrink-0" />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {FORMAL_LIBRARY_VALUES.map((val) => (
+                  <div
+                    key={val.index}
+                    className="p-3.5 bg-[#F3EFE6]/60 border border-[#E5DEC9] rounded-md"
+                  >
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono text-xs font-bold text-[#1E3A8A]">
+                        {val.index}.
+                      </span>
+                      <h5 className="text-xs font-semibold text-[#1C1917]">
+                        {val.title}
+                      </h5>
+                    </div>
+                    <p className="text-xs text-[#57534E] mt-1 leading-relaxed">
+                      {val.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Part 3: Complete Ecosystem & Resource Inventory Table (Section 8 & 12) */}
         <div className="pt-12 border-t border-[#E5DEC9]">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-6">
             <div>
@@ -158,7 +411,7 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
                 Sezione 8 &amp; Sezione 12.2 · Inventario Completo delle Risorse e Politica Licenze
               </div>
               <h3 className="text-2xl font-semibold text-[#1C1917]">
-                Catalogo Federato di Enciclopedie, Manuali Open Source e Infrastruttura Agentica
+                Catalogo Federato di Librerie Formali, Enciclopedie e Manuali Open Source
               </h3>
             </div>
 
@@ -170,13 +423,21 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
                 aria-label="Filtra per categoria risorsa"
                 className="px-3 py-1.5 text-xs bg-[#FBF9F5] border border-[#D6CEBE] rounded-md text-[#1C1917]"
               >
-                <option value="all">Tutte le categorie ({RESOURCE_INVENTORY.length})</option>
-                <option value="agentic">Infrastruttura Agentica &amp; Lean</option>
-                <option value="encyclopedia">Enciclopedie &amp; Knowledge Graph</option>
+                <option value="all">
+                  Tutte le categorie ({RESOURCE_INVENTORY.length})
+                </option>
+                <option value="agentic">
+                  Ecosistema Lean FRO (Mathlib, Tau Ceti, Formal Frontier)
+                </option>
+                <option value="encyclopedia">
+                  Enciclopedie &amp; Knowledge Graph
+                </option>
                 <option value="manual_math">Manuali Open: Matematica</option>
                 <option value="manual_cs">Manuali Open: Informatica</option>
                 <option value="manual_physics">Manuali Open: Fisica</option>
-                <option value="standard">Standard &amp; Interoperabilità</option>
+                <option value="standard">
+                  Standard, Palomar &amp; Interoperabilità
+                </option>
               </select>
 
               <select
@@ -186,8 +447,12 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
                 className="px-3 py-1.5 text-xs bg-[#FBF9F5] border border-[#D6CEBE] rounded-md text-[#1C1917]"
               >
                 <option value="all">Tutte le modalità di compatibilità</option>
-                <option value="direct_import">Importazione Diretta (CC BY-SA / GFDL / CC0)</option>
-                <option value="paraphrase_cite">Parafrasi con Attribuzione (CC BY-NC)</option>
+                <option value="direct_import">
+                  Importazione Diretta (Apache 2.0 / CC BY-SA / GFDL / CC0)
+                </option>
+                <option value="paraphrase_cite">
+                  Parafrasi con Attribuzione (CC BY-NC)
+                </option>
                 <option value="external_link">Link Esterno (Copyright)</option>
               </select>
             </div>
@@ -198,7 +463,7 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
               <thead>
                 <tr className="border-b border-[#E5DEC9] bg-[#F3EFE6] text-xs font-semibold text-[#44403C]">
                   <th className="py-3 px-4">Risorsa / Progetto</th>
-                  <th className="py-3 px-4">Autore / Ente</th>
+                  <th className="py-3 px-4">Autore / Comunità</th>
                   <th className="py-3 px-4">Licenza</th>
                   <th className="py-3 px-4">Modalità Integrazione (Sez. 12.2)</th>
                   <th className="py-3 px-4">Ruolo in Mathema</th>
@@ -250,15 +515,15 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Part 3: Roadmap (Fasi 0–4) & Governance Open Questions (Sections 13 & 15) */}
+        {/* Part 4: Roadmap (Fasi 0–4) & Governance Open Questions (Sections 13 & 15) */}
         <div className="pt-12 border-t border-[#E5DEC9] grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Interactive Roadmap (7 cols) */}
           <div className="lg:col-span-7">
             <div className="text-xs tracking-widest uppercase text-[#78716C] mb-1">
-              Sezione 13 · Roadmap Esecutiva (Mesi 0–48+)
+              Sezione 13 · Roadmap Esecutiva &amp; Orizzonte Triennale Lean FRO
             </div>
             <h3 className="text-2xl font-semibold text-[#1C1917] mb-4">
-              Dalla Fondazione all&apos;Adozione Curricolare Globale
+              Dalla Fondazione all&apos;Adozione Curricolare e di Ricerca
             </h3>
 
             <div className="flex flex-wrap gap-1.5 mb-5">
@@ -310,7 +575,7 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
           {/* Open Governance Questions (5 cols) */}
           <div className="lg:col-span-5">
             <div className="text-xs tracking-widest uppercase text-[#78716C] mb-1">
-              Sezione 15 · Domande Aperte e Governance Federata
+              Sezione 15 · Allineamento, Governance &amp; Domande Aperte
             </div>
             <h3 className="text-2xl font-semibold text-[#1C1917] mb-4">
               Nodi Politici, Legali ed Epistemologici
@@ -330,11 +595,9 @@ export const ArchitectureAndCatalogSection: React.FC = () => {
                       {q.question}
                     </h4>
                   </div>
-                  <p className="text-xs text-[#57534E] mt-1">
-                    {q.tension}
-                  </p>
+                  <p className="text-xs text-[#57534E] mt-1">{q.tension}</p>
                   <p className="text-xs text-[#1C1917] mt-1.5 font-medium">
-                     Indirizzo Blueprint: {q.blueprintDirection}
+                    Indirizzo Blueprint: {q.blueprintDirection}
                   </p>
                 </div>
               ))}
