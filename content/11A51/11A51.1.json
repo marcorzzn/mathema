@@ -17,11 +17,13 @@
   "symbolic": "∀ n ∈ ℕ, n ≥ 2  ⇒  ∃! M ∈ Multiset(ℙ) : (∀ p ∈ M, Prime(p)) ∧ ∏_{p ∈ M} p = n",
   "lean": {
     "code": "import Mathlib.Data.Nat.Factors\n\n/-- Esistenza: il prodotto della lista dei fattori primi di n ≠ 0 restituisce n. -/\ntheorem mathema_primeFactorsList_prod {n : ℕ} (hn : n ≠ 0) :\n    n.primeFactorsList.prod = n :=\n  Nat.prod_primeFactorsList hn\n\n/-- Unicità a meno di permutazioni (Relazione List.Perm) in Mathlib4. -/\ntheorem mathema_primeFactorsList_unique {n : ℕ} {l : List ℕ}\n    (hprod : l.prod = n) (hprime : ∀ p ∈ l, p.Prime) :\n    l ~ n.primeFactorsList :=\n  Nat.primeFactorsList_unique hprod hprime",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.primeFactorsList_unique",
     "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "259fde246ac5487013d8cb421586aca778c394937caf132de6792ec2a01d5f5f",
+    "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
   },
   "deps": [
     {
@@ -58,11 +60,13 @@
       "symbolic": "n = minFac(n) · (n / minFac(n))  ∧  n / minFac(n) < n",
       "lean": {
         "code": "theorem prod_primeFactorsList_rec {n : ℕ} (hn : n ≠ 0) :\n    (∀ p ∈ n.primeFactorsList, p.Prime) ∧ n.primeFactorsList.prod = n :=\n  ⟨fun _ hp => Nat.prime_of_mem_primeFactorsList hp, Nat.prod_primeFactorsList hn⟩",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.prod_primeFactorsList",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "c098c195809ab5dbff0f20622f73e0b9a69a56589839c6e484cd518822d4f777",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
@@ -93,14 +97,32 @@
           "symbolic": "n ≥ 2  ⇒  minFac(n) ≥ 2  ⇒  n / minFac(n) < n",
           "lean": {
             "code": "example {n : ℕ} (hn : 2 ≤ n) : n / n.minFac < n :=\n  Nat.div_lt_self (by omega) (Nat.minFac_prime (by omega)).one_lt",
-            "status": "compiled",
+            "status": "unverified",
             "mathlib_version": "v4.15.0",
             "mathlib_name": "Nat.div_lt_self",
             "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-            "verified_at": "2026-10-20T12:00:00Z"
+            "verified_at": null,
+            "hash": "3aa05024e210bd97798cbeed799dfe33872fbba5dda1bfad7b75cfe9e16147c4",
+            "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
           },
-          "deps": []
+          "deps": [],
+          "missing": [
+            "lang:fr",
+            "lang:de",
+            "lang:pt",
+            "lang:zh",
+            "lang:hi",
+            "lang:ru"
+          ]
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -125,13 +147,24 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Prime.dvd_of_dvd_prod",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "b4d32fa7e9d59a8e7931cc7dc33bb0748c709b6a3e6549280cbf89ed990b39a3",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
           "id": "11A51.0",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     },
     {
@@ -152,11 +185,13 @@
       "symbolic": "p₁ · (p₂⋯pₖ) = p₁ · (∏_{i≠j} qᵢ) ∧ p₁ > 0  ⇒  p₂⋯pₖ = ∏_{i≠j} qᵢ",
       "lean": {
         "code": "theorem cancel_prime_factor {p a b : ℕ} (hp : p.Prime) (h : p * a = p * b) : a = b :=\n  Nat.eq_of_mul_eq_mul_left hp.pos h",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.eq_of_mul_eq_mul_left",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "e01853d17f374fb5e63083cf1ebc86cbb6a3375910fd0e4d331c92ef2624a221",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
@@ -187,14 +222,32 @@
           "symbolic": "∀ c, a, b ∈ ℕ : c > 0 ∧ c·a = c·b  ⇒  a = b",
           "lean": {
             "code": "example {c a b : ℕ} (hc : 0 < c) (h : c * a = c * b) : a = b :=\n  Nat.eq_of_mul_eq_mul_left hc h",
-            "status": "compiled",
+            "status": "unverified",
             "mathlib_version": "v4.15.0",
             "mathlib_name": "Nat.eq_of_mul_eq_mul_left",
             "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-            "verified_at": "2026-10-20T12:00:00Z"
+            "verified_at": null,
+            "hash": "908620ab1f3d471b0b1a5405858d5c633ecba3f52036b89f774b0d7e5ccf58c0",
+            "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
           },
-          "deps": []
+          "deps": [],
+          "missing": [
+            "lang:fr",
+            "lang:de",
+            "lang:pt",
+            "lang:zh",
+            "lang:hi",
+            "lang:ru"
+          ]
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -214,12 +267,14 @@
       },
       "symbolic": "∏_{i=1}^k pᵢ = ∏_{j=1}^m qⱼ  ⇒  [p₁,…,pₖ] ~ [q₁,…,qₘ]",
       "lean": {
-        "code": "theorem unique_factorization_perm {l₁ l₂ : List ℕ}\n    (h₁ : ∀ p ∈ l₁, p.Prime) (h₂ : ∀ p ∈ l₂, p.Prime) (heq : l₁.prod = l₂.prod) :\n    l₁ ~ l₂ :=\n  Nat.factors_unique heq h₁ h₂",
+        "code": "theorem unique_factorization_perm {l₁ l₂ : List ℕ}\n    (h₁ : ∀ p ∈ l₁, p.Prime) (h₂ : ∀ p ∈ l₂, p.Prime) (heq : l₁.prod = l₂.prod) :\n    l₁ ~ l₂ := by sorry",
         "status": "has_sorry",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.primeFactorsList_unique",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "b1c16889cf539f4c8866e87886821804cb115e27f5d37f43f3032a15e3c98915",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
@@ -230,6 +285,15 @@
           "id": "11A51.1.3",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:complete_proof_without_sorry"
       ]
     }
   ],
@@ -278,5 +342,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A51",
+    "target_theorem": "Nat.primeFactorsList_unique",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

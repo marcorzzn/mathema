@@ -17,11 +17,13 @@
   "symbolic": "∀ p, a, b ∈ ℕ : Prime(p) ∧ p ∣ a·b  ⇒  p ∣ a ∨ p ∣ b",
   "lean": {
     "code": "import Mathlib.Data.Nat.Prime.Basic\n\ntheorem mathema_euclid_lemma {p a b : ℕ} (hp : p.Prime) (h : p ∣ a * b) :\n    p ∣ a ∨ p ∣ b :=\n  hp.dvd_mul.mp h",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime.dvd_mul",
     "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "ea951b3bf6dd56793dfe8e0997f615d69ec47266bc97209d2806e68a902f77f9",
+    "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
   },
   "deps": [
     {
@@ -51,12 +53,14 @@
       },
       "symbolic": "Prime(p)  ⇒  (p ∣ a  ∨  gcd(p, a) = 1)",
       "lean": {
-        "code": "example {p a : ℕ} (hp : p.Prime) : p ∣ a ∨ p.Coprime a :=\n  (Nat.Prime.coprime_iff_not_dvd hp).symm.imp_right id |> by\n    intro _; exact Or.symm ( hp.coprime_iff_not_dvd.mpr.mt |> by tauto )",
-        "status": "has_sorry",
+        "code": "example {p a : ℕ} (hp : p.Prime) : p ∣ a ∨ p.Coprime a := by\n  rw [hp.coprime_iff_not_dvd]\n  exact Classical.em (p ∣ a)",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.Prime.coprime_iff_not_dvd",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "8000e67cc8005f6fd4ef31a2d1dc78cb5852e43aec1c35abcbf756013fedb2b8",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
@@ -87,10 +91,29 @@
             "mathlib_version": "v4.15.0",
             "mathlib_name": "Nat.gcd_eq_gcd_ab",
             "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-            "verified_at": null
+            "verified_at": null,
+            "hash": "4fae6b4c03f5eaeb0597ebb0a21e7e1a9654292735a2262771eed4a753237cac",
+            "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
           },
-          "deps": []
+          "deps": [],
+          "missing": [
+            "lang:fr",
+            "lang:de",
+            "lang:pt",
+            "lang:zh",
+            "lang:hi",
+            "lang:ru",
+            "lean:local_proof"
+          ]
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -111,11 +134,13 @@
       "symbolic": "b = p·(u·b) + v·(a·b)  ∧  p ∣ a·b  ⇒  p ∣ b",
       "lean": {
         "code": "theorem dvd_of_coprime_of_dvd_mul {p a b : ℕ} (hcop : p.Coprime a) (hdvd : p ∣ a * b) :\n    p ∣ b :=\n  hcop.dvd_of_dvd_mul_left hdvd",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.Coprime.dvd_of_dvd_mul_left",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "c9eac324a38026f8f0e8e98d3ff43d1479d5b44303d7a3faa0223403fcb7dedf",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
@@ -126,10 +151,32 @@
           "id": "11A51.0.1.a",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11A51.0.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Dall'identità di Bézout u·p + v·a = 1 al Lemma di Euclide",
+        "en": "Figure 1: From Bézout's identity u·p + v·a = 1 to Euclid's Lemma"
+      },
+      "caption": {
+        "it": "Se p ∤ a allora gcd(p, a) = 1; moltiplicando u·p + v·a = 1 per b si ottiene che p divide b.",
+        "en": "If p ∤ a then gcd(p, a) = 1; multiplying u·p + v·a = 1 by b shows that p divides b."
+      },
+      "svg": "<svg viewBox=\"0 0 430 115\" width=\"430\" height=\"115\" role=\"img\" aria-label=\"Schema del Lemma di Euclide\"><rect x=\"14\" y=\"18\" width=\"175\" height=\"42\" rx=\"3\"/><text x=\"24\" y=\"44\">gcd(p, a) = 1 ⇒ up + va = 1</text><line x1=\"189\" y1=\"39\" x2=\"225\" y2=\"39\" stroke=\"currentColor\"/><rect x=\"225\" y=\"18\" width=\"190\" height=\"42\" rx=\"3\"/><text x=\"235\" y=\"44\">b = p·(ub) + v·(ab)</text><text x=\"20\" y=\"90\">Poiché p ∣ p·(ub) e per ipotesi p ∣ ab, segue necessariamente p ∣ b.</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "Euclide, Elementi, Libro VII, Proposizione 30",
@@ -141,5 +188,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A51",
+    "target_theorem": "Nat.Prime.dvd_mul",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

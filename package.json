@@ -1,13 +1,16 @@
 {
-  "name": "react-example",
+  "name": "mathema",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "prebuild": "node scripts/sync-lean-status.mjs && node scripts/build-content.mjs",
+    "sync": "node scripts/sync-lean-status.mjs && node scripts/build-content.mjs",
+    "prebuild": "node scripts/validate.mjs && node scripts/build-content.mjs",
     "build": "vite build",
-    "validate": "node scripts/sync-lean-status.mjs && node scripts/build-content.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test:invariants": "node scripts/test-invariants.mjs",
+    "verify-lean-ci": "node scripts/sync-lean-status.mjs --after-lake-build && node scripts/build-content.mjs && node scripts/validate.mjs",
     "start": "node server.ts",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
@@ -15,24 +18,13 @@
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
-    "@tailwindcss/vite": "^4.3.3",
-    "@vitejs/plugin-react": "^6.1.1",
-    "lucide-react": "^0.546.0",
-    "react": "^19.0.1",
-    "react-dom": "^19.0.1",
-    "vite": "^8.3.0",
-    "express": "^4.21.2",
     "dotenv": "^17.2.3",
-    "motion": "^12.23.24"
+    "express": "^4.21.2",
+    "vite": "^8.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "autoprefixer": "^10.4.21",
-    "esbuild": "^0.25.0",
-    "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",
     "typescript": "^7.0.2",
     "vite-plugin-pwa": "^2.0.0"

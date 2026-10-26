@@ -319,6 +319,11 @@ h2 {
   color: var(--ok);
 }
 
+.lean-banner[data-status="unverified"] {
+  border-left-color: var(--ac);
+  color: var(--ac);
+}
+
 .lean-banner[data-status="has_sorry"],
 .lean-banner[data-status="statement_only"] {
   border-left-color: var(--warn);
@@ -479,6 +484,14 @@ svg line {
 
 [dir="rtl"] .row {
   direction: rtl;
+}
+
+[dir="rtl"] .sym,
+[dir="rtl"] pre,
+[dir="rtl"] code {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: left;
 }
 
 [dir="rtl"] nav {

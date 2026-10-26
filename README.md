@@ -132,10 +132,11 @@ Mathema/
 
 ---
 
-## 5. Come Far Verificare il Codice Lean 4
+### 5. Come Far Verificare il Codice Lean 4
 
 Mathema applica una politica di **onestà formale assoluta**:
-- `compiled`: ammesso **solo** se il codice non contiene `sorry` ed è compilato nel progetto `lean/`.
+- `unverified` (**stato di default**): il codice Lean è scritto senza `sorry`, ma non è ancora stato compilato da `lake build` in CI.
+- `compiled`: assegnato **esclusivamente** dallo script `scripts/sync-lean-status.mjs --after-lake-build` quando `lake build` ha generato il file `.olean` corrispondente senza errori né `sorry`.
 - `has_sorry`: usato quando la prova contiene `sorry` in uno o più passaggi.
 - `statement_only`: usato quando è presente solo l'enunciato o il rimando `#check` a Mathlib.
 - `none`: nessuna formalizzazione Lean (o bozza generata da AI).
@@ -146,31 +147,32 @@ cd lean
 lake exe cache get
 lake build
 cd ..
-node scripts/sync-lean-status.mjs --from-ci
+node scripts/sync-lean-status.mjs --after-lake-build
+node scripts/build-content.mjs
 ```
-Ad ogni push su GitHub, la workflow `.github/workflows/lean-verify.yml` compila automaticamente tutti i file `.lean` e aggiorna gli stati.
+Ad ogni push su GitHub, la workflow `.github/workflows/lean-verify.yml` esegue `leanprover/lean-action@v1` con `lake-package-directory: lean`, lancia `node scripts/sync-lean-status.mjs --after-lake-build` e committa automaticamente nel repository i file JSON aggiornati a `compiled`.
 
 ---
 
 ## 6. Come Pubblicare su GitHub Pages
 
-1. Su GitHub, apri **Settings → Pages** e seleziona **Source: GitHub Actions**.
-2. Ad ogni push sul ramo `main`, la workflow `.github/workflows/deploy-pages.yml` esegue `npm run validate` e `npm run build`, pubblicando la cartella statica `dist/` su GitHub Pages.
+1. `vite.config.ts` è configurato con `base: '/Mathema/'` e percorsi relativi `./` per il manifesto PWA e il caricamento di `data/bundle.json`, così da funzionare nativamente su `https://marcorzzn.github.io/Mathema/`.
+2. Su GitHub, apri **Settings → Pages** e seleziona **Source: GitHub Actions**.
+3. Ad ogni push sul ramo `main`, la workflow `.github/workflows/deploy-pages.yml` esegue `npm ci --legacy-peer-deps`, valida i nodi e pubblica la cartella statica `dist/` su GitHub Pages.
 
 ---
 
 ## 7. Lista Onesta: Cosa è Fatto e Cosa Resta da Fare
 
-### Già completato e verificato
+### Già completato
 - Separazione completa dei contenuti dal codice in `content/<MSC>/<id>.json` con validazione `schema/node.schema.json`.
 - Tutte le 63 discipline MSC2020 di primo livello (`00-XX` … `97-XX`) e le sezioni di teoria dei numeri.
-- Tre insiemi verticali completi con più dimostrazioni alternative, passi numerati, micro-risultati, 3 rappresentazioni e figure SVG / 2D / 3D lazy-loaded:
-  - `11J72` — Irrazionalità di $\sqrt{2}$ (Parità classica, Valutazione $2$-adica tramite TFA, Tappeto geometrico di Tennenbaum).
-  - `11A41` — Infinità dei numeri primi (Euclide *Elementi* IX.20, Numeri di Fermat di Goldbach, Topologia di Fürstenberg).
-  - `11A51` — Teorema Fondamentale dell'Aritmetica (Lemma di Euclide + Induzione classica + Induzione diretta di Zermelo).
-- Frontend Vanilla TypeScript puro nello stile PlanetMath: bundle iniziale ~8 KB gzip, funzionamento offline PWA, accessibilità WCAG 2.2 AA e navigazione da tastiera.
+- Tre insiemi verticali completi (`11J72`, `11A41`, `11A51`) con più dimostrazioni alternative, passi numerati, micro-risultati, 3 rappresentazioni e figure SVG / 2D / 3D lazy-loaded.
+- Onestà Lean: tutti i 32 blocchi scritti senza `sorry` partono con `lean.status = "unverified"` (`verified_at: null`) finché la GitHub Action non esegue `lake build` e committa la promozione a `"compiled"`.
+- Frontend Vanilla TypeScript puro nello stile PlanetMath (~9 KB gzip), compatibile con GitHub Pages (`/Mathema/`), offline PWA e accessibilità WCAG 2.2 AA.
 
-### Ancora da fare (Roadmap aperta per i contributori)
+### Ancora da fare (Roadmap aperta)
+- Eseguire il primo ciclo della GitHub Action `.github/workflows/lean-verify.yml` su GitHub per far compilare `lean/` da `lake build` e promuovere automaticamente i blocchi da `unverified` a `compiled`.
 - Espandere l'albero MSC2020 con tutte le ~6.000 voci a 5 caratteri delle altre 62 discipline oltre `11-XX`.
-- Completare in Lean 4 i passaggi intermedi didattici attualmente marcati con `has_sorry` (es. la formalizzazione topologica completa della prova di Fürstenberg `11A41.3` e l'induzione di Zermelo `11A51.2.3`).
-- Tradurre il corpo dei nodi nelle ulteriori lingue previste dal manifesto (`FR`, `DE`, `PT`, `ZH`, `HI`, `RU`).
+- Completare in Lean 4 i passaggi intermedi didattici attualmente marcati `has_sorry` o `statement_only` (es. la formalizzazione topologica di Fürstenberg `11A41.3` e l'ultimo passo di Zermelo `11A51.2.3`).
+- Tradurre il corpo dei nodi nelle ulteriori lingue previste (`FR`, `DE`, `PT`, `ZH`, `HI`, `RU`).

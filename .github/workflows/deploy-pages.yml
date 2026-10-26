@@ -28,12 +28,12 @@ jobs:
           cache: 'npm'
 
       - name: Installa dipendenze
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Valida JSON Schema, controlla dipendenze e genera indici statici
         run: node scripts/build-content.mjs
 
-      - name: Compila sito statico minimale
+      - name: Compila sito statico minimale (base /Mathema/)
         run: npm run build
 
       - name: Upload Pages artifact

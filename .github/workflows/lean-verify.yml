@@ -11,18 +11,23 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   verify-lean:
-    name: Compila progetto Lake (Lean 4 + Mathlib) e sincronizza status
+    name: Compila progetto Lake (Lean 4 + Mathlib) e aggiorna lean.status
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Installa elan e Lean 4 toolchain
+      - name: Compila i file Lean con lean-action (lake build)
         uses: leanprover/lean-action@v1
         with:
-          project-path: lean
+          lake-package-directory: lean
           use-mathlib-cache: true
           build: true
 
@@ -31,7 +36,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Sincronizza stato di verifica Lean nei file JSON e valida schema
+      - name: Promuovi a 'compiled' solo i blocchi i cui .olean sono stati compilati da lake build
         run: |
-          node scripts/sync-lean-status.mjs --from-ci
+          node scripts/sync-lean-status.mjs --after-lake-build
           node scripts/build-content.mjs
+
+      - name: Salva e committa automaticamente i JSON aggiornati dalla verifica Lean
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/ public/data/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(lean): aggiorna lean.status=compiled dopo lake build riuscito [skip ci]"
+            git push
+          fi

@@ -44,6 +44,7 @@ const ALLOWED_LEAN_STATUS = new Set([
   "none",
   "statement_only",
   "has_sorry",
+  "unverified",
   "compiled"
 ]);
 
@@ -89,8 +90,16 @@ function validateLeanBlock(lean, ctx) {
     fail(`${ctx}: lean.status '${lean.status}' non valido.`);
   }
   const code = String(lean.code || "").trim();
-  if (/\b(sorry|admit)\b/.test(code) && lean.status === "compiled") {
-    fail(`${ctx}: VIOLAZIONE ONESTÀ LEAN — il codice contiene 'sorry' ma lo status è 'compiled'.`);
+  if (/\b(sorry|admit)\b/.test(code) && (lean.status === "compiled" || lean.status === "unverified")) {
+    fail(`${ctx}: VIOLAZIONE ONESTÀ LEAN — il codice contiene 'sorry' ma lo status è '${lean.status}'.`);
+  }
+  if (lean.status === "compiled") {
+    const rel = String(lean.lean_file || "");
+    const oleanRel = rel.startsWith("lean/") ? rel.slice("lean/".length).replace(/\.lean$/, ".olean") : "";
+    const oleanPath = oleanRel ? path.join(ROOT, "lean", ".lake", "build", "lib", oleanRel) : "";
+    if (!oleanPath || !fs.existsSync(oleanPath)) {
+      fail(`${ctx}: VIOLAZIONE ONESTÀ LEAN — status='compiled' ma l'artefatto compilato '${oleanPath}' non esiste. Usa 'unverified' finché la GitHub Action non esegue lake build.`);
+    }
   }
   if (!code && lean.status !== "none") {
     fail(`${ctx}: codice Lean vuoto ma status = '${lean.status}'.`);

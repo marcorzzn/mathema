@@ -13,7 +13,8 @@ namespace Mathema.NumberTheory
 /-- [11J72.0] Caratterizzazione esplicita dell'irrazionalità in ℝ. -/
 theorem mathema_irrational_iff (x : ℝ) :
     Irrational x ↔ ∀ q : ℚ, (q : ℝ) ≠ x := by
-  simpa [Irrational, Set.mem_range, not_exists] using Iff.rfl
+  unfold Irrational
+  simp [Set.mem_range]
 
 /-- [11J72.1] Teorema principale: √2 è irrazionale (collegato a Mathlib `irrational_sqrt_two`). -/
 theorem mathema_irrational_sqrt_two : Irrational (Real.sqrt 2) :=
@@ -38,9 +39,9 @@ lemma q_sq_eq_two_mul_sq {p q k : ℤ} (h : p ^ 2 = 2 * q ^ 2) (hk : p = 2 * k) 
 theorem two_adic_parity_contradiction (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by
   omega
 
-/-- [11J72.2.3] Irrazionalità di √2 dedotta da `Nat.Prime.irrational_sqrt`. -/
-theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) :=
-  Nat.Prime.irrational_sqrt Nat.prime_two
+/-- [11J72.2.3] Irrazionalità di √2 dedotta da `Nat.Prime.irrational_sqrt` (con normalizzazione del cast ℕ → ℝ). -/
+theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) := by
+  simpa using Nat.Prime.irrational_sqrt Nat.prime_two
 
 /-- [11J72.3] Identità algebrica della discesa geometrica di Tennenbaum. -/
 theorem tennenbaum_descent_identity (p q : ℤ) (h : p ^ 2 = 2 * q ^ 2) :

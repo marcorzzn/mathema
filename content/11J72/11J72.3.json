@@ -17,11 +17,13 @@
   "symbolic": "p² = 2q² ∧ 1 < p/q < 2  ⇒  (2q - p)² = 2(p - q)² ∧ 0 < p - q < q",
   "lean": {
     "code": "-- Identità algebrica esatta della discesa di Tennenbaum verificata da ring\ntheorem tennenbaum_descent_identity (p q : ℤ) (h : p ^ 2 = 2 * q ^ 2) :\n    (2 * q - p) ^ 2 = 2 * (p - q) ^ 2 := by\n  calc (2 * q - p) ^ 2\n    _ = 4 * q ^ 2 - 4 * p * q + p ^ 2 := by ring\n    _ = 4 * q ^ 2 - 4 * p * q + 2 * q ^ 2 := by rw [h]\n    _ = 2 * (2 * q ^ 2 - 2 * p * q + q ^ 2) := by ring\n    _ = 2 * (p ^ 2 - 2 * p * q + q ^ 2) := by rw [← h]\n    _ = 2 * (p - q) ^ 2 := by ring",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "WellFounded.min",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "6faaf7f5d7088a9711880fc5f40bbef491500300b99e871e60e8bd77e55ddd19",
+    "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
   "deps": [
     {
@@ -53,13 +55,23 @@
       "symbolic": "p, q > 0 ∧ p² = 2q²  ⇒  q < p < 2q  ⇒  0 < p - q < q",
       "lean": {
         "code": "lemma tennenbaum_bounds {p q : ℤ} (hp : 0 < p) (hq : 0 < q) (h : p ^ 2 = 2 * q ^ 2) :\n    0 < p - q ∧ p - q < q := by\n  constructor <;> nlinarith",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "sq_lt_sq",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "d1b200548abadedff44a236f7312e71c250c68c16fa676e97746550f418347a7",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
-      "deps": []
+      "deps": [],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
+      ]
     },
     {
       "id": "11J72.3.2",
@@ -79,17 +91,27 @@
       "symbolic": "(2q - p)² - 2(p - q)² = 2q² - p² = 0",
       "lean": {
         "code": "example (p q : ℤ) (h : p ^ 2 = 2 * q ^ 2) : (2 * q - p) ^ 2 = 2 * (p - q) ^ 2 :=\n  tennenbaum_descent_identity p q h",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
-        "mathlib_name": "tennenbaum_descent_identity",
+        "mathlib_name": "none",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "43b739369478d45aac8f014c87c38b9b72a35f68a4c9b7b9bc31f0461070a741",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
       "deps": [
         {
           "id": "11J72.3.1",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -114,7 +136,9 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.strong_induction_on",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "9ef2aaad7142c1c7448d61191f78c03e9d2286225d9912dc54364916bf80d3f4",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
       "deps": [
         {
@@ -125,6 +149,15 @@
           "id": "11J72.3.2",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     }
   ],
@@ -154,5 +187,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11J72",
+    "target_theorem": "WellFounded.min",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

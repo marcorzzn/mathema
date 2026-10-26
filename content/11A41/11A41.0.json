@@ -17,11 +17,13 @@
   "symbolic": "Prime(p) :⇔ p ≥ 2 ∧ (∀ d ∈ ℕ, d ∣ p ⇒ d = 1 ∨ d = p)",
   "lean": {
     "code": "import Mathlib.Data.Nat.Prime.Basic\n\n-- In Mathlib4, Nat.Prime p coincide con Irreducible p in ℕ\n#check Nat.Prime\n\ntheorem mathema_exists_prime_dvd {n : ℕ} (hn : n ≠ 1) :\n    ∃ p : ℕ, p.Prime ∧ p ∣ n :=\n  Nat.exists_prime_and_dvd hn",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "a74840f0625ba9bb1e3089e5b32656538a33fda916bb39dc267bccc0fba6125f",
+    "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
   },
   "deps": [],
   "children": [
@@ -46,16 +48,40 @@
       "symbolic": "∀ n ∈ ℕ, n ≠ 1  ⇒  Prime(minFac(n)) ∧ minFac(n) ∣ n",
       "lean": {
         "code": "example {n : ℕ} (hn : n ≠ 1) : n.minFac.Prime ∧ n.minFac ∣ n :=\n  ⟨Nat.minFac_prime hn, Nat.minFac_dvd n⟩",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.minFac_prime",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "b8ba1db7c47f125d5388c856fd9b352781b9f1eecd54ca6a992e21407827c3ac",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
-      "deps": []
+      "deps": [],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
+      ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11A41.0.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Il minimo divisore minFac(n) > 1 è necessariamente primo",
+        "en": "Figure 1: The least divisor minFac(n) > 1 is necessarily prime"
+      },
+      "caption": {
+        "it": "Se d = minFac(n) si fattorizzasse come d = a·b con 1 < a < d, per transitività a dividerebbe n violando la minimalità di d.",
+        "en": "If d = minFac(n) factored as d = a·b with 1 < a < d, transitivity would give a ∣ n, violating the minimality of d."
+      },
+      "svg": "<svg viewBox=\"0 0 420 115\" width=\"420\" height=\"115\" role=\"img\" aria-label=\"Minimalità di minFac(n)\"><line x1=\"25\" y1=\"65\" x2=\"390\" y2=\"65\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"45\" cy=\"65\" r=\"4\" fill=\"currentColor\"/><text x=\"41\" y=\"90\">1</text><circle cx=\"120\" cy=\"65\" r=\"4\" fill=\"var(--warn)\"/><text x=\"95\" y=\"42\">a (impossibile)</text><circle cx=\"215\" cy=\"65\" r=\"5\" fill=\"var(--ac)\"/><text x=\"175\" y=\"90\" style=\"fill:var(--ac);font-weight:bold\">d = minFac(n)</text><circle cx=\"360\" cy=\"65\" r=\"4.5\" fill=\"currentColor\"/><text x=\"355\" y=\"90\">n</text><text x=\"25\" y=\"20\">Nessun divisore di n cade nell'intervallo aperto (1, minFac(n))</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "Mathlib4 — Mathlib.Data.Nat.Prime.Basic",
@@ -68,5 +94,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A41",
+    "target_theorem": "Nat.Prime",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

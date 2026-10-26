@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://marcorzzn.github.io/Mathema/schema/node.schema.json",
-  "title": "Mathema Knowledge Node Schema",
-  "description": "Schema formale per un nodo della conoscenza matematica in Mathema. I codici a 2, 3 e 5 caratteri (es. 11, 11J, 11J72) appartengono allo standard ufficiale MSC2020. I suffissi con punto (es. 11J72.1, 11J72.1.2, 11J72.1.2.a) sono l'estensione gerarchica di Mathema per numerare proposizioni, passaggi dimostrativi e micro-risultati.",
+  "title": "mathema Knowledge Node Schema (Frozen Contract — Phase C)",
+  "description": "Contratto dati congelato per un nodo della conoscenza matematica in mathema. I codici a 2, 3 e 5 caratteri (es. 11, 11J, 11J72) appartengono allo standard ufficiale MSC2020. I suffissi con punto (es. 11J72.1, 11J72.1.2, 11J72.1.2.a) sono l'estensione gerarchica di mathema.",
   "type": "object",
   "required": [
     "id",
@@ -12,10 +12,13 @@
     "natural",
     "symbolic",
     "lean",
+    "missing",
     "deps",
     "children",
+    "steps",
     "attachments",
     "sources",
+    "formalization_yaml",
     "license",
     "provenance",
     "reviewed_by"
@@ -24,7 +27,7 @@
     "id": {
       "type": "string",
       "pattern": "^[0-9]{2}[A-Z][0-9]{2}\\.[0-9A-Za-z.]+$",
-      "description": "Codice univoco gerarchico esteso Mathema (es. 11J72.1). Non fa parte dello standard MSC2020 ma estende una voce MSC a 5 caratteri."
+      "description": "Codice univoco gerarchico esteso mathema (es. 11J72.1). Non fa parte dello standard MSC2020 ma estende una voce MSC a 5 caratteri."
     },
     "msc": {
       "type": "string",
@@ -68,6 +71,11 @@
     "lean": {
       "$ref": "#/$defs/leanBlock"
     },
+    "missing": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Invariante I2: Lista esplicita di elementi o traduzioni non ancora presenti nel nodo (es. ['lean_proof', 'lang:hi']). Se tutto è presente, array vuoto []."
+    },
     "deps": {
       "type": "array",
       "items": {
@@ -89,13 +97,15 @@
     },
     "attachments": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "$ref": "#/$defs/attachment"
       },
-      "description": "Figure SVG, grafici 2D e scene 3D (caricate in lazy-loading) che accompagnano il nodo."
+      "description": "Fase B: Almeno 1 allegato (figura SVG, grafico 2D o scena 3D lazy) per ogni nodo principale."
     },
     "sources": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": ["title", "citation", "license_note"],
@@ -107,6 +117,9 @@
         }
       },
       "description": "Fonti bibliografiche o formali con indicazione della compatibilità di licenza."
+    },
+    "formalization_yaml": {
+      "$ref": "#/$defs/palomarBlock"
     },
     "license": {
       "type": "string",
@@ -120,6 +133,7 @@
     },
     "reviewed_by": {
       "type": "array",
+      "minItems": 1,
       "items": { "type": "string" },
       "description": "Revisori umani che hanno controllato la correttezza matematica del nodo."
     }
@@ -127,16 +141,25 @@
   "$defs": {
     "leanBlock": {
       "type": "object",
-      "required": ["code", "status", "mathlib_version"],
+      "required": ["code", "hash", "status", "mathlib_version", "mathlib_name", "verified_at"],
       "properties": {
         "code": {
           "type": "string",
           "description": "Rappresentazione 3/3: Codice formale Lean 4 allineato a Mathlib."
         },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Fase C / Invariante I1: Hash SHA-256 del codice Lean (lean.code.trim()) per rilevare modifiche al JSON successive a lake build."
+        },
+        "file_hash": {
+          "type": ["string", "null"],
+          "description": "Fase C / Invariante I1: Hash SHA-256 del file sorgente .lean nel progetto Lake al momento della verifica."
+        },
         "status": {
           "type": "string",
-          "enum": ["none", "statement_only", "has_sorry", "compiled"],
-          "description": "Stato ONESTO di verifica Lean. 'compiled' è ammesso SOLO se il codice non contiene sorry ed è stato compilato con successo nel progetto Lake."
+          "enum": ["none", "statement_only", "has_sorry", "unverified", "compiled"],
+          "description": "Invariante I1: Stato ONESTO di verifica Lean. 'unverified' è il default per codice senza sorry. 'compiled' è ammesso SOLO se esiste il binario .olean generato da lake build e gli hash coincidono."
         },
         "mathlib_version": {
           "type": "string",
@@ -144,7 +167,7 @@
         },
         "mathlib_name": {
           "type": "string",
-          "description": "Identificatore del teorema/definizione corrispondente in Mathlib4, oppure 'none' se non presente."
+          "description": "Invariante I8: Identificatore verificato in Mathlib4 oppure 'none' se non presente in Mathlib."
         },
         "lean_file": {
           "type": "string",
@@ -155,6 +178,28 @@
           "description": "Data ISO-8601 dell'ultima compilazione riuscita con lake build, o null se non compilato."
         }
       }
+    },
+    "palomarBlock": {
+      "type": "object",
+      "required": ["project", "msc", "target_theorem", "comparator_setup"],
+      "properties": {
+        "project": { "type": "string" },
+        "msc": { "type": "string" },
+        "target_theorem": { "type": "string" },
+        "comparator_setup": {
+          "type": "object",
+          "required": ["lean_toolchain", "mathlib_rev", "permitted_axioms"],
+          "properties": {
+            "lean_toolchain": { "type": "string" },
+            "mathlib_rev": { "type": "string" },
+            "permitted_axioms": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      },
+      "description": "Metadati compatibili con lo standard Palomar (formalization.yaml + Comparator)."
     },
     "dependency": {
       "type": "object",
@@ -178,7 +223,7 @@
     },
     "stepNode": {
       "type": "object",
-      "required": ["id", "kind", "title", "natural", "symbolic", "lean", "deps"],
+      "required": ["id", "kind", "title", "natural", "symbolic", "lean", "missing", "deps"],
       "properties": {
         "id": { "type": "string" },
         "kind": {
@@ -197,6 +242,10 @@
         },
         "symbolic": { "type": "string" },
         "lean": { "$ref": "#/$defs/leanBlock" },
+        "missing": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "deps": {
           "type": "array",
           "items": { "$ref": "#/$defs/dependency" }

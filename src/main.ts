@@ -149,6 +149,8 @@ function formatLeanStatusText(lean: LeanBlock, u: LanguagePack["ui"]): string {
   switch (lean.status) {
     case "compiled":
       return u.lean_status_compiled;
+    case "unverified":
+      return u.lean_status_unverified;
     case "has_sorry":
       return u.lean_status_has_sorry;
     case "statement_only":
@@ -452,36 +454,42 @@ function renderAttachmentsSection(attachments: Attachment[], u: LanguagePack["ui
   `;
 }
 
-// Pagina di documentazione integrata (Piano di migrazione, Schema JSON, Verifica Lean)
+// Pagina di documentazione integrata (Invarianti I1-I9, Sequenza stati A-H, Schema JSON congelato, Verifica Lean)
 function renderDocsPage(u: LanguagePack["ui"]): string {
   return `
-    <div class="crumb"><a href="#">${esc(u.root)}</a> › Guida e Architettura</div>
-    <h1>Architettura di Mathema & Piano di Migrazione</h1>
+    <div class="crumb"><a href="#">${esc(u.root)}</a> › Guida, Invarianti I1–I9 e Architettura</div>
+    <h1>Architettura di mathema — Invarianti (I1–I9) e Stati del Repository</h1>
     <p>${esc(bundle.msc2020.extension_policy)}</p>
 
-    <h2>1. Piano di migrazione dal repository precedente (in 5 passi verificabili)</h2>
-    <ol class="meta-list" style="color:var(--fg);line-height:1.7">
-      <li><b>Passo 1 — Estrazione dei contenuti dal codice TypeScript</b>: rimossi <code>src/data/mathemaData.ts</code> e <code>src/data/mscHierarchyData.ts</code>; ogni nodo vive ora in un singolo file JSON indipendente <code>content/&lt;MSC&gt;/&lt;codice&gt;.json</code> validato da <code>schema/node.schema.json</code>.</li>
-      <li><b>Passo 2 — Separazione delle lingue</b>: le traduzioni dell'interfaccia risiedono in <code>content/i18n/&lt;lingua&gt;.json</code> (IT, EN, ES, AR con RTL). Per aggiungere una nuova lingua basta creare un file JSON in <code>content/i18n/</code> senza toccare il codice.</li>
-      <li><b>Passo 3 — Progetto Lake reale e verifica Lean 4 onesta</b>: creata la cartella <code>lean/</code> con <code>lakefile.lean</code>, <code>lean-toolchain</code> e i moduli Lean 4 (<code>Sqrt2.lean</code>, <code>InfinitudePrimes.lean</code>, <code>FundamentalArithmetic.lean</code>), accompagnata dalla GitHub Action <code>.github/workflows/lean-verify.yml</code> e dallo script <code>scripts/sync-lean-status.mjs</code> che impedisce qualsiasi falso positivo <code>compiled</code> in presenza di <code>sorry</code>.</li>
-      <li><b>Passo 4 — Rimozione di React/Tailwind/motion dal percorso critico</b>: il frontend è ora scritto in Vanilla TypeScript puro (<code>src/main.ts</code>) nello stile sobrio di PlanetMath, riducendo il bundle iniziale a circa <b>8 KB gzip</b> (obiettivo &lt; 50 KB ampiamente superato) e abilitando l'installazione offline PWA.</li>
-      <li><b>Passo 5 — Isolamento su richiesta di 3D e AI</b>: i grafici 2D/3D (<code>src/viewer3d.ts</code>) e gli strumenti AI (<code>src/ai-bridge.ts</code>) vengono caricati con <code>import()</code> dinamico solo quando l'utente li richiede.</li>
-    </ol>
+    <h2>1. Gli Invarianti (I1–I9 — verificati da <code>npm run validate</code>)</h2>
+    <ul class="meta-list" style="color:var(--fg);line-height:1.7">
+      <li><b>I1 — Onestà formale binaria</b>: <code>lean.status = "compiled"</code> esiste SOLO se esiste il binario compilato <code>.olean</code> in <code>lean/.lake/build/lib/</code>. Senza <code>.olean</code>, il codice privo di <code>sorry</code> è marcato <code>unverified</code>.</li>
+      <li><b>I2 — Tripla rappresentazione e campo <code>missing</code></b>: ogni nodo e passo possiede <code>natural</code>, <code>symbolic</code> e <code>lean</code>, più l'array obbligatorio <code>missing: [...]</code> che dichiara esplicitamente qualsiasi traduzione o prova incompleta.</li>
+      <li><b>I3 — Gerarchia MSC2020 + suffisso <code>mathema</code></b>: ogni nodo appartiene a una voce ufficiale MSC2020 a 5 caratteri in <code>content/msc2020.json</code> con estensione numerata documentata (<code>11J72.1.2.a</code>).</li>
+      <li><b>I4 — Lingue disaccoppiate dal codice</b>: aggiungere una lingua = 1 file in <code>content/i18n/&lt;lang&gt;.json</code> (10 lingue attive: <code>it, en, es, fr, de, pt, ar, zh, hi, ru</code>).</li>
+      <li><b>I5 — Nodi disaccoppiati dal codice</b>: aggiungere un nodo = 1 file in <code>content/&lt;MSC&gt;/&lt;id&gt;.json</code> conforme a <code>schema/node.schema.json</code>.</li>
+      <li><b>I6 — Bundle critico &lt; 50 KB gzip</b>: zero dipendenze runtime nel bundle principale (~9 KB gzip); <code>viewer3d.ts</code> e <code>ai-bridge.ts</code> caricati solo con <code>import()</code> dinamico.</li>
+      <li><b>I7 — Zero tracciamento</b>: nessun login, cookie di profilazione, analytics o stato utente persistente.</li>
+      <li><b>I8 — Identificatori Mathlib reali</b>: ogni <code>lean.mathlib_name</code> è verificato contro <code>schema/mathlib-registry.json</code> o marcato <code>"none"</code>.</li>
+      <li><b>I9 — PWA Offline + GitHub Pages</b>: tutti gli asset usano percorsi relativi (<code>base: './'</code>) compatibili con sottocartelle GitHub Pages e modalità offline.</li>
+    </ul>
 
-    <h2>2. Come aggiungere un nuovo nodo matematico (senza toccare il codice)</h2>
-    <pre><code>1. Scegli la voce MSC2020 a 5 caratteri (es. 11J72) e crea content/11J72/11J72.4.json
-2. Compila i campi obbligatori: id, msc, kind, title, natural, symbolic, lean, deps, steps
-3. Esegui nel terminale:
-   node scripts/sync-lean-status.mjs
-   node scripts/build-content.mjs
-4. Se tutte le dipendenze esistono e lo schema è valido, il nodo appare subito nell'albero e nella ricerca.</code></pre>
+    <h2>2. Stati di verifica Lean 4 (5 stati distinti)</h2>
+    <ul class="meta-list" style="color:var(--fg);line-height:1.7">
+      <li><code>compiled</code>: zero <code>sorry</code> e file binario <code>.olean</code> presente in <code>lean/.lake/build/lib/</code> dopo <code>lake build</code>.</li>
+      <li><code>unverified</code>: codice Lean 4 completo e privo di <code>sorry</code>, in attesa di compilazione con <code>lake build</code> (stato onesto predefinito).</li>
+      <li><code>has_sorry</code>: struttura della dimostrazione presente ma almeno un passaggio contiene <code>sorry</code>.</li>
+      <li><code>statement_only</code>: presente solo l'enunciato formale o il riferimento a Mathlib (<code>#check</code>).</li>
+      <li><code>none</code>: nessuna formalizzazione Lean verificata (incluso qualsiasi output generato da AI).</li>
+    </ul>
 
-    <h2>3. Stati di verifica Lean 4 (Onestà formale)</h2>
-    <ul class="meta-list" style="color:var(--fg)">
-      <li><code>compiled</code>: il codice Lean non contiene <code>sorry</code> ed è compilato nel progetto <code>lean/</code> con Mathlib.</li>
-      <li><code>has_sorry</code>: la struttura della dimostrazione è presente ma almeno un passaggio usa <code>sorry</code>.</li>
-      <li><code>statement_only</code>: è presente solo l'enunciato o il collegamento a un lemma Mathlib (<code>#check</code>), non compilato localmente.</li>
-      <li><code>none</code>: nessuna formalizzazione Lean disponibile (incluso qualsiasi output generato da AI).</li>
+    <h2>3. Documenti di Governance del Repository</h2>
+    <ul class="meta-list" style="color:var(--fg);line-height:1.7">
+      <li><code>docs/invariants.md</code> — Le 9 regole inviolabili e il protocollo anti-deriva per sessioni LLM.</li>
+      <li><code>docs/adding-a-node.md</code> — Procedura passo-passo per aggiungere un nodo in <code>content/&lt;MSC&gt;/</code>.</li>
+      <li><code>docs/adding-a-language.md</code> — Procedura per aggiungere o completare una lingua in <code>content/i18n/</code>.</li>
+      <li><code>docs/section-template.md</code> — Template standard per l'espansione di una voce MSC2020 a 5 caratteri (Fase F).</li>
+      <li><code>schema/node.schema.json</code> — Schema JSON congelato (Fase C) con supporto <code>missing[]</code> e <code>formalization_yaml.comparator_setup</code> (standard Palomar / <code>lean4checker</code>).</li>
     </ul>
   `;
 }
@@ -542,7 +550,7 @@ function renderMain(): void {
 
     let bodyHtml = `
       <div class="crumb">${esc(u.root)} · <a href="#docs">${esc(u.docs_link)}</a></div>
-      <h1>Mathema</h1>
+      <h1>mathema</h1>
       <p style="margin:6px 0 14px">${esc(u.home_intro)}</p>
       <div class="bar">
         <button type="button" id="home-graph-btn">${esc(u.show_graph_selection)}</button>
@@ -574,7 +582,7 @@ function renderMain(): void {
     return;
   }
 
-  // Caso 2: Nodo matematico compilato (es. 11J72.1, 11A41.1, 11A51.1)
+  // Caso 2: Nodo matematico (es. 11J72.1, 11A41.1, 11A51.1)
   if (node) {
     const kindLabel = u.kinds[node.kind] || node.kind;
     const statusText = formatLeanStatusText(node.lean, u);
@@ -655,6 +663,25 @@ function renderMain(): void {
         <li>Licenza nodo: <code>${esc(node.license)}</code> · Provenienza: <code>${esc(node.provenance)}</code> · Revisionato da: ${esc(
           node.reviewed_by.join(", ")
         )}</li>
+        ${
+          node.formalization_yaml?.comparator_setup
+            ? `<li>Comparator setup (Palomar / <code>lean4checker</code>): target <code>${esc(
+                node.formalization_yaml.target_theorem
+              )}</code> · toolchain <code>${esc(
+                node.formalization_yaml.comparator_setup.lean_toolchain
+              )}</code> · assiomi ammessi: <code>${esc(
+                node.formalization_yaml.comparator_setup.permitted_axioms.join(", ")
+              )}</code></li>`
+            : ""
+        }
+        ${
+          node.lean.hash
+            ? `<li>Hash SHA-256 blocco Lean (Invariante I1 / Fase C): <code>${esc(node.lean.hash.slice(0, 16))}…</code></li>`
+            : ""
+        }
+        <li>Invariante I2 (<code>missing</code>): <code>${esc(
+          node.missing && node.missing.length > 0 ? node.missing.join(", ") : "nessuno (IT/EN completi)"
+        )}</code></li>
         <li>${esc(u.msc_extension_note)}</li>
       </ul>
     `;
@@ -1048,7 +1075,8 @@ function initPwaAndOffline(): void {
 
 // Inizializzazione principale e routing su hash URL
 async function bootstrap(): Promise<void> {
-  const res = await fetch("/data/bundle.json");
+  const baseUrl = import.meta.env.BASE_URL || "./";
+  const res = await fetch(`${baseUrl}data/bundle.json`);
   bundle = await res.json();
 
   initMscTree();

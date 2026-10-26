@@ -21,7 +21,9 @@
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Int.exists_prime_and_dvd",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": null
+    "verified_at": null,
+    "hash": "6b16617ba2d9416104a2c5c6019a7ddbaad43a5021cbfec21480d344748d8a1a",
+    "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
   },
   "deps": [
     {
@@ -56,14 +58,25 @@
       },
       "symbolic": "ℤ \\ (aℤ + b) = ⋃_{r=1}^{a-1} (aℤ + b + r)  ⇒  IsClosed(aℤ + b)",
       "lean": {
-        "code": "-- Riferimento all'archivio Mathlib Archive.Arithcc (Fürstenberg)\n#check TopologicalSpace",
+        "code": "-- La topologia delle progressioni aritmetiche di Fürstenberg non fa parte del core di Mathlib4:\n-- richiede di istanziare una struttura `TopologicalSpace ℤ` dedicata.\n#check TopologicalSpace",
         "status": "statement_only",
         "mathlib_version": "v4.15.0",
-        "mathlib_name": "TopologicalSpace",
+        "mathlib_name": "none",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "c63d4fdf878fb337476cb69400a9443f49d95ae94c32659b116cf3bd0da86f40",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
-      "deps": []
+      "deps": [],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
+      ]
     },
     {
       "id": "11A41.3.2",
@@ -87,13 +100,24 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Int.exists_prime_and_dvd",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "6d555d5b171e6ed499149372b0d351bb45d06eb1e11e452ca4e40abc5cd6ad06",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
       "deps": [
         {
           "id": "11A41.0",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     },
     {
@@ -118,7 +142,9 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Set.Finite.isClosed_biUnion",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "afedd5fac85433c0441b8037f9a3304071cd37e423b7740f89ece3a129fb33f6",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
       "deps": [
         {
@@ -129,10 +155,33 @@
           "id": "11A41.3.2",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11A41.3.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Partizione topologica di ℤ \\ {-1, 1} tramite gli aperti-chiusi pℤ",
+        "en": "Figure 1: Topological covering of ℤ \\ {-1, 1} by clopen progressions pℤ"
+      },
+      "caption": {
+        "it": "Ogni progressione pℤ è sia aperta sia chiusa; il complementare {-1, 1} è finito e non può essere aperto.",
+        "en": "Each progression pℤ is clopen; the complement {-1, 1} is finite and therefore cannot be open."
+      },
+      "svg": "<svg viewBox=\"0 0 430 120\" width=\"430\" height=\"120\" role=\"img\" aria-label=\"Topologia di Furstenberg su Z\"><rect x=\"12\" y=\"15\" width=\"406\" height=\"88\" rx=\"4\"/><text x=\"24\" y=\"38\">ℤ = (⋃_{p primo} pℤ)  ⊔  {-1, +1}</text><rect x=\"24\" y=\"50\" width=\"250\" height=\"40\" rx=\"3\"/><text x=\"34\" y=\"75\">2ℤ ∪ 3ℤ ∪ 5ℤ ∪ … (clopen)</text><rect x=\"290\" y=\"50\" width=\"114\" height=\"40\" rx=\"3\" style=\"stroke:var(--warn)\"/><text x=\"300\" y=\"75\">{-1, +1} (# = 2)</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "Harry Fürstenberg (1955), On the infinitude of primes, Amer. Math. Monthly 62, 353",
@@ -144,5 +193,28 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A41",
+    "target_theorem": "Int.exists_prime_and_dvd",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru",
+    "lean:complete_proof_without_sorry"
   ]
 }

@@ -17,11 +17,13 @@
   "symbolic": "n' := n - p₁·(q₂⋯qₘ) = (q₁ - p₁)·q₂⋯qₘ < n  ⇒  p₁ ∣ n' ∧ p₁ ∤ (q₁ - p₁)",
   "lean": {
     "code": "-- Identità algebrica distributiva usata nel passo di discesa di Zermelo\ntheorem zermelo_descent_step (n p₁ q₁ Q : ℤ) (hq : n = q₁ * Q) :\n    n - p₁ * Q = (q₁ - p₁) * Q := by\n  rw [hq]; ring",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
-    "mathlib_name": "zermelo_descent_step",
+    "mathlib_name": "none",
     "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "4ec3f3e7c856af7941e3b4ec48d4c5eb99533287ffbda9e25fa1f02ce8080ae9",
+    "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
   },
   "deps": [
     {
@@ -57,13 +59,23 @@
       "symbolic": "n minimo controesempio  ⇒  p₁ ≠ q₁  ⇒  WLOG p₁ < q₁",
       "lean": {
         "code": "example (p₁ q₁ : ℕ) (hne : p₁ ≠ q₁) : p₁ < q₁ ∨ q₁ < p₁ :=\n  Nat.lt_or_gt_of_ne hne",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.lt_or_gt_of_ne",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "899e14014283f84c460caf49222a84caa9bdeb4229a4c646616d0cbc00e01312",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
-      "deps": []
+      "deps": [],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
+      ]
     },
     {
       "id": "11A51.2.2",
@@ -83,17 +95,27 @@
       "symbolic": "n' = p₁·(P - Q) = (q₁ - p₁)·q₂⋯qₘ  ∧  2 ≤ n' < n",
       "lean": {
         "code": "example (n p₁ q₁ Q : ℤ) (hq : n = q₁ * Q) : n - p₁ * Q = (q₁ - p₁) * Q :=\n  zermelo_descent_step n p₁ q₁ Q hq",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
-        "mathlib_name": "zermelo_descent_step",
+        "mathlib_name": "none",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "afaf37d73c772b1caf09be010fbc8c26df39e2083913fe0cc224d888365238b8",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
           "id": "11A51.2.1",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -118,17 +140,42 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.dvd_sub",
         "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "f57bcb6d81d95a5a8dba8f3d3ec57462dd9aefdfcb90a7e93c8bdc9bcac29bc2",
+        "file_hash": "d606cd0e4668a315571aaf80c64c18d761ed72fa751a216d304f119e82c929aa"
       },
       "deps": [
         {
           "id": "11A51.2.2",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:complete_proof_without_sorry"
       ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11A51.2.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Sottrazione geometrica di Zermelo n' = n - p₁·Q = (q₁ - p₁)·Q",
+        "en": "Figure 1: Zermelo's geometric subtraction n' = n - p₁·Q = (q₁ - p₁)·Q"
+      },
+      "caption": {
+        "it": "Dal rettangolo di area n = q₁·Q si sottrae la striscia p₁·Q, ottenendo un intero positivo strettamente minore n' < n.",
+        "en": "Subtracting the strip p₁·Q from the rectangle n = q₁·Q produces a strictly smaller positive integer n' < n."
+      },
+      "svg": "<svg viewBox=\"0 0 420 135\" width=\"420\" height=\"135\" role=\"img\" aria-label=\"Rettangolo di discesa di Zermelo\"><rect x=\"25\" y=\"20\" width=\"180\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><rect x=\"25\" y=\"20\" width=\"65\" height=\"90\" fill=\"var(--sf)\" stroke=\"var(--ac)\"/><text x=\"38\" y=\"68\">p₁ · Q</text><text x=\"108\" y=\"68\" style=\"fill:var(--ok);font-weight:bold\">(q₁ - p₁) · Q</text><text x=\"95\" y=\"126\">Larghezza totale q₁, altezza Q  ⇒  n' = n - p₁Q &lt; n</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "Ernst Zermelo (1912 / 1934), Elementare Betrachtungen zur Theorie der Primzahlen",
@@ -140,5 +187,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A51",
+    "target_theorem": "Mathema.NumberTheory.11A51_2",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

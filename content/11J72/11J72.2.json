@@ -17,11 +17,13 @@
   "symbolic": "p² = 2q²  ⇒  v₂(p²) = v₂(2q²)  ⇒  2·v₂(p) = 2·v₂(q) + 1  ⇒  ⊥",
   "lean": {
     "code": "import Mathlib.Data.Nat.PrimeFin\n\n/-- In ℕ, due doppi non possono differire di 1: 2 * a ≠ 2 * b + 1. -/\ntheorem two_adic_parity_contradiction (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by\n  omega",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime.irrational_sqrt",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "148ed0ef4956e88a73f48c38509931c54b3d8d5fee6f077c905dfa0a71a635c4",
+    "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
   "deps": [
     {
@@ -61,13 +63,24 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.factorization_mul",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "2891fe21738c116a8da21425a38bc1299609fb738ae3f6f417057f4fad19560b",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
       "deps": [
         {
           "id": "11A51.1",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     },
     {
@@ -88,11 +101,13 @@
       "symbolic": "∀ a, b ∈ ℕ : 2a ≠ 2b + 1",
       "lean": {
         "code": "example (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by omega",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.even_iff_not_odd",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "56aa57ae1e36af4932d7e7f78648b0f627cb0e9ef81361b969274fa372dbcd50",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
       "deps": [
         {
@@ -123,15 +138,34 @@
             "mathlib_version": "v4.15.0",
             "mathlib_name": "Nat.Prime.irrational_sqrt",
             "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-            "verified_at": null
+            "verified_at": null,
+            "hash": "39c774dd2d41dbfb8c30bf1217a755025e6605e69c1494789ef9ae8ee64797c4",
+            "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
           },
           "deps": [
             {
               "id": "11A41.0",
               "type": "requires"
             }
+          ],
+          "missing": [
+            "lang:fr",
+            "lang:de",
+            "lang:pt",
+            "lang:zh",
+            "lang:hi",
+            "lang:ru",
+            "lean:local_proof"
           ]
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     },
     {
@@ -151,22 +185,46 @@
       },
       "symbolic": "¬(∃ p, q ∈ ℕ₊, p² = 2q²)  ⇒  √2 ∉ ℚ",
       "lean": {
-        "code": "theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) :=\n  Nat.Prime.irrational_sqrt Nat.prime_two",
-        "status": "compiled",
+        "code": "theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) := by\n  simpa using Nat.Prime.irrational_sqrt Nat.prime_two",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.Prime.irrational_sqrt",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "c7c623d5de4cfdc75151172531cf60a2b44d50d88325104765bfbcfd2b8ed6cb",
+        "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
       "deps": [
         {
           "id": "11J72.2.2",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
       ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11J72.2.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Disgiunzione tra valutazioni 2-adiche pari e dispari in ℕ",
+        "en": "Figure 1: Disjointness of even and odd 2-adic valuations in ℕ"
+      },
+      "caption": {
+        "it": "In p² = 2q², l'esponente v₂(p²) = 2v₂(p) appartiene agli interi pari mentre v₂(2q²) = 2v₂(q)+1 appartiene ai dispari.",
+        "en": "In p² = 2q², the exponent v₂(p²) = 2v₂(p) is even whereas v₂(2q²) = 2v₂(q)+1 is odd."
+      },
+      "svg": "<svg viewBox=\"0 0 420 115\" width=\"420\" height=\"115\" role=\"img\" aria-label=\"Confronto di parità 2-adica\"><line x1=\"20\" y1=\"65\" x2=\"395\" y2=\"65\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"50\" cy=\"65\" r=\"4.5\" fill=\"var(--ac)\"/><text x=\"36\" y=\"92\">0 (pari)</text><circle cx=\"115\" cy=\"65\" r=\"4.5\" fill=\"var(--ok)\"/><text x=\"98\" y=\"42\" style=\"fill:var(--ok)\">1 (dispari)</text><circle cx=\"180\" cy=\"65\" r=\"4.5\" fill=\"var(--ac)\"/><text x=\"166\" y=\"92\">2 (pari)</text><circle cx=\"245\" cy=\"65\" r=\"4.5\" fill=\"var(--ok)\"/><text x=\"228\" y=\"42\" style=\"fill:var(--ok)\">3 (dispari)</text><circle cx=\"310\" cy=\"65\" r=\"4.5\" fill=\"var(--ac)\"/><text x=\"296\" y=\"92\">4 (pari)</text><text x=\"20\" y=\"20\">v₂(p²) = 2·v₂(p) ∈ 2ℕ   ≠   v₂(2q²) = 2·v₂(q)+1 ∈ 2ℕ+1</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "G. H. Hardy & E. M. Wright, An Introduction to the Theory of Numbers",
@@ -178,5 +236,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11J72",
+    "target_theorem": "Nat.Prime.irrational_sqrt",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

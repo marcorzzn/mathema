@@ -283,51 +283,17 @@ ${studentAttempt}
   });
 
   if (process.env.NODE_ENV !== "production") {
-    // Shim WebSocket-free per /@vite/client in ambiente Cloud Run / AI Studio preview
-    // Mantiene intatto il caricamento CSS (updateStyle/removeStyle) senza aprire WebSocket HMR
-    app.get("/@vite/client", (_req, res) => {
-      res.setHeader("Content-Type", "application/javascript; charset=utf-8");
-      res.setHeader("Cache-Control", "no-store");
-      res.send(`
-export function createHotContext() {
-  return {
-    accept() {},
-    acceptExports() {},
-    dispose() {},
-    prune() {},
-    invalidate() {},
-    on() {},
-    off() {},
-    send() {},
-    data: {}
-  };
-}
-export function updateStyle(id, content) {
-  let style = document.querySelector('style[data-vite-dev-id="' + id + '"]');
-  if (!style) {
-    style = document.createElement('style');
-    style.setAttribute('data-vite-dev-id', id);
-    document.head.appendChild(style);
-  }
-  style.textContent = content;
-}
-export function removeStyle(id) {
-  const style = document.querySelector('style[data-vite-dev-id="' + id + '"]');
-  if (style) style.remove();
-}
-export function injectQuery(url) {
-  return url;
-}
-`);
-    });
-
     const vite = await createViteServer({
-      server: { middlewareMode: true, hmr: false, watch: null },
+      server: { middlewareMode: true },
       appType: "spa",
     });
+    app.use("/Mathema", vite.middlewares);
+    app.use("/mathema", vite.middlewares);
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(__dirname, "dist");
+    app.use("/Mathema", express.static(distPath));
+    app.use("/mathema", express.static(distPath));
     app.use(express.static(distPath));
     app.get("*all", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));

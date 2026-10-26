@@ -17,11 +17,13 @@
   "symbolic": "Fₙ := 2^(2ⁿ) + 1  ⇒  (∀ m < n, Fₘ ∣ Fₙ - 2)  ⇒  gcd(Fₘ, Fₙ) = 1  ⇒  #{pₙ : Prime(pₙ) ∧ pₙ ∣ Fₙ} = ∞",
   "lean": {
     "code": "def fermatNumber (n : ℕ) : ℕ := 2 ^ (2 ^ n) + 1\n\ntheorem fermatNumber_step_identity (n : ℕ) :\n    (fermatNumber n - 1) ^ 2 + 1 = fermatNumber (n + 1) := by\n  simp [fermatNumber, ← pow_mul, pow_succ]",
-    "status": "compiled",
+    "status": "unverified",
     "mathlib_version": "v4.15.0",
-    "mathlib_name": "fermatNumber",
+    "mathlib_name": "none",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": "2026-10-20T12:00:00Z"
+    "verified_at": null,
+    "hash": "b1d705e0b8a9a72a5cf7b2b1453c4255b7c442cdb7cfd391d8068e25d65d7a6a",
+    "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
   },
   "deps": [
     {
@@ -57,13 +59,23 @@
       "symbolic": "(2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = 2^(2^(n+1)) - 1 = F_{n+1} - 2",
       "lean": {
         "code": "theorem fermat_diff_squares (x : ℤ) : (x - 1) * (x + 1) = x ^ 2 - 1 := by ring",
-        "status": "compiled",
+        "status": "unverified",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "sq_sub_sq",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": "2026-10-20T12:00:00Z"
+        "verified_at": null,
+        "hash": "9ce18749219743a38528eea74c2ab5972fa9e259db4906417e5fbde12d2cb611",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
-      "deps": []
+      "deps": [],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru"
+      ]
     },
     {
       "id": "11A41.2.2",
@@ -87,13 +99,24 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.Coprime",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "9e04ca02f09dce20c6be8491a28e7be62ea76a5b75d064ae2599f3253da873ea",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
       "deps": [
         {
           "id": "11A41.2.1",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:complete_proof_without_sorry"
       ]
     },
     {
@@ -118,7 +141,9 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Set.infinite_of_injective_forall_mem",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null
+        "verified_at": null,
+        "hash": "74e0dcb452e6f5855729b751f8bb75a8f7a0efd083bcdf831a866b0839385159",
+        "file_hash": "2fc6112c4fa5f2ec435379be62219f20cdc478abfea3d061797f4c5a00bb837c"
       },
       "deps": [
         {
@@ -129,10 +154,33 @@
           "id": "11A41.2.2",
           "type": "requires"
         }
+      ],
+      "missing": [
+        "lang:fr",
+        "lang:de",
+        "lang:pt",
+        "lang:zh",
+        "lang:hi",
+        "lang:ru",
+        "lean:local_proof"
       ]
     }
   ],
-  "attachments": [],
+  "attachments": [
+    {
+      "id": "11A41.2.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Numeri di Fermat Fₙ = 2^(2ⁿ) + 1 e fattori primi distinti",
+        "en": "Figure 1: Fermat numbers Fₙ = 2^(2ⁿ) + 1 and distinct prime factors"
+      },
+      "caption": {
+        "it": "La relazione F₀·F₁⋯F_{n-1} = Fₙ - 2 implica MCD(Fₘ, Fₙ) = 1 per ogni m < n.",
+        "en": "The identity F₀·F₁⋯F_{n-1} = Fₙ - 2 forces gcd(Fₘ, Fₙ) = 1 for all m < n."
+      },
+      "svg": "<svg viewBox=\"0 0 430 125\" width=\"430\" height=\"125\" role=\"img\" aria-label=\"Numeri di Fermat coprimi\"><rect x=\"14\" y=\"18\" width=\"88\" height=\"52\" rx=\"3\"/><text x=\"22\" y=\"39\">F₀ = 3</text><text x=\"22\" y=\"58\">p₀ = 3</text><rect x=\"118\" y=\"18\" width=\"88\" height=\"52\" rx=\"3\"/><text x=\"126\" y=\"39\">F₁ = 5</text><text x=\"126\" y=\"58\">p₁ = 5</text><rect x=\"222\" y=\"18\" width=\"92\" height=\"52\" rx=\"3\"/><text x=\"230\" y=\"39\">F₂ = 17</text><text x=\"230\" y=\"58\">p₂ = 17</text><rect x=\"328\" y=\"18\" width=\"90\" height=\"52\" rx=\"3\"/><text x=\"335\" y=\"39\">F₃ = 257</text><text x=\"335\" y=\"58\">p₃ = 257</text><text x=\"14\" y=\"102\">3 · 5 · 17 = 255 = 257 - 2  ⇒  gcd(Fₘ, Fₙ) = 1  ⇒  p₀, p₁, p₂, p₃, … tutti distinti</text></svg>"
+    }
+  ],
   "sources": [
     {
       "title": "Christian Goldbach, Lettera a Leonhard Euler (20 luglio 1730)",
@@ -144,5 +192,27 @@
   "provenance": "human",
   "reviewed_by": [
     "Marco Razzano"
+  ],
+  "formalization_yaml": {
+    "project": "mathema",
+    "msc": "11A41",
+    "target_theorem": "Mathema.NumberTheory.11A41_2",
+    "comparator_setup": {
+      "lean_toolchain": "leanprover/lean4:v4.15.0",
+      "mathlib_rev": "v4.15.0",
+      "permitted_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "missing": [
+    "lang:fr",
+    "lang:de",
+    "lang:pt",
+    "lang:zh",
+    "lang:hi",
+    "lang:ru"
   ]
 }

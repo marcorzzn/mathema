@@ -3,7 +3,7 @@
  * Tipi TypeScript per i nodi, lo schema MSC2020, il grafo e le traduzioni di Mathema.
  */
 
-export type LeanStatus = "none" | "statement_only" | "has_sorry" | "compiled";
+export type LeanStatus = "none" | "statement_only" | "has_sorry" | "unverified" | "compiled";
 
 export type NodeKind =
   | "definition"
@@ -26,6 +26,8 @@ export type DependencyType =
 
 export interface LeanBlock {
   code: string;
+  hash?: string;
+  file_hash?: string | null;
   status: LeanStatus;
   mathlib_version: string;
   mathlib_name?: string;
@@ -46,6 +48,7 @@ export interface StepNode {
   symbolic: string;
   lean: LeanBlock;
   deps: Dependency[];
+  missing?: string[];
   substeps?: StepNode[];
 }
 
@@ -65,6 +68,17 @@ export interface SourceRef {
   license_note: string;
 }
 
+export interface FormalizationYaml {
+  project: string;
+  msc: string;
+  target_theorem: string;
+  comparator_setup: {
+    lean_toolchain: string;
+    mathlib_rev: string;
+    permitted_axioms: string[];
+  };
+}
+
 export interface MathemaNode {
   id: string;
   msc: string;
@@ -78,6 +92,8 @@ export interface MathemaNode {
   steps: StepNode[];
   attachments: Attachment[];
   sources: SourceRef[];
+  missing: string[];
+  formalization_yaml?: FormalizationYaml;
   license: "CC-BY-SA-4.0" | "Apache-2.0";
   provenance: "human" | "ai-assisted" | "imported";
   reviewed_by: string[];
@@ -117,6 +133,7 @@ export interface LanguagePack {
     msc_extension_note: string;
     lean_status_label: string;
     lean_status_compiled: string;
+    lean_status_unverified: string;
     lean_status_has_sorry: string;
     lean_status_statement_only: string;
     lean_status_none: string;
