@@ -11,7 +11,7 @@
         "es": "Número primo en ℕ y menor divisor primo",
         "ar": "العدد الأولي في ℕ وأصغر قاسم أولي"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -25,7 +25,7 @@
         "es": "Existencia de un divisor primo para todo n ≠ 1",
         "ar": "وجود قاسم أولي لكل n ≠ 1"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -39,7 +39,7 @@
         "es": "Infinitud de los números primos (Teorema de Euclides, Elementos IX.20)",
         "ar": "لانهائية الأعداد الأولية (مبرهنة إقليدس، الأصول IX.20)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -53,7 +53,7 @@
         "es": "Construcción del número de Euclides N = n! + 1",
         "ar": "بناء عدد إقليدس N = n! + 1"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -67,7 +67,7 @@
         "es": "Extracción del menor divisor primo p de N",
         "ar": "استخراج أصغر قاسم أولي p للعدد N"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -81,7 +81,7 @@
         "es": "Exclusión de todos los factores ≤ n",
         "ar": "استبعاد جميع العوامل الأصغر أو المساوية لـ n"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -95,7 +95,7 @@
         "es": "Microrresultado: Todo entero 0 < k ≤ n divide a n!",
         "ar": "نتيجة جزئية: كل عدد صحيح 0 < k ≤ n يقسم n!"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -109,7 +109,7 @@
         "es": "Conclusión: p > n y no acotación de los primos",
         "ar": "الخلاصة: p > n وعدم محدودية الأعداد الأولية"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -123,7 +123,7 @@
         "es": "Infinitud de los primos — Demostración II (Números de Fermat coprimos, Goldbach 1730)",
         "ar": "لانهائية الأعداد الأولية — البرهان الثاني (أعداد فيرما الأولية نسبياً، غولدباخ 1730)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -137,7 +137,7 @@
         "es": "Identidad telescópica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
         "ar": "المتطابقة التلسكوبية ∏_{k=0}^{n-1} Fₖ = Fₙ - 2"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -235,7 +235,7 @@
         "es": "Lema de Euclides (Elementos VII.30): si p primo divide a a·b, entonces p divide a a o a b",
         "ar": "تمهيدية إقليدس (الأصول VII.30): إذا قسم عدد أولي p الجداء a·b فإنه يقسم a أو يقسم b"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -249,7 +249,7 @@
         "es": "Dicotomía de coprimalidad: p ∣ a o mcd(p, a) = 1",
         "ar": "ثنائية الأولية النسبية: إما p ∣ a أو gcd(p, a) = 1"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -277,7 +277,7 @@
         "es": "Multiplicación por b de la identidad de Bézout",
         "ar": "ضرب متطابقة بيزو بالعدد b"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -291,7 +291,7 @@
         "es": "Teorema Fundamental de la Aritmética (Existencia y unicidad de la factorización prima)",
         "ar": "المبرهنة الأساسية في الحساب (وجود ووحدانية التحليل إلى عوامل أولية)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -305,7 +305,7 @@
         "es": "Existencia de la factorización por inducción fuerte sobre n",
         "ar": "وجود التحليل بالاستقراء القوي على n"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -319,7 +319,7 @@
         "es": "Microrresultado: Decrecimiento estricto n / minFac(n) < n",
         "ar": "نتيجة جزئية: التناقص الفعلي لخارج القسمة n / minFac(n) < n"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -347,7 +347,7 @@
         "es": "Cancelación inductiva del factor primo común p₁ = qⱼ",
         "ar": "الاختزال الاستقرائي للعامل الأولي المشترك p₁ = qⱼ"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -361,7 +361,7 @@
         "es": "Microrresultado: Ley de cancelación multiplicativa en ℕ",
         "ar": "نتيجة جزئية: قانون الاختزال الضربي في ℕ للعوامل الموجبة"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -389,7 +389,7 @@
         "es": "Teorema Fundamental de la Aritmética — Demostración II (Inducción directa de Zermelo, 1912)",
         "ar": "المبرهنة الأساسية في الحساب — البرهان الثاني (الاستقراء المباشر لزيرميلو بدون بيزو، 1912)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -403,7 +403,7 @@
         "es": "Exclusión de p₁ = q₁ en el contraejemplo mínimo n",
         "ar": "استبعاد p₁ = q₁ في المثال المضاد الأصغر n"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -417,7 +417,7 @@
         "es": "Construcción del entero auxiliar n' = (q₁ - p₁)·q₂⋯qₘ",
         "ar": "بناء العدد المساعد n' = (q₁ - p₁)·q₂⋯qₘ"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -445,7 +445,7 @@
         "es": "Número racional y número irracional",
         "ar": "العدد القياسي والعدد غير القياسي"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -459,7 +459,7 @@
         "es": "Representación en términos irreducibles",
         "ar": "التمثيل في أبسط صورة"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -473,7 +473,7 @@
         "es": "Irracionalidad de √2 (Demostración clásica por paridad)",
         "ar": "لاقياسية √2 (البرهان الكلاسيكي بالزوجية)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -501,7 +501,7 @@
         "es": "Paridad del numerador p",
         "ar": "زوجية البسط p"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -515,7 +515,7 @@
         "es": "Microrresultado: El cuadrado de un entero impar es impar",
         "ar": "نتيجة جزئية: مربع العدد الفردي هو عدد فردي"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -529,7 +529,7 @@
         "es": "Paridad del denominador q",
         "ar": "زوجية المقام q"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -543,7 +543,7 @@
         "es": "Contradicción con la coprimalidad de p y q",
         "ar": "التناقض مع كون p و q أوليين نسبياً"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -557,7 +557,7 @@
         "es": "Irracionalidad de √2 — Demostración II (Valuación 2-ádica y factorización única)",
         "ar": "لاقياسية √2 — البرهان الثاني (التقييم 2-adic والتحليل الوحيد)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -585,7 +585,7 @@
         "es": "Comparación de paridad de los exponentes en ℕ",
         "ar": "مقارنة زوجية الأسس في ℕ"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -613,7 +613,7 @@
         "es": "Conclusión de la irracionalidad",
         "ar": "استنتاج اللاقياسية"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -627,7 +627,7 @@
         "es": "Irracionalidad de √2 — Demostración III (Alfombra geométrica de Tennenbaum y descenso infinito)",
         "ar": "لاقياسية √2 — البرهان الثالث (برهان تيننباوم الهندسي والنزول اللانهائي)"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": false
     },
     {
@@ -641,7 +641,7 @@
         "es": "Cota de orden: q < p < 2q",
         "ar": "متباينة الترتيب: q < p < 2q"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {
@@ -655,7 +655,7 @@
         "es": "Identidad algebraica del cuadrado superpuesto",
         "ar": "المتطابقة الجبرية للمربع المتداخل"
       },
-      "leanStatus": "unverified",
+      "leanStatus": "compiled",
       "isStep": true
     },
     {

@@ -17,11 +17,11 @@
   "symbolic": "Irrational(x) :⇔ x ∈ ℝ \\ ℚ ⇔ ¬(∃ q ∈ ℚ, (q : ℝ) = x) ⇔ ∀ p, q ∈ ℤ, q ≠ 0 ⇒ x ≠ p / q",
   "lean": {
     "code": "import Mathlib.Data.Real.Irrational\n\n-- In Mathlib, Irrational x è definito esattamente come x ∉ Set.range ((↑) : ℚ → ℝ)\n#check Irrational\n\ntheorem mathema_irrational_iff (x : ℝ) :\n    Irrational x ↔ ∀ q : ℚ, (q : ℝ) ≠ x := by\n  unfold Irrational\n  simp [Set.mem_range]",
-    "status": "unverified",
+    "status": "compiled",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Irrational",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": null,
+    "verified_at": "2026-10-26T17:03:17.143Z",
     "hash": "2336f525d640e6306412e65a4214f81fe3e8e9e9988abc18baf394da51236e91",
     "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
@@ -48,11 +48,11 @@
       "symbolic": "∀ q ∈ ℚ, ∃! (n, d) ∈ ℤ × ℕ₊ : q = n / d ∧ gcd(|n|, d) = 1",
       "lean": {
         "code": "example (q : ℚ) : q.num.natAbs.Coprime q.den := q.reduced",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Rat.reduced",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "f2189ae6e0d23a4ccf5f359d48e9e0c5a90712aa282e45d8601e8addab830607",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },

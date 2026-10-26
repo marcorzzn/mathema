@@ -17,11 +17,11 @@
   "symbolic": "√2 ∉ ℚ  ⇔  ¬(∃ p, q ∈ ℤ, q ≠ 0 ∧ p² = 2q²)",
   "lean": {
     "code": "import Mathlib.Data.Real.Irrational\n\n/-- Enunciato principale allineato a Mathlib: √2 è irrazionale. -/\ntheorem mathema_irrational_sqrt_two : Irrational (Real.sqrt 2) :=\n  irrational_sqrt_two",
-    "status": "unverified",
+    "status": "compiled",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "irrational_sqrt_two",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": null,
+    "verified_at": "2026-10-26T17:03:17.143Z",
     "hash": "73893fe93e220608fad668ec74e9dcb44366166f552778dbd848496bea39a418",
     "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
@@ -98,11 +98,11 @@
       "symbolic": "p² = 2q²  ⇒  2 ∣ p²  ⇒  2 ∣ p  ⇔  ∃ k ∈ ℤ, p = 2k",
       "lean": {
         "code": "lemma even_of_sq_eq_two_mul_sq {p q : ℤ} (h : p ^ 2 = 2 * q ^ 2) : 2 ∣ p := by\n  have h2 : (2 : ℤ) ∣ p ^ 2 := ⟨q ^ 2, h⟩\n  exact Prime.dvd_of_dvd_pow Int.prime_two h2",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Int.prime_two",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "26322abe2e09b979c7f38bfb4673949051d4319cce98536a11d3b95190b070c2",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
@@ -135,11 +135,11 @@
           "symbolic": "∀ m ∈ ℤ, (2m + 1)² = 2(2m² + 2m) + 1 ≡ 1 (mod 2)",
           "lean": {
             "code": "theorem odd_sq_algebraic (m : ℤ) :\n    (2 * m + 1) ^ 2 = 2 * (2 * m ^ 2 + 2 * m) + 1 := by\n  ring",
-            "status": "unverified",
+            "status": "compiled",
             "mathlib_version": "v4.15.0",
             "mathlib_name": "Odd.pow",
             "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-            "verified_at": null,
+            "verified_at": "2026-10-26T17:03:17.143Z",
             "hash": "9d38368ba6628357f65d51182ad60b459161b7803ba3768bb13f4b9a5408eb99",
             "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
           },
@@ -181,11 +181,11 @@
       "symbolic": "p = 2k ∧ p² = 2q²  ⇒  4k² = 2q²  ⇒  q² = 2k²  ⇒  2 ∣ q",
       "lean": {
         "code": "lemma q_sq_eq_two_mul_sq {p q k : ℤ} (h : p ^ 2 = 2 * q ^ 2) (hk : p = 2 * k) :\n    q ^ 2 = 2 * k ^ 2 := by\n  linarith [ sq_nonneg k, show p ^ 2 = 4 * k ^ 2 by rw [hk]; ring ]",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Int.dvd_of_mul_dvd_mul_left",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "56631985c73f3ff455e698e9ff43f586caba854c76d4f1d9242028085d871236",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
@@ -222,11 +222,11 @@
       "symbolic": "(2 ∣ p ∧ 2 ∣ q) ⇒ 2 ∣ gcd(p, q) = 1 ⇒ ⊥",
       "lean": {
         "code": "lemma not_coprime_of_two_dvd {p q : ℤ} (hp : 2 ∣ p) (hq : 2 ∣ q) :\n    ¬ IsCoprime p q := by\n  intro hcop\n  have hunit : IsUnit (2 : ℤ) := hcop.isUnit_of_dvd' hp hq\n  exact Int.not_isUnit_two hunit",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "IsCoprime.isUnit_of_dvd'",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "ab92ae5dd25c03f05497275870b69080ed17ac99e2256450c2ccd996228fc02d",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },

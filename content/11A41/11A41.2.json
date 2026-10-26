@@ -17,11 +17,11 @@
   "symbolic": "Fₙ := 2^(2ⁿ) + 1  ⇒  (∀ m < n, Fₘ ∣ Fₙ - 2)  ⇒  gcd(Fₘ, Fₙ) = 1  ⇒  #{pₙ : Prime(pₙ) ∧ pₙ ∣ Fₙ} = ∞",
   "lean": {
     "code": "def fermatNumber (n : ℕ) : ℕ := 2 ^ (2 ^ n) + 1\n\ntheorem fermatNumber_step_identity (n : ℕ) :\n    (fermatNumber n - 1) ^ 2 + 1 = fermatNumber (n + 1) := by\n  simp [fermatNumber, ← pow_mul, pow_succ]",
-    "status": "unverified",
+    "status": "compiled",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "none",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": null,
+    "verified_at": "2026-10-26T17:03:17.143Z",
     "hash": "b1d705e0b8a9a72a5cf7b2b1453c4255b7c442cdb7cfd391d8068e25d65d7a6a",
     "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
   },
@@ -59,11 +59,11 @@
       "symbolic": "(2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = 2^(2^(n+1)) - 1 = F_{n+1} - 2",
       "lean": {
         "code": "theorem fermat_diff_squares (x : ℤ) : (x - 1) * (x + 1) = x ^ 2 - 1 := by ring",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "sq_sub_sq",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "9ce18749219743a38528eea74c2ab5972fa9e259db4906417e5fbde12d2cb611",
         "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },

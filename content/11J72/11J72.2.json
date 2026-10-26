@@ -17,11 +17,11 @@
   "symbolic": "p² = 2q²  ⇒  v₂(p²) = v₂(2q²)  ⇒  2·v₂(p) = 2·v₂(q) + 1  ⇒  ⊥",
   "lean": {
     "code": "import Mathlib.Data.Nat.PrimeFin\n\n/-- In ℕ, due doppi non possono differire di 1: 2 * a ≠ 2 * b + 1. -/\ntheorem two_adic_parity_contradiction (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by\n  omega",
-    "status": "unverified",
+    "status": "compiled",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime.irrational_sqrt",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": null,
+    "verified_at": "2026-10-26T17:03:17.143Z",
     "hash": "148ed0ef4956e88a73f48c38509931c54b3d8d5fee6f077c905dfa0a71a635c4",
     "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
@@ -101,11 +101,11 @@
       "symbolic": "∀ a, b ∈ ℕ : 2a ≠ 2b + 1",
       "lean": {
         "code": "example (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by omega",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.even_iff_not_odd",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "56aa57ae1e36af4932d7e7f78648b0f627cb0e9ef81361b969274fa372dbcd50",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },
@@ -186,11 +186,11 @@
       "symbolic": "¬(∃ p, q ∈ ℕ₊, p² = 2q²)  ⇒  √2 ∉ ℚ",
       "lean": {
         "code": "theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) := by\n  simpa using Nat.Prime.irrational_sqrt Nat.prime_two",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.Prime.irrational_sqrt",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "c7c623d5de4cfdc75151172531cf60a2b44d50d88325104765bfbcfd2b8ed6cb",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },

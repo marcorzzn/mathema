@@ -17,11 +17,11 @@
   "symbolic": "Prime(p) :⇔ p ≥ 2 ∧ (∀ d ∈ ℕ, d ∣ p ⇒ d = 1 ∨ d = p)",
   "lean": {
     "code": "import Mathlib.Data.Nat.Prime.Basic\n\n-- In Mathlib4, Nat.Prime p coincide con Irreducible p in ℕ\n#check Nat.Prime\n\ntheorem mathema_exists_prime_dvd {n : ℕ} (hn : n ≠ 1) :\n    ∃ p : ℕ, p.Prime ∧ p ∣ n :=\n  Nat.exists_prime_and_dvd hn",
-    "status": "unverified",
+    "status": "compiled",
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": null,
+    "verified_at": "2026-10-26T17:03:17.143Z",
     "hash": "a74840f0625ba9bb1e3089e5b32656538a33fda916bb39dc267bccc0fba6125f",
     "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
   },
@@ -48,11 +48,11 @@
       "symbolic": "∀ n ∈ ℕ, n ≠ 1  ⇒  Prime(minFac(n)) ∧ minFac(n) ∣ n",
       "lean": {
         "code": "example {n : ℕ} (hn : n ≠ 1) : n.minFac.Prime ∧ n.minFac ∣ n :=\n  ⟨Nat.minFac_prime hn, Nat.minFac_dvd n⟩",
-        "status": "unverified",
+        "status": "compiled",
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.minFac_prime",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": null,
+        "verified_at": "2026-10-26T17:03:17.143Z",
         "hash": "b8ba1db7c47f125d5388c856fd9b352781b9f1eecd54ca6a992e21407827c3ac",
         "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },

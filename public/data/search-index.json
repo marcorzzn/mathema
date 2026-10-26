@@ -915,7 +915,7 @@
     "id": "11A41.0",
     "msc": "11A41",
     "kind": "definition",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Numero primo in ℕ e minimo divisore primo",
@@ -929,7 +929,7 @@
     "id": "11A41.0.1",
     "msc": "11A41",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Esistenza di un divisore primo per ogni n ≠ 1",
@@ -943,7 +943,7 @@
     "id": "11A41.1",
     "msc": "11A41",
     "kind": "theorem",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Infinità dei numeri primi (Teorema di Euclide, Elementi IX.20)",
@@ -957,7 +957,7 @@
     "id": "11A41.1.1",
     "msc": "11A41",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Costruzione del numero di Euclide N = n! + 1 (o ∏ pᵢ + 1)",
@@ -971,7 +971,7 @@
     "id": "11A41.1.2",
     "msc": "11A41",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Estrazione del minimo divisore primo p di N",
@@ -985,7 +985,7 @@
     "id": "11A41.1.3",
     "msc": "11A41",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Esclusione di tutti i fattori ≤ n",
@@ -999,7 +999,7 @@
     "id": "11A41.1.3.a",
     "msc": "11A41",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Micro-risultato: Ogni intero 0 < k ≤ n divide n!",
@@ -1013,7 +1013,7 @@
     "id": "11A41.1.4",
     "msc": "11A41",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Conclusione: p > n e illimitatezza dei primi",
@@ -1027,7 +1027,7 @@
     "id": "11A41.2",
     "msc": "11A41",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Infinità dei primi — Dimostrazione II (Numeri di Fermat coprimi, Goldbach 1730)",
@@ -1041,7 +1041,7 @@
     "id": "11A41.2.1",
     "msc": "11A41",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Identità telescopica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
@@ -1139,7 +1139,7 @@
     "id": "11A51.0",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Lemma di Euclide (Elementi VII.30): se p primo divide a·b, allora p divide a oppure p divide b",
@@ -1153,7 +1153,7 @@
     "id": "11A51.0.1",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Dicotomia di coprimalità per un primo p: p ∣ a oppure MCD(p, a) = 1",
@@ -1181,7 +1181,7 @@
     "id": "11A51.0.2",
     "msc": "11A51",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Moltiplicazione per b dell'identità di Bézout",
@@ -1195,7 +1195,7 @@
     "id": "11A51.1",
     "msc": "11A51",
     "kind": "theorem",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Teorema Fondamentale dell'Aritmetica (Esistenza e unicità della fattorizzazione in primi)",
@@ -1209,7 +1209,7 @@
     "id": "11A51.1.1",
     "msc": "11A51",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Esistenza della fattorizzazione per induzione forte su n",
@@ -1223,7 +1223,7 @@
     "id": "11A51.1.1.a",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Micro-risultato: Stretta decrescenza del quoziente n / minFac(n) < n",
@@ -1251,7 +1251,7 @@
     "id": "11A51.1.3",
     "msc": "11A51",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Cancellazione induttiva del fattore primo comune p₁ = qⱼ",
@@ -1265,7 +1265,7 @@
     "id": "11A51.1.3.a",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Micro-risultato: Legge di cancellazione moltiplicativa in ℕ per fattori positivi",
@@ -1293,7 +1293,7 @@
     "id": "11A51.2",
     "msc": "11A51",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Teorema Fondamentale dell'Aritmetica — Dimostrazione II (Induzione diretta di Zermelo, 1912)",
@@ -1307,7 +1307,7 @@
     "id": "11A51.2.1",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Esclusione di p₁ = q₁ nel minimo controesempio n",
@@ -1321,7 +1321,7 @@
     "id": "11A51.2.2",
     "msc": "11A51",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Costruzione dell'intero ausiliario n' = (q₁ - p₁)·q₂⋯qₘ",
@@ -1349,7 +1349,7 @@
     "id": "11J72.0",
     "msc": "11J72",
     "kind": "definition",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Numero razionale e numero irrazionale",
@@ -1363,7 +1363,7 @@
     "id": "11J72.0.1",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Rappresentazione ridotta ai minimi termini",
@@ -1377,7 +1377,7 @@
     "id": "11J72.1",
     "msc": "11J72",
     "kind": "theorem",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Irrazionalità di √2 (Dimostrazione classica per parità)",
@@ -1405,7 +1405,7 @@
     "id": "11J72.1.2",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Parità del numeratore p",
@@ -1419,7 +1419,7 @@
     "id": "11J72.1.2.a",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Micro-risultato: Il quadrato di un intero dispari è dispari",
@@ -1433,7 +1433,7 @@
     "id": "11J72.1.3",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Parità del denominatore q",
@@ -1447,7 +1447,7 @@
     "id": "11J72.1.4",
     "msc": "11J72",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Contraddizione con la coprimalità di p e q",
@@ -1461,7 +1461,7 @@
     "id": "11J72.2",
     "msc": "11J72",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Irrazionalità di √2 — Dimostrazione II (Valutazione 2-adica e fattorizzazione unica)",
@@ -1489,7 +1489,7 @@
     "id": "11J72.2.2",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Confronto di parità degli esponenti in ℕ",
@@ -1517,7 +1517,7 @@
     "id": "11J72.2.3",
     "msc": "11J72",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Conclusione dell'irrazionalità",
@@ -1531,7 +1531,7 @@
     "id": "11J72.3",
     "msc": "11J72",
     "kind": "proof",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": false,
     "title": {
       "it": "Irrazionalità di √2 — Dimostrazione III (Tappeto geometrico di Tennenbaum e discesa infinita)",
@@ -1545,7 +1545,7 @@
     "id": "11J72.3.1",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Stima d'ordine: q < p < 2q",
@@ -1559,7 +1559,7 @@
     "id": "11J72.3.2",
     "msc": "11J72",
     "kind": "lemma",
-    "leanStatus": "unverified",
+    "leanStatus": "compiled",
     "isStep": true,
     "title": {
       "it": "Identità algebrica del quadrato sovrapposto",
