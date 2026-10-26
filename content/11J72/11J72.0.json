@@ -21,7 +21,7 @@
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Irrational",
     "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-    "verified_at": "2026-10-26T17:03:17.143Z",
+    "verified_at": "2026-10-26T18:53:06.543Z",
     "hash": "2336f525d640e6306412e65a4214f81fe3e8e9e9988abc18baf394da51236e91",
     "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
   },
@@ -52,7 +52,7 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Rat.reduced",
         "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
-        "verified_at": "2026-10-26T17:03:17.143Z",
+        "verified_at": "2026-10-26T18:53:06.543Z",
         "hash": "f2189ae6e0d23a4ccf5f359d48e9e0c5a90712aa282e45d8601e8addab830607",
         "file_hash": "cad3f50d8de2c494c8851bc5a8a917d07f38837599ce492d73a52c80de54e17f"
       },

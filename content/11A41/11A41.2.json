@@ -21,7 +21,7 @@
     "mathlib_version": "v4.15.0",
     "mathlib_name": "none",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": "2026-10-26T17:03:17.143Z",
+    "verified_at": "2026-10-26T18:53:06.543Z",
     "hash": "b1d705e0b8a9a72a5cf7b2b1453c4255b7c442cdb7cfd391d8068e25d65d7a6a",
     "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
   },
@@ -63,7 +63,7 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "sq_sub_sq",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": "2026-10-26T17:03:17.143Z",
+        "verified_at": "2026-10-26T18:53:06.543Z",
         "hash": "9ce18749219743a38528eea74c2ab5972fa9e259db4906417e5fbde12d2cb611",
         "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },

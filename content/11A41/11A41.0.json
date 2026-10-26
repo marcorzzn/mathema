@@ -21,7 +21,7 @@
     "mathlib_version": "v4.15.0",
     "mathlib_name": "Nat.Prime",
     "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-    "verified_at": "2026-10-26T17:03:17.143Z",
+    "verified_at": "2026-10-26T18:53:06.543Z",
     "hash": "a74840f0625ba9bb1e3089e5b32656538a33fda916bb39dc267bccc0fba6125f",
     "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
   },
@@ -52,7 +52,7 @@
         "mathlib_version": "v4.15.0",
         "mathlib_name": "Nat.minFac_prime",
         "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
-        "verified_at": "2026-10-26T17:03:17.143Z",
+        "verified_at": "2026-10-26T18:53:06.543Z",
         "hash": "b8ba1db7c47f125d5388c856fd9b352781b9f1eecd54ca6a992e21407827c3ac",
         "file_hash": "c433299c5164cdf2d59d2750afa3ca7db4e75934264c45aaa54f50964901ec44"
       },
