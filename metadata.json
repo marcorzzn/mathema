@@ -2,5 +2,7 @@
   "name": "Mathema — Grafo Aperto della Conoscenza Matematica",
   "description": "Infrastruttura aperta, multilingue, verificabile e navigabile della conoscenza matematica, fisica e informatica con ponte bidirezionale NL ↔ Lean 4. Manifesto e Blueprint di Marco Razzano.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

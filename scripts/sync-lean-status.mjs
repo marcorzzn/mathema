@@ -167,12 +167,16 @@ function auditLeanBlock(lean, defaultLeanFile) {
   if (!lean.lean_file && defaultLeanFile) {
     lean.lean_file = defaultLeanFile;
   }
-  lean.hash = sha256(code);
-  if (lean.lean_file && fs.existsSync(path.join(ROOT, lean.lean_file))) {
-    lean.file_hash = sha256(fs.readFileSync(path.join(ROOT, lean.lean_file), "utf8"));
-  } else {
-    lean.file_hash = null;
-  }
+  const prevHash = lean.hash;
+  const prevFileHash = lean.file_hash;
+  const nextHash = sha256(code);
+  const nextFileHash =
+    lean.lean_file && fs.existsSync(path.join(ROOT, lean.lean_file))
+      ? sha256(fs.readFileSync(path.join(ROOT, lean.lean_file), "utf8"))
+      : null;
+
+  lean.hash = nextHash;
+  lean.file_hash = nextFileHash;
 
   if (!code) {
     lean.status = "none";
@@ -196,6 +200,13 @@ function auditLeanBlock(lean, defaultLeanFile) {
   if (afterLakeBuild && hasCompiledOlean(lean.lean_file)) {
     lean.status = "compiled";
     lean.verified_at = nowIso;
+  } else if (
+    lean.status === "compiled" &&
+    lean.verified_at &&
+    prevHash === nextHash &&
+    prevFileHash === nextFileHash
+  ) {
+    // Mantieni lo stato 'compiled' certificato dalla CI se né il blocco né il file .lean sono cambiati
   } else {
     lean.status = "unverified";
     lean.verified_at = null;

@@ -2,8 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://marcorzzn.github.io/Mathema/schema/node.schema.json",
   "title": "mathema Knowledge Node Schema (Frozen Contract — Phase C)",
+  "$comment": "CONTRATTO CONGELATO (Fase C): Lo schema è bloccato crittograficamente in scripts/validate.mjs sotto l'Invariante I1. Qualsiasi modifica non autorizzata a questo file fa fallire npm run validate.",
   "description": "Contratto dati congelato per un nodo della conoscenza matematica in mathema. I codici a 2, 3 e 5 caratteri (es. 11, 11J, 11J72) appartengono allo standard ufficiale MSC2020. I suffissi con punto (es. 11J72.1, 11J72.1.2, 11J72.1.2.a) sono l'estensione gerarchica di mathema.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "id",
     "msc",
@@ -101,19 +103,20 @@
       "items": {
         "$ref": "#/$defs/attachment"
       },
-      "description": "Fase B: Almeno 1 allegato (figura SVG, grafico 2D o scena 3D lazy) per ogni nodo principale."
+      "description": "Fase B / Invariante I5: Almeno 1 allegato (figura SVG, grafico 2D o scena 3D lazy) per ogni nodo principale."
     },
     "sources": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": ["title", "citation", "license_note"],
         "properties": {
-          "title": { "type": "string" },
-          "citation": { "type": "string" },
+          "title": { "type": "string", "minLength": 1 },
+          "citation": { "type": "string", "minLength": 1 },
           "url": { "type": "string" },
-          "license_note": { "type": "string" }
+          "license_note": { "type": "string", "minLength": 1 }
         }
       },
       "description": "Fonti bibliografiche o formali con indicazione della compatibilità di licenza."
@@ -134,13 +137,14 @@
     "reviewed_by": {
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string" },
+      "items": { "type": "string", "minLength": 1 },
       "description": "Revisori umani che hanno controllato la correttezza matematica del nodo."
     }
   },
   "$defs": {
     "leanBlock": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["code", "hash", "status", "mathlib_version", "mathlib_name", "verified_at"],
       "properties": {
         "code": {
@@ -181,20 +185,23 @@
     },
     "palomarBlock": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["project", "msc", "target_theorem", "comparator_setup"],
       "properties": {
-        "project": { "type": "string" },
-        "msc": { "type": "string" },
-        "target_theorem": { "type": "string" },
+        "project": { "type": "string", "minLength": 1 },
+        "msc": { "type": "string", "pattern": "^[0-9]{2}[A-Z][0-9]{2}$" },
+        "target_theorem": { "type": "string", "minLength": 1 },
         "comparator_setup": {
           "type": "object",
+          "additionalProperties": false,
           "required": ["lean_toolchain", "mathlib_rev", "permitted_axioms"],
           "properties": {
-            "lean_toolchain": { "type": "string" },
-            "mathlib_rev": { "type": "string" },
+            "lean_toolchain": { "type": "string", "minLength": 1 },
+            "mathlib_rev": { "type": "string", "minLength": 1 },
             "permitted_axioms": {
               "type": "array",
-              "items": { "type": "string" }
+              "minItems": 1,
+              "items": { "type": "string", "minLength": 1 }
             }
           }
         }
@@ -203,6 +210,7 @@
     },
     "dependency": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["id", "type"],
       "properties": {
         "id": {
@@ -223,6 +231,7 @@
     },
     "stepNode": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["id", "kind", "title", "natural", "symbolic", "lean", "missing", "deps"],
       "properties": {
         "id": { "type": "string" },
@@ -258,6 +267,7 @@
     },
     "attachment": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["id", "kind", "title", "caption"],
       "properties": {
         "id": { "type": "string" },

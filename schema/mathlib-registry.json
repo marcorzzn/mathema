@@ -17,7 +17,7 @@
     "Nat.strong_induction_on",
     "Nat.Prime",
     "Nat.minFac_prime",
-    "Nat.infinite_setOf_prime",
+    "Nat.Prime.two_le",
     "Nat.factorial_pos",
     "Nat.dvd_add_right",
     "Nat.dvd_factorial",

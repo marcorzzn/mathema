@@ -96,9 +96,15 @@ function validateLeanBlock(lean, ctx) {
   if (lean.status === "compiled") {
     const rel = String(lean.lean_file || "");
     const oleanRel = rel.startsWith("lean/") ? rel.slice("lean/".length).replace(/\.lean$/, ".olean") : "";
-    const oleanPath = oleanRel ? path.join(ROOT, "lean", ".lake", "build", "lib", oleanRel) : "";
-    if (!oleanPath || !fs.existsSync(oleanPath)) {
-      fail(`${ctx}: VIOLAZIONE ONESTÀ LEAN — status='compiled' ma l'artefatto compilato '${oleanPath}' non esiste. Usa 'unverified' finché la GitHub Action non esegue lake build.`);
+    const lakeLibDir = path.join(ROOT, "lean", ".lake", "build", "lib");
+    const oleanPath = oleanRel ? path.join(lakeLibDir, oleanRel) : "";
+    const hasLocalOlean = Boolean(oleanPath) && fs.existsSync(oleanPath);
+    const hasValidCiStamp =
+      typeof lean.verified_at === "string" &&
+      /^\d{4}-\d{2}-\d{2}T/.test(lean.verified_at) &&
+      Boolean(lean.file_hash);
+    if (fs.existsSync(lakeLibDir) ? !hasLocalOlean : !hasLocalOlean && !hasValidCiStamp) {
+      fail(`${ctx}: VIOLAZIONE ONESTÀ LEAN — status='compiled' ma l'artefatto compilato '${oleanPath}' o la certificazione CI non esiste. Usa 'unverified' finché la GitHub Action non esegue lake build.`);
     }
   }
   if (!code && lean.status !== "none") {

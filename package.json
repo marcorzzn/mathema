@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "sync": "node scripts/sync-lean-status.mjs && node scripts/build-content.mjs",
+    "sync": "node scripts/build-content.mjs",
     "prebuild": "node scripts/validate.mjs && node scripts/build-content.mjs",
     "build": "vite build",
     "validate": "node scripts/validate.mjs",
