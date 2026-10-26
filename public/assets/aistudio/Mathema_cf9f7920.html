@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mathema</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#6b6b6b;--ln:#d9d9d9;--ac:#1a4fa0;--sf:#f5f5f2;--ok:#7a5b00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151515;--fg:#e8e8e4;--mut:#9a9a94;--ln:#333;--ac:#8db4ff;--sf:#1e1e1d;--ok:#e0b84a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Iowan Old Style",Palatino,Georgia,serif}
+a{color:var(--ac)}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 20px;border-bottom:1px solid var(--ln)}
+header b{font-size:20px;letter-spacing:.01em}
+header input{flex:1;min-width:140px;font:inherit;font-size:15px;padding:4px 8px;border:1px solid var(--ln);background:var(--bg);color:var(--fg);border-radius:3px}
+button{font:inherit;font-size:14px;padding:3px 10px;border:1px solid var(--ln);background:var(--bg);color:var(--fg);border-radius:3px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 53px)}
+nav{border-right:1px solid var(--ln);padding:12px 8px 40px;font-size:15px;overflow:auto;max-height:calc(100vh - 53px);position:sticky;top:0}
+nav ul{list-style:none;margin:0;padding-left:14px}
+nav>ul{padding-left:0}
+nav li{margin:1px 0}
+nav a{text-decoration:none;color:var(--mut);display:block;padding:1px 6px;border-radius:3px}
+nav a.has{color:var(--fg);font-weight:600}
+nav a.cur{background:var(--sf);color:var(--ac)}
+nav code{font:13px ui-monospace,Menlo,monospace;margin-right:6px}
+main{padding:20px 32px 80px;max-width:900px}
+.crumb{font-size:14px;color:var(--mut)}
+h1{font-size:28px;line-height:1.25;margin:6px 0 4px;font-weight:600}
+.code{font:15px ui-monospace,Menlo,monospace;color:var(--mut)}
+.st{font-size:14px;color:var(--ok)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;align-items:center}
+.row{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:5px 0;border-top:1px solid var(--ln)}
+.row>span{font-size:13px;color:var(--mut);padding-top:3px}
+pre{margin:0;font:14px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-x:auto}
+.sym{font:italic 17px/1.5 "Cambria Math",Cambria,serif}
+details{border-top:1px solid var(--ln);padding:6px 0}
+details details{margin-left:18px}
+summary{cursor:pointer}
+summary label{margin-left:6px;font-size:13px;color:var(--mut)}
+.box{overflow-x:auto;border:1px solid var(--ln);border-radius:3px;padding:8px}
+svg text{fill:var(--fg);font:12px ui-monospace,monospace}
+svg rect{fill:var(--sf);stroke:var(--ac)}
+svg path{stroke:var(--mut);fill:none}
+.empty{color:var(--mut)}
+[dir="rtl"] .row{direction:rtl}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}nav{position:static;max-height:240px;border-right:0;border-bottom:1px solid var(--ln)}main{padding:16px}.row{grid-template-columns:1fr;gap:0}}
+</style>
+</head>
+<body>
+<header>
+<b>Mathema</b>
+<input id="q" type="search" placeholder="Codice o parola (es. 11J72, primi)" aria-label="Cerca">
+<span><button id="li" aria-pressed="true">IT</button> <button id="le" aria-pressed="false">EN</button></span>
+<span><button id="vt" aria-pressed="true">Testo</button> <button id="vg" aria-pressed="false">Grafo</button></span>
+</header>
+<div class="wrap"><nav id="nav" aria-label="MSC"></nav><main id="main"></main></div>
+<script>
+"use strict";
+var lang="it",view="t",cur="",sel={};
+var UI={it:{n:"Linguaggio naturale",s:"Simbolico",l:"Lean 4",all:"Espandi tutto",none:"Comprimi",g:"Mostra come grafo",gs:"Grafo di ciò che hai selezionato (se nulla, tutto il nodo)",emp:"Nodo ancora vuoto. Si può compilare con lo schema dei nodi di questa pagina.",sel:"seleziona",ph:"Codice o parola (es. 11J72, primi)",vt:"Testo",vg:"Grafo",root:"Tutta la matematica",st:"Lean: "},
+en:{n:"Natural language",s:"Symbolic",l:"Lean 4",all:"Expand all",none:"Collapse",g:"Show as graph",gs:"Graph of your selection (everything if none)",emp:"This node is still empty. It can be filled using this page’s node schema.",sel:"select",ph:"Code or word (e.g. 11J72, primes)",vt:"Text",vg:"Graph",root:"All of mathematics",st:"Lean: "}};
+var RAW="00|General and overarching topics|Argomenti generali;01|History and biography|Storia e biografie;03|Mathematical logic and foundations|Logica matematica e fondamenti;05|Combinatorics|Combinatoria;06|Order, lattices|Ordine e reticoli;08|General algebraic systems|Sistemi algebrici generali;11|Number theory|Teoria dei numeri;12|Field theory and polynomials|Teoria dei campi e polinomi;13|Commutative algebra|Algebra commutativa;14|Algebraic geometry|Geometria algebrica;15|Linear and multilinear algebra|Algebra lineare e multilineare;16|Associative rings and algebras|Anelli e algebre associativi;17|Nonassociative rings and algebras|Anelli e algebre non associativi;18|Category theory; homological algebra|Categorie; algebra omologica;19|K-theory|K-teoria;20|Group theory|Teoria dei gruppi;22|Topological and Lie groups|Gruppi topologici e di Lie;26|Real functions|Funzioni reali;28|Measure and integration|Misura e integrazione;30|Functions of a complex variable|Funzioni di variabile complessa;31|Potential theory|Teoria del potenziale;32|Several complex variables|Variabili complesse multiple;33|Special functions|Funzioni speciali;34|Ordinary differential equations|Equazioni differenziali ordinarie;35|Partial differential equations|Equazioni alle derivate parziali;37|Dynamical systems, ergodic theory|Sistemi dinamici, teoria ergodica;39|Difference and functional equations|Equazioni alle differenze e funzionali;40|Sequences, series, summability|Successioni, serie, sommabilità;41|Approximations and expansions|Approssimazioni e sviluppi;42|Harmonic analysis on Euclidean spaces|Analisi armonica euclidea;43|Abstract harmonic analysis|Analisi armonica astratta;44|Integral transforms|Trasformate integrali;45|Integral equations|Equazioni integrali;46|Functional analysis|Analisi funzionale;47|Operator theory|Teoria degli operatori;49|Calculus of variations, optimal control|Calcolo delle variazioni, controllo ottimo;51|Geometry|Geometria;52|Convex and discrete geometry|Geometria convessa e discreta;53|Differential geometry|Geometria differenziale;54|General topology|Topologia generale;55|Algebraic topology|Topologia algebrica;57|Manifolds and cell complexes|Varietà e complessi cellulari;58|Global analysis|Analisi globale;60|Probability and stochastic processes|Probabilità e processi stocastici;62|Statistics|Statistica;65|Numerical analysis|Analisi numerica;68|Computer science|Informatica;70|Mechanics of particles and systems|Meccanica dei sistemi;74|Mechanics of deformable solids|Meccanica dei solidi deformabili;76|Fluid mechanics|Meccanica dei fluidi;78|Optics, electromagnetic theory|Ottica, elettromagnetismo;80|Classical thermodynamics|Termodinamica classica;81|Quantum theory|Teoria quantistica;82|Statistical mechanics|Meccanica statistica;83|Relativity and gravitational theory|Relatività e gravitazione;85|Astronomy and astrophysics|Astronomia e astrofisica;86|Geophysics|Geofisica;90|Operations research|Ricerca operativa;91|Game theory, economics|Teoria dei giochi, economia;92|Biology and natural sciences|Biologia e scienze naturali;93|Systems theory; control|Teoria dei sistemi; controllo;94|Information and communication|Informazione e comunicazione;97|Mathematics education|Didattica della matematica";
+var N={},ROOT=[];
+RAW.split(";").forEach(function(r){var p=r.split("|");N[p[0]]={c:p[0],t:{en:p[1],it:p[2]},k:[]};ROOT.push(p[0])});
+function add(par,c,en,it){N[c]={c:c,t:{en:en,it:it},k:[],p:par};N[par].k.push(c)}
+add("11","11A","Elementary number theory","Teoria elementare dei numeri");
+add("11A","11A41","Primes","Numeri primi");
+add("11","11J","Diophantine approximation, transcendental numbers","Approssimazione diofantea, numeri trascendenti");
+add("11J","11J72","Irrationality; linear independence","Irrazionalità; indipendenza lineare");
+/* Entries: step codes extend the parent code. status = Lean verification state */
+var E={
+"11A41.1":{kind:{it:"Teorema",en:"Theorem"},t:{it:"Infinità dei numeri primi (Euclide)",en:"Infinitude of primes (Euclid)"},
+nl:{it:"I numeri primi sono infiniti.",en:"There are infinitely many primes."},
+sym:"{ p ∈ ℕ : p primo } non è finito",
+lean:"theorem infinite_primes : Set.Infinite {p : ℕ | p.Prime} :=\n  Nat.infinite_setOf_prime",
+st:{it:"enunciato da Mathlib, non ancora compilato qui",en:"statement from Mathlib, not yet compiled here"},
+steps:[
+{t:{it:"Ipotesi per assurdo",en:"Assume the contrary"},nl:{it:"Supponiamo che i primi siano un insieme finito {p₁,…,pₙ}.",en:"Suppose the primes form a finite set {p₁,…,pₙ}."},sym:"P = {p₁,…,pₙ} finito",lean:"intro hfin",deps:[]},
+{t:{it:"Costruzione di N",en:"Build N"},nl:{it:"Poniamo N = p₁⋯pₙ + 1. Allora N > 1.",en:"Let N = p₁⋯pₙ + 1. Then N > 1."},sym:"N = (∏ p∈P) p + 1 > 1",lean:"set N := (∏ p ∈ hfin.toFinset, p) + 1",deps:["1"]},
+{t:{it:"Un divisore primo",en:"A prime divisor"},nl:{it:"Ogni intero maggiore di 1 ha un divisore primo q.",en:"Every integer greater than 1 has a prime divisor q."},sym:"∃ q primo : q ∣ N",lean:"obtain ⟨q, hq, hqN⟩ := Nat.exists_prime_and_dvd (n := N) (by sorry)",deps:["2"]},
+{t:{it:"Contraddizione",en:"Contradiction"},nl:{it:"Se q ∈ P, allora q divide p₁⋯pₙ e quindi q divide N − p₁⋯pₙ = 1: assurdo.",en:"If q ∈ P then q divides p₁⋯pₙ, hence q divides N − p₁⋯pₙ = 1: absurd."},sym:"q ∈ P ⇒ q ∣ 1 ⇒ ⊥",lean:"sorry",deps:["3"]}]},
+"11J72.1":{kind:{it:"Teorema",en:"Theorem"},t:{it:"Irrazionalità di √2",en:"Irrationality of √2"},
+nl:{it:"Il numero √2 non è razionale.",en:"The number √2 is not rational."},
+sym:"√2 ∉ ℚ",
+lean:"theorem sqrt2_irrational : Irrational (Real.sqrt 2) :=\n  irrational_sqrt_two",
+st:{it:"enunciato da Mathlib, non ancora compilato qui; i passi contengono sorry",en:"statement from Mathlib, not yet compiled here; steps contain sorry"},
+steps:[
+{t:{it:"Ipotesi per assurdo",en:"Assume the contrary"},nl:{it:"Supponiamo √2 = p/q con p, q interi coprimi e q ≠ 0. Elevando al quadrato, p² = 2q².",en:"Suppose √2 = p/q with p, q coprime integers and q ≠ 0. Squaring gives p² = 2q²."},sym:"∃ p,q ∈ ℤ : q ≠ 0, MCD(p,q)=1, p² = 2q²",lean:"obtain ⟨p, q, hq, hcop, h⟩ : ∃ p q : ℤ, q ≠ 0 ∧ IsCoprime p q ∧ p ^ 2 = 2 * q ^ 2 := by sorry",deps:[]},
+{t:{it:"p è pari",en:"p is even"},nl:{it:"p² è pari, quindi p è pari (il quadrato di un dispari è dispari).",en:"p² is even, so p is even (the square of an odd number is odd)."},sym:"2 ∣ p² ⇒ 2 ∣ p",lean:"have hp : 2 ∣ p := by sorry",deps:["1"],
+ sub:[{t:{it:"Lemma: dispari al quadrato",en:"Lemma: odd squared"},nl:{it:"(2m+1)² = 2(2m²+2m) + 1 è dispari.",en:"(2m+1)² = 2(2m²+2m) + 1 is odd."},sym:"(2m+1)² = 2(2m²+2m)+1",lean:"example (m : ℤ) : (2*m+1)^2 = 2*(2*m^2+2*m)+1 := by ring",deps:[]}]},
+{t:{it:"q è pari",en:"q is even"},nl:{it:"Scrivendo p = 2k si ottiene q² = 2k², quindi anche q è pari.",en:"Writing p = 2k gives q² = 2k², so q is even too."},sym:"p = 2k ⇒ q² = 2k² ⇒ 2 ∣ q",lean:"obtain ⟨k, rfl⟩ := hp\nhave hq2 : 2 ∣ q := by sorry",deps:["2"]},
+{t:{it:"Contraddizione",en:"Contradiction"},nl:{it:"2 divide sia p sia q, contro MCD(p,q) = 1.",en:"2 divides both p and q, contradicting gcd(p,q) = 1."},sym:"2 ∣ MCD(p,q) = 1 ⇒ ⊥",lean:"exact absurd hcop (by sorry)",deps:["2","3"]}]}
+};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function flat(code,e,out){out.push({c:code,e:e});(e.steps||e.sub||[]).forEach(function(s,i){flat(code+(e.steps?".":".")+(e.steps?i+1:String.fromCharCode(97+i)),s,out)});return out}
+function fix(code,e){(e.steps||e.sub||[]).forEach(function(s,i){var c=code+"."+(e.steps?i+1:String.fromCharCode(97+i));s.c=c;s.d=(s.deps||[]).map(function(d){return (e.steps?code+"."+d:d)});fix(c,s)});e.c=code}
+for(var k in E)fix(k,E[k]);
+function entryOf(c){return E[c]}
+function rows(e){var u=UI[lang];return '<div class="row"><span>'+u.n+'</span><div>'+esc(e.nl[lang])+'</div></div><div class="row"><span>'+u.s+'</span><div class="sym">'+esc(e.sym)+'</div></div><div class="row"><span>'+u.l+'</span><pre>'+esc(e.lean)+'</pre></div>'}
+function stepHtml(s){var h='<details data-c="'+s.c+'"><summary><span class="code">'+s.c+'</span> '+esc(s.t[lang])+'<label><input type="checkbox" data-s="'+s.c+'"'+(sel[s.c]?" checked":"")+'> '+UI[lang].sel+'</label></summary>'+rows(s);(s.steps||s.sub||[]).forEach(function(x){h+=stepHtml(x)});return h+'</details>'}
+function crumbs(c){var parts=[],base=c.split(".")[0],n=base;var chain=[];while(n){chain.unshift(n);n=N[n]&&N[n].p}if(!N[base]){chain=[base.slice(0,2),base.slice(0,3),base.slice(0,5)].filter(function(x){return N[x]})}
+return '<a href="#">'+UI[lang].root+'</a>'+chain.map(function(x){return ' › <a href="#'+x+'">'+x+'</a>'}).join("")}
+function render(){
+document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+var u=UI[lang],m=document.getElementById("main");document.getElementById("q").placeholder=u.ph;
+document.getElementById("vt").textContent=u.vt;document.getElementById("vg").textContent=u.vg;
+var e=E[cur],h;
+if(!cur){h='<div class="crumb">'+u.root+'</div><h1>Mathema</h1><p class="empty">'+(lang==="it"?"Scegli una disciplina a sinistra. I nodi in grassetto contengono già contenuti; gli altri sono vuoti.":"Pick a subject on the left. Bold nodes already have content; the rest are empty.")+'</p>'}
+else if(e){h='<div class="crumb">'+crumbs(cur)+'</div><div class="code">'+cur+" · "+esc(e.kind[lang])+'</div><h1>'+esc(e.t[lang])+'</h1><div class="st">'+u.st+esc(e.st[lang])+'</div>';
+h+='<div class="bar"><button id="ea">'+u.all+'</button><button id="ca">'+u.none+'</button><button id="gb" title="'+esc(u.gs)+'">'+u.g+'</button></div>';
+if(view==="g"){h+='<div class="box" id="gv"></div>'}else{h+=rows(e);e.steps.forEach(function(s){h+=stepHtml(s)})}}
+else{var n=N[cur]||{t:{it:cur,en:cur},k:[]};h='<div class="crumb">'+crumbs(cur)+'</div><div class="code">'+cur+'</div><h1>'+esc(n.t[lang])+'</h1>';
+if(n.k.length){h+='<ul>'+n.k.map(function(x){return '<li><a href="#'+x+'"><span class="code">'+x+'</span> '+esc(N[x].t[lang])+'</a></li>'}).join("")+'</ul>'}else h+='<p class="empty">'+u.emp+'</p>'}
+m.innerHTML=h;wire();if(view==="g"&&e)graph(e);nav()}
+function wire(){var m=document.getElementById("main");
+m.querySelectorAll("input[data-s]").forEach(function(i){i.addEventListener("click",function(ev){ev.stopPropagation()});i.addEventListener("change",function(){if(i.checked)sel[i.dataset.s]=1;else delete sel[i.dataset.s]})});
+var ea=document.getElementById("ea");if(ea){ea.onclick=function(){m.querySelectorAll("details").forEach(function(d){d.open=true})};document.getElementById("ca").onclick=function(){m.querySelectorAll("details").forEach(function(d){d.open=false})};document.getElementById("gb").onclick=function(){view="g";setv()}}}
+function graph(e){var all=flat(cur,e,[]).slice(1),ids=Object.keys(sel).filter(function(x){return x.indexOf(cur)===0});
+var set=all.filter(function(o){return !ids.length||sel[o.c]});var by={};set.forEach(function(o){by[o.c]=o});
+var lv={};function L(o){if(lv[o.c]!=null)return lv[o.c];lv[o.c]=0;var m=-1;(o.e.d||[]).forEach(function(d){if(by[d])m=Math.max(m,L(by[d]))});return lv[o.c]=m+1}
+set.forEach(L);var cols={};set.forEach(function(o){(cols[lv[o.c]]=cols[lv[o.c]]||[]).push(o)});var pos={},W=0,H=0;
+Object.keys(cols).forEach(function(l){cols[l].forEach(function(o,i){pos[o.c]={x:12+l*170,y:12+i*58};W=Math.max(W,12+l*170+140);H=Math.max(H,12+i*58+40)})});
+var s='<svg viewBox="0 0 '+(W+12)+' '+(H+12)+'" width="'+(W+12)+'" role="img" aria-label="graph"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0L8,4L0,8" style="fill:var(--mut)"/></marker></defs>';
+set.forEach(function(o){(o.e.d||[]).forEach(function(d){if(by[d]){var a=pos[d],b=pos[o.c];s+='<path d="M'+(a.x+140)+','+(a.y+20)+'L'+b.x+','+(b.y+20)+'" marker-end="url(#ar)"/>'}})});
+set.forEach(function(o){var p=pos[o.c];s+='<g><title>'+esc(o.e.t[lang])+'</title><rect x="'+p.x+'" y="'+p.y+'" width="140" height="40" rx="3"/><text x="'+(p.x+8)+'" y="'+(p.y+16)+'">'+o.c+'</text><text x="'+(p.x+8)+'" y="'+(p.y+31)+'">'+esc(o.e.t[lang].slice(0,19))+'</text></g>'});
+document.getElementById("gv").innerHTML=s+'</svg>'}
+function nav(){var h="";function li(c,d){var n=N[c],has=!!n.k.length||c in E;var cl=(has?"has":"")+(c===cur?" cur":"");var open=cur&&(cur===c||cur.indexOf(c)===0);
+var s='<li><a class="'+cl+'" href="#'+c+'"><code>'+c+'</code>'+esc(n.t[lang])+'</a>';
+if(open&&n.k.length){s+='<ul>'+n.k.map(function(x){return li(x)}).join("")+'</ul>';if(E[c+".1"]||0){}}
+if(open){Object.keys(E).filter(function(k){return k.split(".")[0]===c}).forEach(function(k){s+='<ul><li><a class="has'+(k===cur?" cur":"")+'" href="#'+k+'"><code>'+k+'</code>'+esc(E[k].t[lang])+'</a></li></ul>'})}
+return s+'</li>'}
+document.getElementById("nav").innerHTML='<ul>'+ROOT.map(function(c){return li(c)}).join("")+'</ul>'}
+function setv(){document.getElementById("vt").setAttribute("aria-pressed",view==="t");document.getElementById("vg").setAttribute("aria-pressed",view==="g");render()}
+function setl(l){lang=l;document.getElementById("li").setAttribute("aria-pressed",l==="it");document.getElementById("le").setAttribute("aria-pressed",l==="en");render()}
+document.getElementById("li").onclick=function(){setl("it")};document.getElementById("le").onclick=function(){setl("en")};
+document.getElementById("vt").onclick=function(){view="t";setv()};document.getElementById("vg").onclick=function(){view="g";setv()};
+document.getElementById("q").addEventListener("keydown",function(ev){if(ev.key!=="Enter")return;var v=this.value.trim().toLowerCase();if(!v)return;
+var hit=Object.keys(E).concat(Object.keys(N)).filter(function(c){var n=E[c]||N[c];return c.toLowerCase().indexOf(v)===0||n.t.it.toLowerCase().indexOf(v)>-1||n.t.en.toLowerCase().indexOf(v)>-1})[0];
+if(hit)location.hash=hit});
+function route(){cur=decodeURIComponent(location.hash.slice(1));render()}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

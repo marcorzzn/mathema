@@ -1,0 +1,1113 @@
+{
+  "nodes": [
+    {
+      "id": "11A41.0",
+      "parentId": "11A41",
+      "msc": "11A41",
+      "kind": "definition",
+      "title": {
+        "it": "Numero primo in ℕ e minimo divisore primo",
+        "en": "Prime number in ℕ and least prime divisor",
+        "es": "Número primo en ℕ y menor divisor primo",
+        "ar": "العدد الأولي في ℕ وأصغر قاسم أولي"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A41.0.1",
+      "parentId": "11A41.0",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Esistenza di un divisore primo per ogni n ≠ 1",
+        "en": "Existence of a prime divisor for every n ≠ 1",
+        "es": "Existencia de un divisor primo para todo n ≠ 1",
+        "ar": "وجود قاسم أولي لكل n ≠ 1"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.1",
+      "parentId": "11A41",
+      "msc": "11A41",
+      "kind": "theorem",
+      "title": {
+        "it": "Infinità dei numeri primi (Teorema di Euclide, Elementi IX.20)",
+        "en": "Infinitude of prime numbers (Euclid's Theorem, Elements IX.20)",
+        "es": "Infinitud de los números primos (Teorema de Euclides, Elementos IX.20)",
+        "ar": "لانهائية الأعداد الأولية (مبرهنة إقليدس، الأصول IX.20)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A41.1.1",
+      "parentId": "11A41.1",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Costruzione del numero di Euclide N = n! + 1 (o ∏ pᵢ + 1)",
+        "en": "Construction of Euclid's number N = n! + 1 (or ∏ pᵢ + 1)",
+        "es": "Construcción del número de Euclides N = n! + 1",
+        "ar": "بناء عدد إقليدس N = n! + 1"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.1.2",
+      "parentId": "11A41.1",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Estrazione del minimo divisore primo p di N",
+        "en": "Extraction of the least prime divisor p of N",
+        "es": "Extracción del menor divisor primo p de N",
+        "ar": "استخراج أصغر قاسم أولي p للعدد N"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.1.3",
+      "parentId": "11A41.1",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Esclusione di tutti i fattori ≤ n",
+        "en": "Exclusion of all factors ≤ n",
+        "es": "Exclusión de todos los factores ≤ n",
+        "ar": "استبعاد جميع العوامل الأصغر أو المساوية لـ n"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.1.3.a",
+      "parentId": "11A41.1.3",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Micro-risultato: Ogni intero 0 < k ≤ n divide n!",
+        "en": "Micro-result: Every integer 0 < k ≤ n divides n!",
+        "es": "Microrresultado: Todo entero 0 < k ≤ n divide a n!",
+        "ar": "نتيجة جزئية: كل عدد صحيح 0 < k ≤ n يقسم n!"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.1.4",
+      "parentId": "11A41.1",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione: p > n e illimitatezza dei primi",
+        "en": "Conclusion: p > n and unboundedness of primes",
+        "es": "Conclusión: p > n y no acotación de los primos",
+        "ar": "الخلاصة: p > n وعدم محدودية الأعداد الأولية"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.2",
+      "parentId": "11A41",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Infinità dei primi — Dimostrazione II (Numeri di Fermat coprimi, Goldbach 1730)",
+        "en": "Infinitude of primes — Proof II (Pairwise coprime Fermat numbers, Goldbach 1730)",
+        "es": "Infinitud de los primos — Demostración II (Números de Fermat coprimos, Goldbach 1730)",
+        "ar": "لانهائية الأعداد الأولية — البرهان الثاني (أعداد فيرما الأولية نسبياً، غولدباخ 1730)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A41.2.1",
+      "parentId": "11A41.2",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Identità telescopica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "en": "Telescoping identity ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "es": "Identidad telescópica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "ar": "المتطابقة التلسكوبية ∏_{k=0}^{n-1} Fₖ = Fₙ - 2"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A41.2.2",
+      "parentId": "11A41.2",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Mutua coprimalità: MCD(Fₘ, Fₙ) = 1 per m ≠ n",
+        "en": "Pairwise coprimality: gcd(Fₘ, Fₙ) = 1 for m ≠ n",
+        "es": "Coprimalidad mutua: mcd(Fₘ, Fₙ) = 1 para m ≠ n",
+        "ar": "الأولية النسبية المثنى: gcd(Fₘ, Fₙ) = 1 عندما m ≠ n"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11A41.2.3",
+      "parentId": "11A41.2",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Iniettività della mappa n ↦ minFac(Fₙ)",
+        "en": "Injectivity of the map n ↦ minFac(Fₙ)",
+        "es": "Inyectividad de la aplicación n ↦ minFac(Fₙ)",
+        "ar": "تباين الدالة n ↦ minFac(Fₙ)"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A41.3",
+      "parentId": "11A41",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Infinità dei primi — Dimostrazione III (Topologia delle progressioni aritmetiche di Fürstenberg, 1955)",
+        "en": "Infinitude of primes — Proof III (Fürstenberg's arithmetic progression topology, 1955)",
+        "es": "Infinitud de los primos — Demostración III (Topología de progresiones aritméticas de Fürstenberg, 1955)",
+        "ar": "لانهائية الأعداد الأولية — البرهان الثالث (طوبولوجيا المتتاليات الحسابية لفورستنبرغ، 1955)"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": false
+    },
+    {
+      "id": "11A41.3.1",
+      "parentId": "11A41.3",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Ogni progressione S(a, b) = aℤ + b è sia aperta sia chiusa (clopen)",
+        "en": "Every progression S(a, b) = aℤ + b is both open and closed (clopen)",
+        "es": "Toda progresión S(a, b) = aℤ + b es abierta y cerrada (clopen)",
+        "ar": "كل متتالية حسابية S(a, b) مفتوحة ومغلقة في آن واحد"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A41.3.2",
+      "parentId": "11A41.3",
+      "msc": "11A41",
+      "kind": "lemma",
+      "title": {
+        "it": "Decomposizione ℤ \\ {-1, 1} = ⋃_{p primo} pℤ",
+        "en": "Decomposition ℤ \\ {-1, 1} = ⋃_{p prime} pℤ",
+        "es": "Descomposición ℤ \\ {-1, 1} = ⋃_{p primo} pℤ",
+        "ar": "التفكيك ℤ \\ {-1, 1} = ⋃_{p أولي} pℤ"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A41.3.3",
+      "parentId": "11A41.3",
+      "msc": "11A41",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione sull'aperto finito {-1, 1}",
+        "en": "Contradiction on the finite open set {-1, 1}",
+        "es": "Contradicción sobre el abierto finito {-1, 1}",
+        "ar": "التناقض حول المجموعة المفتوحة المنتهية {-1, 1}"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A51.0",
+      "parentId": "11A51",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Lemma di Euclide (Elementi VII.30): se p primo divide a·b, allora p divide a oppure p divide b",
+        "en": "Euclid's Lemma (Elements VII.30): if a prime p divides a·b, then p divides a or p divides b",
+        "es": "Lema de Euclides (Elementos VII.30): si p primo divide a a·b, entonces p divide a a o a b",
+        "ar": "تمهيدية إقليدس (الأصول VII.30): إذا قسم عدد أولي p الجداء a·b فإنه يقسم a أو يقسم b"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A51.0.1",
+      "parentId": "11A51.0",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Dicotomia di coprimalità per un primo p: p ∣ a oppure MCD(p, a) = 1",
+        "en": "Coprimality dichotomy for a prime p: p ∣ a or gcd(p, a) = 1",
+        "es": "Dicotomía de coprimalidad: p ∣ a o mcd(p, a) = 1",
+        "ar": "ثنائية الأولية النسبية: إما p ∣ a أو gcd(p, a) = 1"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11A51.0.1.a",
+      "parentId": "11A51.0.1",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Micro-risultato: Identità di Bézout u·p + v·a = 1",
+        "en": "Micro-result: Bézout's identity u·p + v·a = 1",
+        "es": "Microrresultado: Identidad de Bézout u·p + v·a = 1",
+        "ar": "نتيجة جزئية: متطابقة بيزو u·p + v·a = 1"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A51.0.2",
+      "parentId": "11A51.0",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Moltiplicazione per b dell'identità di Bézout",
+        "en": "Multiplying Bézout's identity by b",
+        "es": "Multiplicación por b de la identidad de Bézout",
+        "ar": "ضرب متطابقة بيزو بالعدد b"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1",
+      "parentId": "11A51",
+      "msc": "11A51",
+      "kind": "theorem",
+      "title": {
+        "it": "Teorema Fondamentale dell'Aritmetica (Esistenza e unicità della fattorizzazione in primi)",
+        "en": "Fundamental Theorem of Arithmetic (Existence and uniqueness of prime factorization)",
+        "es": "Teorema Fundamental de la Aritmética (Existencia y unicidad de la factorización prima)",
+        "ar": "المبرهنة الأساسية في الحساب (وجود ووحدانية التحليل إلى عوامل أولية)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A51.1.1",
+      "parentId": "11A51.1",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Esistenza della fattorizzazione per induzione forte su n",
+        "en": "Existence of factorization by strong induction on n",
+        "es": "Existencia de la factorización por inducción fuerte sobre n",
+        "ar": "وجود التحليل بالاستقراء القوي على n"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1.1.a",
+      "parentId": "11A51.1.1",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Micro-risultato: Stretta decrescenza del quoziente n / minFac(n) < n",
+        "en": "Micro-result: Strict decrease of the quotient n / minFac(n) < n",
+        "es": "Microrresultado: Decrecimiento estricto n / minFac(n) < n",
+        "ar": "نتيجة جزئية: التناقص الفعلي لخارج القسمة n / minFac(n) < n"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1.2",
+      "parentId": "11A51.1",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Estensione del Lemma di Euclide a prodotti finiti: p ∣ ∏ qⱼ ⇒ ∃ j, p = qⱼ",
+        "en": "Extension of Euclid's Lemma to finite products: p ∣ ∏ qⱼ ⇒ ∃ j, p = qⱼ",
+        "es": "Extensión del Lema de Euclides a productos finitos",
+        "ar": "تعميم تمهيدية إقليدس إلى الجداءات المنتهية"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1.3",
+      "parentId": "11A51.1",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Cancellazione induttiva del fattore primo comune p₁ = qⱼ",
+        "en": "Inductive cancellation of the common prime factor p₁ = qⱼ",
+        "es": "Cancelación inductiva del factor primo común p₁ = qⱼ",
+        "ar": "الاختزال الاستقرائي للعامل الأولي المشترك p₁ = qⱼ"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1.3.a",
+      "parentId": "11A51.1.3",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Micro-risultato: Legge di cancellazione moltiplicativa in ℕ per fattori positivi",
+        "en": "Micro-result: Multiplicative cancellation law in ℕ for positive factors",
+        "es": "Microrresultado: Ley de cancelación multiplicativa en ℕ",
+        "ar": "نتيجة جزئية: قانون الاختزال الضربي في ℕ للعوامل الموجبة"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.1.4",
+      "parentId": "11A51.1",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione dell'unicità a meno di permutazione",
+        "en": "Conclusion of uniqueness up to permutation",
+        "es": "Conclusión de la unicidad salvo permutación",
+        "ar": "استنتاج الوحدانية حتى تبديل العوامل"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11A51.2",
+      "parentId": "11A51",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Teorema Fondamentale dell'Aritmetica — Dimostrazione II (Induzione diretta di Zermelo, 1912)",
+        "en": "Fundamental Theorem of Arithmetic — Proof II (Zermelo's direct induction without Bézout, 1912)",
+        "es": "Teorema Fundamental de la Aritmética — Demostración II (Inducción directa de Zermelo, 1912)",
+        "ar": "المبرهنة الأساسية في الحساب — البرهان الثاني (الاستقراء المباشر لزيرميلو بدون بيزو، 1912)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11A51.2.1",
+      "parentId": "11A51.2",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Esclusione di p₁ = q₁ nel minimo controesempio n",
+        "en": "Exclusion of p₁ = q₁ in the minimal counterexample n",
+        "es": "Exclusión de p₁ = q₁ en el contraejemplo mínimo n",
+        "ar": "استبعاد p₁ = q₁ في المثال المضاد الأصغر n"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.2.2",
+      "parentId": "11A51.2",
+      "msc": "11A51",
+      "kind": "lemma",
+      "title": {
+        "it": "Costruzione dell'intero ausiliario n' = (q₁ - p₁)·q₂⋯qₘ",
+        "en": "Construction of the auxiliary integer n' = (q₁ - p₁)·q₂⋯qₘ",
+        "es": "Construcción del entero auxiliar n' = (q₁ - p₁)·q₂⋯qₘ",
+        "ar": "بناء العدد المساعد n' = (q₁ - p₁)·q₂⋯qₘ"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11A51.2.3",
+      "parentId": "11A51.2",
+      "msc": "11A51",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione sull'unicità della fattorizzazione di n' < n",
+        "en": "Contradiction on unique factorization of n' < n",
+        "es": "Contradicción sobre la factorización única de n' < n",
+        "ar": "التناقض مع وحدانية تحليل n' < n"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11J72.0",
+      "parentId": "11J72",
+      "msc": "11J72",
+      "kind": "definition",
+      "title": {
+        "it": "Numero razionale e numero irrazionale",
+        "en": "Rational and irrational number",
+        "es": "Número racional y número irracional",
+        "ar": "العدد القياسي والعدد غير القياسي"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11J72.0.1",
+      "parentId": "11J72.0",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Rappresentazione ridotta ai minimi termini",
+        "en": "Representation in lowest terms",
+        "es": "Representación en términos irreducibles",
+        "ar": "التمثيل في أبسط صورة"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.1",
+      "parentId": "11J72",
+      "msc": "11J72",
+      "kind": "theorem",
+      "title": {
+        "it": "Irrazionalità di √2 (Dimostrazione classica per parità)",
+        "en": "Irrationality of √2 (Classical parity proof)",
+        "es": "Irracionalidad de √2 (Demostración clásica por paridad)",
+        "ar": "لاقياسية √2 (البرهان الكلاسيكي بالزوجية)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11J72.1.1",
+      "parentId": "11J72.1",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Ipotesi per assurdo e riduzione ai minimi termini",
+        "en": "Assumption by contradiction and reduction to lowest terms",
+        "es": "Hipótesis por reducción al absurdo en fracción irreducible",
+        "ar": "فرضية الخلف والاختزال إلى أبسط صورة"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11J72.1.2",
+      "parentId": "11J72.1",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Parità del numeratore p",
+        "en": "Parity of the numerator p",
+        "es": "Paridad del numerador p",
+        "ar": "زوجية البسط p"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.1.2.a",
+      "parentId": "11J72.1.2",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Micro-risultato: Il quadrato di un intero dispari è dispari",
+        "en": "Micro-result: The square of an odd integer is odd",
+        "es": "Microrresultado: El cuadrado de un entero impar es impar",
+        "ar": "نتيجة جزئية: مربع العدد الفردي هو عدد فردي"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.1.3",
+      "parentId": "11J72.1",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Parità del denominatore q",
+        "en": "Parity of the denominator q",
+        "es": "Paridad del denominador q",
+        "ar": "زوجية المقام q"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.1.4",
+      "parentId": "11J72.1",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione con la coprimalità di p e q",
+        "en": "Contradiction with the coprimality of p and q",
+        "es": "Contradicción con la coprimalidad de p y q",
+        "ar": "التناقض مع كون p و q أوليين نسبياً"
+      },
+      "leanStatus": "has_sorry",
+      "isStep": true
+    },
+    {
+      "id": "11J72.2",
+      "parentId": "11J72",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Irrazionalità di √2 — Dimostrazione II (Valutazione 2-adica e fattorizzazione unica)",
+        "en": "Irrationality of √2 — Proof II (2-adic valuation and unique factorization)",
+        "es": "Irracionalidad de √2 — Demostración II (Valuación 2-ádica y factorización única)",
+        "ar": "لاقياسية √2 — البرهان الثاني (التقييم 2-adic والتحليل الوحيد)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11J72.2.1",
+      "parentId": "11J72.2",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Additività della valutazione 2-adica v₂ sul prodotto",
+        "en": "Additivity of the 2-adic valuation v₂ on products",
+        "es": "Aditividad de la valuación 2-ádica v₂",
+        "ar": "جمعية التقييم 2-adic على الجداء"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11J72.2.2",
+      "parentId": "11J72.2",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Confronto di parità degli esponenti in ℕ",
+        "en": "Parity comparison of exponents in ℕ",
+        "es": "Comparación de paridad de los exponentes en ℕ",
+        "ar": "مقارنة زوجية الأسس في ℕ"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.2.2.a",
+      "parentId": "11J72.2.2",
+      "msc": "11J72",
+      "kind": "remark",
+      "title": {
+        "it": "Micro-risultato: Generalizzazione a √p per ogni primo p",
+        "en": "Micro-result: Generalization to √p for every prime p",
+        "es": "Microrresultado: Generalización a √p para todo primo p",
+        "ar": "نتيجة جزئية: التعميم إلى √p لكل عدد أولي p"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    },
+    {
+      "id": "11J72.2.3",
+      "parentId": "11J72.2",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione dell'irrazionalità",
+        "en": "Conclusion of irrationality",
+        "es": "Conclusión de la irracionalidad",
+        "ar": "استنتاج اللاقياسية"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.3",
+      "parentId": "11J72",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Irrazionalità di √2 — Dimostrazione III (Tappeto geometrico di Tennenbaum e discesa infinita)",
+        "en": "Irrationality of √2 — Proof III (Tennenbaum's geometric carpet and infinite descent)",
+        "es": "Irracionalidad de √2 — Demostración III (Alfombra geométrica de Tennenbaum y descenso infinito)",
+        "ar": "لاقياسية √2 — البرهان الثالث (برهان تيننباوم الهندسي والنزول اللانهائي)"
+      },
+      "leanStatus": "compiled",
+      "isStep": false
+    },
+    {
+      "id": "11J72.3.1",
+      "parentId": "11J72.3",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Stima d'ordine: q < p < 2q",
+        "en": "Order bound: q < p < 2q",
+        "es": "Cota de orden: q < p < 2q",
+        "ar": "متباينة الترتيب: q < p < 2q"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.3.2",
+      "parentId": "11J72.3",
+      "msc": "11J72",
+      "kind": "lemma",
+      "title": {
+        "it": "Identità algebrica del quadrato sovrapposto",
+        "en": "Algebraic identity of the overlapping square",
+        "es": "Identidad algebraica del cuadrado superpuesto",
+        "ar": "المتطابقة الجبرية للمربع المتداخل"
+      },
+      "leanStatus": "compiled",
+      "isStep": true
+    },
+    {
+      "id": "11J72.3.3",
+      "parentId": "11J72.3",
+      "msc": "11J72",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione con la minimalità in ℕ",
+        "en": "Contradiction with minimality in ℕ",
+        "es": "Contradicción con la minimalidad en ℕ",
+        "ar": "التناقض مع الأصغرية في ℕ"
+      },
+      "leanStatus": "statement_only",
+      "isStep": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "11A41.0",
+      "to": "11A41.0.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.1.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.1.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.1.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1.1",
+      "to": "11A41.1.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.1.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.1.2",
+      "to": "11A41.1.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1.3.a",
+      "to": "11A41.1.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1.3",
+      "to": "11A41.1.3.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.1.4",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.1.3",
+      "to": "11A41.1.4",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.2",
+      "type": "alternative_proof_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.2",
+      "to": "11A41.2.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.2",
+      "to": "11A41.2.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.2.1",
+      "to": "11A41.2.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.2",
+      "to": "11A41.2.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.2.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.2.2",
+      "to": "11A41.2.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.1",
+      "to": "11A41.3",
+      "type": "alternative_proof_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.3",
+      "to": "11A41.3.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.3",
+      "to": "11A41.3.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A41.3.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.3",
+      "to": "11A41.3.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.3.1",
+      "to": "11A41.3.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.3.2",
+      "to": "11A41.3.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A51.0",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.0",
+      "to": "11A51.0.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A51.0.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.0.1",
+      "to": "11A51.0.1.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.0",
+      "to": "11A51.0.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.0.1",
+      "to": "11A51.0.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.0.1.a",
+      "to": "11A51.0.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A51.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.0",
+      "to": "11A51.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11A51.1.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A51.1.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1.1.a",
+      "to": "11A51.1.1",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1.1",
+      "to": "11A51.1.1.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11A51.1.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.0",
+      "to": "11A51.1.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11A51.1.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.1.2",
+      "to": "11A51.1.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1.3.a",
+      "to": "11A51.1.3",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1.3",
+      "to": "11A51.1.3.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11A51.1.4",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.1.1",
+      "to": "11A51.1.4",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1.3",
+      "to": "11A51.1.4",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11A51.2",
+      "type": "alternative_proof_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11A51.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.2",
+      "to": "11A51.2.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.2",
+      "to": "11A51.2.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.2.1",
+      "to": "11A51.2.2",
+      "type": "requires"
+    },
+    {
+      "from": "11A51.2",
+      "to": "11A51.2.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.2.2",
+      "to": "11A51.2.3",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.0",
+      "to": "11J72.0.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.0",
+      "to": "11J72.1",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.1.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.0",
+      "to": "11J72.1.1",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.1.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.1.1",
+      "to": "11J72.1.2",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1.2.a",
+      "to": "11J72.1.2",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1.2",
+      "to": "11J72.1.2.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.1.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.1.2",
+      "to": "11J72.1.3",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.1.4",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.1.2",
+      "to": "11J72.1.4",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1.3",
+      "to": "11J72.1.4",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.2",
+      "type": "alternative_proof_of"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11J72.2",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.2",
+      "to": "11J72.2.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11A51.1",
+      "to": "11J72.2.1",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.2",
+      "to": "11J72.2.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.2.1",
+      "to": "11J72.2.2",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.2.2",
+      "to": "11J72.2.2.a",
+      "type": "part_of"
+    },
+    {
+      "from": "11A41.0",
+      "to": "11J72.2.2.a",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.2",
+      "to": "11J72.2.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.2.2",
+      "to": "11J72.2.3",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.1",
+      "to": "11J72.3",
+      "type": "alternative_proof_of"
+    },
+    {
+      "from": "11J72.3",
+      "to": "11J72.3.1",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.3",
+      "to": "11J72.3.2",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.3.1",
+      "to": "11J72.3.2",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.3",
+      "to": "11J72.3.3",
+      "type": "part_of"
+    },
+    {
+      "from": "11J72.3.1",
+      "to": "11J72.3.3",
+      "type": "requires"
+    },
+    {
+      "from": "11J72.3.2",
+      "to": "11J72.3.3",
+      "type": "requires"
+    }
+  ]
+}

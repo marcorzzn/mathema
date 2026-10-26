@@ -1,0 +1,241 @@
+{
+  "id": "11A41.1",
+  "msc": "11A41",
+  "kind": "theorem",
+  "title": {
+    "it": "Infinità dei numeri primi (Teorema di Euclide, Elementi IX.20)",
+    "en": "Infinitude of prime numbers (Euclid's Theorem, Elements IX.20)",
+    "es": "Infinitud de los números primos (Teorema de Euclides, Elementos IX.20)",
+    "ar": "لانهائية الأعداد الأولية (مبرهنة إقليدس، الأصول IX.20)"
+  },
+  "natural": {
+    "it": "L'insieme dei numeri primi in ℕ è infinito: per ogni sottoinsieme finito S di numeri primi (o equivalentemente per ogni soglia naturale n ∈ ℕ) esiste un numero primo q che non appartiene a S (rispettivamente q ≥ n).",
+    "en": "The set of prime numbers in ℕ is infinite: for every finite subset S of primes (or equivalently for every natural bound n ∈ ℕ) there exists a prime number q not in S (respectively q ≥ n).",
+    "es": "El conjunto de los números primos es infinito: para cualquier conjunto finito de primos existe otro número primo fuera de él.",
+    "ar": "مجموعة الأعداد الأولية غير منتهية: لأي مجموعة منتهية من الأعداد الأولية يوجد دائماً عدد أولي لا ينتمي إليها."
+  },
+  "symbolic": "Set.Infinite { p ∈ ℕ ∣ Prime(p) }  ⇔  ∀ n ∈ ℕ, ∃ p ≥ n, Prime(p)",
+  "lean": {
+    "code": "import Mathlib.Data.Nat.Prime.Infinite\n\n/-- Teorema di Euclide: l'insieme dei numeri primi è infinito. -/\ntheorem mathema_infinite_primes : Set.Infinite {p : ℕ | p.Prime} :=\n  Nat.infinite_setOf_prime\n\n/-- Formulazione costruttiva tramite fattoriale N = n! + 1. -/\ntheorem mathema_exists_infinite_primes (n : ℕ) : ∃ p ≥ n, Nat.Prime p :=\n  Nat.exists_infinite_primes n",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Nat.infinite_setOf_prime",
+    "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11A41.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11A41.1.1",
+    "11A41.1.2",
+    "11A41.1.3",
+    "11A41.1.4"
+  ],
+  "steps": [
+    {
+      "id": "11A41.1.1",
+      "kind": "proof",
+      "title": {
+        "it": "Costruzione del numero di Euclide N = n! + 1 (o ∏ pᵢ + 1)",
+        "en": "Construction of Euclid's number N = n! + 1 (or ∏ pᵢ + 1)",
+        "es": "Construcción del número de Euclides N = n! + 1",
+        "ar": "بناء عدد إقليدس N = n! + 1"
+      },
+      "natural": {
+        "it": "Fissato un qualunque naturale n ∈ ℕ, poniamo N = n! + 1 (oppure, data una famiglia finita P = {p₁, …, pₖ} di primi, poniamo N = p₁⋯pₖ + 1). Poiché n! ≥ 1 per ogni n ∈ ℕ, risulta N ≥ 2, e quindi N ≠ 1.",
+        "en": "Given any natural number n ∈ ℕ, define N = n! + 1 (or, given a finite set of primes P = {p₁, …, pₖ}, set N = p₁⋯pₖ + 1). Since n! ≥ 1 for all n ∈ ℕ, we have N ≥ 2, and in particular N ≠ 1.",
+        "es": "Dado n ∈ ℕ, definimos N = n! + 1. Como n! ≥ 1, se tiene N ≥ 2 y en particular N ≠ 1.",
+        "ar": "لأي عدد طبيعي n نضع N = n! + 1. بما أن n! ≥ 1 فإن N ≥ 2 وبالتالي N ≠ 1."
+      },
+      "symbolic": "N := n! + 1 ≥ 2  ⇒  N ≠ 1",
+      "lean": {
+        "code": "lemma euclid_number_ne_one (n : ℕ) : n.factorial + 1 ≠ 1 := by\n  have hpos : 0 < n.factorial := Nat.factorial_pos n\n  omega",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.factorial_pos",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    },
+    {
+      "id": "11A41.1.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Estrazione del minimo divisore primo p di N",
+        "en": "Extraction of the least prime divisor p of N",
+        "es": "Extracción del menor divisor primo p de N",
+        "ar": "استخراج أصغر قاسم أولي p للعدد N"
+      },
+      "natural": {
+        "it": "Poiché N = n! + 1 ≠ 1, per il lemma 11A41.0.1 il numero p = minFac(N) è un numero primo e divide N.",
+        "en": "Since N = n! + 1 ≠ 1, by lemma 11A41.0.1 the number p = minFac(N) is prime and divides N.",
+        "es": "Como N ≠ 1, por el lema 11A41.0.1 el número p = minFac(N) es primo y divide a N.",
+        "ar": "بما أن N ≠ 1 فإن p = minFac(N) عدد أولي ويقسم N."
+      },
+      "symbolic": "p := minFac(n! + 1)  ⇒  Prime(p) ∧ p ∣ (n! + 1)",
+      "lean": {
+        "code": "lemma euclid_minFac_prime_and_dvd (n : ℕ) :\n    (n.factorial + 1).minFac.Prime ∧ (n.factorial + 1).minFac ∣ n.factorial + 1 :=\n  ⟨Nat.minFac_prime (euclid_number_ne_one n), Nat.minFac_dvd (n.factorial + 1)⟩",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.minFac_prime",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A41.0",
+          "type": "requires"
+        },
+        {
+          "id": "11A41.1.1",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11A41.1.3",
+      "kind": "lemma",
+      "title": {
+        "it": "Esclusione di tutti i fattori ≤ n",
+        "en": "Exclusion of all factors ≤ n",
+        "es": "Exclusión de todos los factores ≤ n",
+        "ar": "استبعاد جميع العوامل الأصغر أو المساوية لـ n"
+      },
+      "natural": {
+        "it": "Supponiamo per assurdo che p ≤ n. Poiché p ≥ 2 è positivo e p ≤ n, p divide il fattoriale n! (micro-risultato 11A41.1.3.a). Ma p divide anche n! + 1, dunque per linearità della divisibilità p divide (n! + 1) - n! = 1, il che contraddice p ≥ 2.",
+        "en": "Suppose for contradiction that p ≤ n. Since p ≥ 2 is positive and p ≤ n, p divides the factorial n! (micro-result 11A41.1.3.a). Since p also divides n! + 1, it must divide (n! + 1) - n! = 1, contradicting p ≥ 2.",
+        "es": "Si p ≤ n, entonces p divide a n!. Como también divide a n! + 1, debe dividir a 1, contradiciendo que p ≥ 2.",
+        "ar": "لو كان p ≤ n لقسم p المضروب n!، وبما أنه يقسم n! + 1 فإنه يقسم الفرق 1، وهذا يناقض كون p ≥ 2."
+      },
+      "symbolic": "p ≤ n  ⇒  p ∣ n!  ⇒  (p ∣ n! + 1 ∧ p ∣ n!)  ⇒  p ∣ 1  ⇒  ⊥",
+      "lean": {
+        "code": "lemma not_le_of_dvd_factorial_succ {n p : ℕ} (hp : p.Prime) (hdvd : p ∣ n.factorial + 1) :\n    ¬ (p ≤ n) := by\n  intro hle\n  have h1 : p ∣ n.factorial := Nat.dvd_factorial hp.pos hle\n  have h2 : p ∣ 1 := (Nat.dvd_add_right h1).mp hdvd\n  exact hp.not_dvd_one h2",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.dvd_add_right",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A41.1.2",
+          "type": "requires"
+        },
+        {
+          "id": "11A41.1.3.a",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11A41.1.3.a",
+          "kind": "lemma",
+          "title": {
+            "it": "Micro-risultato: Ogni intero 0 < k ≤ n divide n!",
+            "en": "Micro-result: Every integer 0 < k ≤ n divides n!",
+            "es": "Microrresultado: Todo entero 0 < k ≤ n divide a n!",
+            "ar": "نتيجة جزئية: كل عدد صحيح 0 < k ≤ n يقسم n!"
+          },
+          "natural": {
+            "it": "Per definizione ricorsiva del fattoriale n! = 1 · 2 · … · k · … · n, ogni intero positivo k ≤ n compare come fattore nel prodotto e quindi divide n!.",
+            "en": "By definition of the factorial n! = 1 · 2 · … · k · … · n, every positive integer k ≤ n occurs as a factor in the product and therefore divides n!.",
+            "es": "Todo entero positivo k ≤ n aparece como factor en n! y por tanto divide a n!.",
+            "ar": "كل عدد صحيح موجب k ≤ n يظهر كعامل في الجداء n! وبالتالي يقسمه."
+          },
+          "symbolic": "∀ k, n ∈ ℕ : 0 < k ≤ n  ⇒  k ∣ n!",
+          "lean": {
+            "code": "example {k n : ℕ} (hk : 0 < k) (hle : k ≤ n) : k ∣ n.factorial :=\n  Nat.dvd_factorial hk hle",
+            "status": "compiled",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Nat.dvd_factorial",
+            "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+            "verified_at": "2026-10-20T12:00:00Z"
+          },
+          "deps": []
+        }
+      ]
+    },
+    {
+      "id": "11A41.1.4",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione: p > n e illimitatezza dei primi",
+        "en": "Conclusion: p > n and unboundedness of primes",
+        "es": "Conclusión: p > n y no acotación de los primos",
+        "ar": "الخلاصة: p > n وعدم محدودية الأعداد الأولية"
+      },
+      "natural": {
+        "it": "Dal passo 11A41.1.3 segue ¬(p ≤ n), ossia p > n ≥ n. Poiché n ∈ ℕ era arbitrario, esistono numeri primi arbitrariamente grandi e l'insieme dei primi è infinito.",
+        "en": "From step 11A41.1.3 we have ¬(p ≤ n), so p > n ≥ n. Since n ∈ ℕ was arbitrary, there exist arbitrarily large primes, proving the set of primes is infinite.",
+        "es": "De ¬(p ≤ n) se sigue p > n. Como n era arbitrario, existen infinitos números primos.",
+        "ar": "بما أن ¬(p ≤ n) فإن p > n، ولأن n اختياري توجد أعداد أولية كبيرة بلا حدود."
+      },
+      "symbolic": "¬(p ≤ n)  ⇒  p > n  ⇒  ∀ n ∈ ℕ, ∃ p > n, Prime(p)",
+      "lean": {
+        "code": "theorem euclid_step_conclusion (n : ℕ) : ∃ p ≥ n, p.Prime := by\n  refine ⟨(n.factorial + 1).minFac, ?_, (euclid_minFac_prime_and_dvd n).1⟩\n  by_contra! hlt\n  exact not_le_of_dvd_factorial_succ (euclid_minFac_prime_and_dvd n).1\n    (euclid_minFac_prime_and_dvd n).2 (Nat.le_of_lt hlt)",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.exists_infinite_primes",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A41.1.3",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "id": "11A41.1.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Costruzione di Euclide N = p₁·p₂·p₃ + 1 sulla retta dei naturali",
+        "en": "Figure 1: Euclid's construction N = p₁·p₂·p₃ + 1 on the number line"
+      },
+      "caption": {
+        "it": "Per P = {2, 3, 5}, il prodotto è 30 e N = 30 + 1 = 31 leaves resto 1 nella divisione per 2, 3 e 5.",
+        "en": "For P = {2, 3, 5}, the product is 30 and N = 30 + 1 = 31 leaves remainder 1 when divided by 2, 3, and 5."
+      },
+      "svg": "<svg viewBox=\"0 0 420 130\" width=\"420\" height=\"130\" role=\"img\" aria-label=\"Costruzione di Euclide sulla retta numerica\"><line x1=\"20\" y1=\"70\" x2=\"395\" y2=\"70\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"70\" r=\"4\" fill=\"var(--ac)\"/><text x=\"31\" y=\"95\">2</text><circle cx=\"55\" cy=\"70\" r=\"4\" fill=\"var(--ac)\"/><text x=\"51\" y=\"95\">3</text><circle cx=\"85\" cy=\"70\" r=\"4\" fill=\"var(--ac)\"/><text x=\"81\" y=\"95\">5</text><circle cx=\"320\" cy=\"70\" r=\"4\" fill=\"currentColor\"/><text x=\"285\" y=\"95\">2·3·5 = 30</text><circle cx=\"355\" cy=\"70\" r=\"5\" fill=\"var(--ok)\"/><text x=\"340\" y=\"45\" style=\"fill:var(--ok);font-weight:bold\">N = 31</text><path d=\"M320,62 Q337,42 355,62\" fill=\"none\" stroke=\"var(--ok)\" stroke-width=\"1.5\"/><text x=\"20\" y=\"28\">Resto mod pᵢ: 31 ≡ 1 (mod 2, 3, 5) ⇒ minFac(N) ∉ {2,3,5}</text></svg>"
+    },
+    {
+      "id": "11A41.1.plot2d",
+      "kind": "plot2d",
+      "title": {
+        "it": "Grafico 2D: Funzione enumerativa dei primi π(x) e stima asintotica x / ln(x)",
+        "en": "2D Plot: Prime-counting step function π(x) and asymptotic estimate x / ln(x)"
+      },
+      "caption": {
+        "it": "La funzione a gradini π(x) = #{p ≤ x : p primo} cresce illimitatamente per il Teorema di Euclide e segue asintoticamente x / ln(x).",
+        "en": "The step function π(x) = #{p ≤ x : p prime} grows without bound by Euclid's Theorem and asymptotically tracks x / ln(x)."
+      },
+      "preset": "prime_counting_2d"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Euclide, Elementi, Libro IX, Proposizione 20",
+      "citation": "Πολλῶν δοθέντων πρώτων ἀριθμῶν οἱ πλείους εἰσὶν οἱ πρῶτοι ἀριθμοί (pubblico dominio)",
+      "license_note": "Pubblico dominio → testo moderno CC-BY-SA-4.0"
+    },
+    {
+      "title": "Mathlib4 — Mathlib.Data.Nat.Prime.Infinite",
+      "citation": "Nat.exists_infinite_primes & Nat.infinite_setOf_prime",
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Nat/Prime/Infinite.html",
+      "license_note": "Apache-2.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

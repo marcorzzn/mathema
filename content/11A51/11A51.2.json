@@ -1,0 +1,144 @@
+{
+  "id": "11A51.2",
+  "msc": "11A51",
+  "kind": "proof",
+  "title": {
+    "it": "Teorema Fondamentale dell'Aritmetica — Dimostrazione II (Induzione diretta di Zermelo, 1912)",
+    "en": "Fundamental Theorem of Arithmetic — Proof II (Zermelo's direct induction without Bézout, 1912)",
+    "es": "Teorema Fundamental de la Aritmética — Demostración II (Inducción directa de Zermelo, 1912)",
+    "ar": "المبرهنة الأساسية في الحساب — البرهان الثاني (الاستقراء المباشر لزيرميلو بدون بيزو، 1912)"
+  },
+  "natural": {
+    "it": "Dimostriamo l'unicità della fattorizzazione senza usare il Lemma di Euclide né l'identità di Bézout, per discesa sul minimo intero n ≥ 2 che ammetta due fattorizzazioni distinte n = p₁⋯pₖ = q₁⋯qₘ con p₁ ≤ … ≤ pₖ e q₁ ≤ … ≤ qₘ. Se p₁ = q₁ si cancella p₁; se p₁ < q₁, l'intero n' = n - p₁·(q₂⋯qₘ) = (q₁ - p₁)·q₂⋯qₘ soddisfa 2 ≤ n' < n e possiede due fattorizzazioni incompatibili riguardo al fattore p₁: contraddizione con la minimalità di n.",
+    "en": "We prove uniqueness of prime factorization without Euclid's Lemma or Bézout's identity, by minimal counterexample on n ≥ 2 having two distinct sorted prime factorizations n = p₁⋯pₖ = q₁⋯qₘ. If p₁ = q₁ we cancel p₁; if p₁ < q₁, the integer n' = n - p₁·(q₂⋯qₘ) = (q₁ - p₁)·q₂⋯qₘ satisfies 2 ≤ n' < n and yields two incompatible prime factorizations with respect to p₁: contradicting the minimality of n.",
+    "es": "Por descenso sobre el menor contraejemplo n ≥ 2: si p₁ < q₁, el número n' = (q₁ - p₁)·q₂⋯qₘ < n tendría dos factorizaciones incompatibles respecto a p₁.",
+    "ar": "بالنزول على أصغر مثال مضاد n ≥ 2: إذا كان p₁ < q₁ فإن العدد n' = (q₁ - p₁)·q₂⋯qₘ < n يمتلك تحليلين غير متوافقين بالنسبة للعامل الأولي p₁."
+  },
+  "symbolic": "n' := n - p₁·(q₂⋯qₘ) = (q₁ - p₁)·q₂⋯qₘ < n  ⇒  p₁ ∣ n' ∧ p₁ ∤ (q₁ - p₁)",
+  "lean": {
+    "code": "-- Identità algebrica distributiva usata nel passo di discesa di Zermelo\ntheorem zermelo_descent_step (n p₁ q₁ Q : ℤ) (hq : n = q₁ * Q) :\n    n - p₁ * Q = (q₁ - p₁) * Q := by\n  rw [hq]; ring",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "zermelo_descent_step",
+    "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11A51.1",
+      "type": "alternative_proof_of"
+    },
+    {
+      "id": "11A41.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11A51.2.1",
+    "11A51.2.2",
+    "11A51.2.3"
+  ],
+  "steps": [
+    {
+      "id": "11A51.2.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Esclusione di p₁ = q₁ nel minimo controesempio n",
+        "en": "Exclusion of p₁ = q₁ in the minimal counterexample n",
+        "es": "Exclusión de p₁ = q₁ en el contraejemplo mínimo n",
+        "ar": "استبعاد p₁ = q₁ في المثال المضاد الأصغر n"
+      },
+      "natural": {
+        "it": "Se p₁ = q₁, dividendo n per p₁ si otterrebbe n / p₁ < n con due fattorizzazioni distinte p₂⋯pₖ e q₂⋯qₘ, contro la minimalità di n. Per simmetria possiamo supporre p₁ < q₁.",
+        "en": "If p₁ = q₁, dividing n by p₁ would give n / p₁ < n with two distinct factorizations p₂⋯pₖ and q₂⋯qₘ, contradicting the minimality of n. By symmetry we may assume p₁ < q₁.",
+        "es": "Si p₁ = q₁, n / p₁ < n sería un contraejemplo menor. Por simetría suponemos p₁ < q₁.",
+        "ar": "إذا كان p₁ = q₁ فإن n / p₁ < n يكون مثالاً مضاداً أصغر. بالتماثل نفرض p₁ < q₁."
+      },
+      "symbolic": "n minimo controesempio  ⇒  p₁ ≠ q₁  ⇒  WLOG p₁ < q₁",
+      "lean": {
+        "code": "example (p₁ q₁ : ℕ) (hne : p₁ ≠ q₁) : p₁ < q₁ ∨ q₁ < p₁ :=\n  Nat.lt_or_gt_of_ne hne",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.lt_or_gt_of_ne",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    },
+    {
+      "id": "11A51.2.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Costruzione dell'intero ausiliario n' = (q₁ - p₁)·q₂⋯qₘ",
+        "en": "Construction of the auxiliary integer n' = (q₁ - p₁)·q₂⋯qₘ",
+        "es": "Construcción del entero auxiliar n' = (q₁ - p₁)·q₂⋯qₘ",
+        "ar": "بناء العدد المساعد n' = (q₁ - p₁)·q₂⋯qₘ"
+      },
+      "natural": {
+        "it": "Poniamo P = p₂⋯pₖ e Q = q₂⋯qₘ, sicché n = p₁·P = q₁·Q. Definiamo n' = n - p₁·Q. Allora n' = p₁·(P - Q) = (q₁ - p₁)·Q, con 2 ≤ n' < n.",
+        "en": "Set P = p₂⋯pₖ and Q = q₂⋯qₘ, so n = p₁·P = q₁·Q. Define n' = n - p₁·Q. Then n' = p₁·(P - Q) = (q₁ - p₁)·Q, with 2 ≤ n' < n.",
+        "es": "Definimos n' = n - p₁·Q = p₁·(P - Q) = (q₁ - p₁)·Q, cumpliéndose 2 ≤ n' < n.",
+        "ar": "نضع n' = n - p₁·Q = p₁·(P - Q) = (q₁ - p₁)·Q حيث 2 ≤ n' < n."
+      },
+      "symbolic": "n' = p₁·(P - Q) = (q₁ - p₁)·q₂⋯qₘ  ∧  2 ≤ n' < n",
+      "lean": {
+        "code": "example (n p₁ q₁ Q : ℤ) (hq : n = q₁ * Q) : n - p₁ * Q = (q₁ - p₁) * Q :=\n  zermelo_descent_step n p₁ q₁ Q hq",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "zermelo_descent_step",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A51.2.1",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11A51.2.3",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione sull'unicità della fattorizzazione di n' < n",
+        "en": "Contradiction on unique factorization of n' < n",
+        "es": "Contradicción sobre la factorización única de n' < n",
+        "ar": "التناقض مع وحدانية تحليل n' < n"
+      },
+      "natural": {
+        "it": "Poiché n' < n, per minimalità di n l'intero n' ha fattorizzazione unica. Da n' = p₁·(P - Q) segue che p₁ compare nella fattorizzazione unica di n'. D'altra parte n' = (q₁ - p₁)·q₂⋯qₘ e p₁ < q₁ ≤ qⱼ implica p₁ ≠ qⱼ per ogni j ≥ 2; dunque p₁ deve comparire nella fattorizzazione di q₁ - p₁, ossia p₁ ∣ (q₁ - p₁) e quindi p₁ ∣ q₁, assurdo perché q₁ è primo e p₁ < q₁.",
+        "en": "Since n' < n, by minimality of n the integer n' has unique prime factorization. From n' = p₁·(P - Q), p₁ appears in the unique factorization of n'. Yet from n' = (q₁ - p₁)·q₂⋯qₘ and p₁ < q₁ ≤ qⱼ, p₁ ≠ qⱼ for all j ≥ 2; hence p₁ must divide q₁ - p₁, so p₁ ∣ q₁, impossible since q₁ is prime and p₁ < q₁.",
+        "es": "Por minimalidad, n' tiene factorización única; luego p₁ debe dividir a q₁ - p₁ y por tanto a q₁, contradicción.",
+        "ar": "بأصغرية n يمتلك n' تحليلاً وحيداً، مما يفرض أن p₁ يقسم q₁ - p₁ وبالتالي يقسم العدد الأولي q₁، وهذا تناقض."
+      },
+      "symbolic": "p₁ ∣ (q₁ - p₁)  ⇒  p₁ ∣ q₁  ⇒  p₁ = q₁  ⇒  ⊥",
+      "lean": {
+        "code": "-- Passo conclusivo della prova di Zermelo\nlemma zermelo_contradiction {p₁ q₁ : ℕ} (hp : p₁.Prime) (hq : q₁.Prime) (hlt : p₁ < q₁)\n    (hdvd : p₁ ∣ q₁ - p₁) : False := by sorry",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.dvd_sub",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A51.2.2",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "Ernst Zermelo (1912 / 1934), Elementare Betrachtungen zur Theorie der Primzahlen",
+      "citation": "Nachr. Ges. Wiss. Göttingen 1, 43–46 (pubblico dominio)",
+      "license_note": "Pubblico dominio → parafrasi originale CC-BY-SA-4.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

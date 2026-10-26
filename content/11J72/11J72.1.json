@@ -1,0 +1,259 @@
+{
+  "id": "11J72.1",
+  "msc": "11J72",
+  "kind": "theorem",
+  "title": {
+    "it": "Irrazionalità di √2 (Dimostrazione classica per parità)",
+    "en": "Irrationality of √2 (Classical parity proof)",
+    "es": "Irracionalidad de √2 (Demostración clásica por paridad)",
+    "ar": "لاقياسية √2 (البرهان الكلاسيكي بالزوجية)"
+  },
+  "natural": {
+    "it": "La radice quadrata di 2 non è un numero razionale: non esistono due numeri interi p, q ∈ ℤ con q ≠ 0 tali che (p / q)² = 2.",
+    "en": "The square root of 2 is not a rational number: there do not exist integers p, q ∈ ℤ with q ≠ 0 such that (p / q)² = 2.",
+    "es": "La raíz cuadrada de 2 no es un número racional: no existen enteros p, q ∈ ℤ con q ≠ 0 tales que (p / q)² = 2.",
+    "ar": "الجذر التربيعي للعدد 2 ليس عدداً قياسياً: لا يوجد عددان صحيحان p, q مع q ≠ 0 يحققان (p / q)² = 2."
+  },
+  "symbolic": "√2 ∉ ℚ  ⇔  ¬(∃ p, q ∈ ℤ, q ≠ 0 ∧ p² = 2q²)",
+  "lean": {
+    "code": "import Mathlib.Data.Real.Irrational\n\n/-- Enunciato principale allineato a Mathlib: √2 è irrazionale. -/\ntheorem mathema_irrational_sqrt_two : Irrational (Real.sqrt 2) :=\n  irrational_sqrt_two",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "irrational_sqrt_two",
+    "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11J72.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11J72.1.1",
+    "11J72.1.2",
+    "11J72.1.3",
+    "11J72.1.4"
+  ],
+  "steps": [
+    {
+      "id": "11J72.1.1",
+      "kind": "proof",
+      "title": {
+        "it": "Ipotesi per assurdo e riduzione ai minimi termini",
+        "en": "Assumption by contradiction and reduction to lowest terms",
+        "es": "Hipótesis por reducción al absurdo en fracción irreducible",
+        "ar": "فرضية الخلف والاختزال إلى أبسط صورة"
+      },
+      "natural": {
+        "it": "Supponiamo per assurdo che √2 ∈ ℚ. Per il lemma di riduzione ai minimi termini (11J72.0.1), esistono due interi p, q ∈ ℤ con q ≠ 0, MCD(p, q) = 1 (coprimi) tali che √2 = p / q. Elevando al quadrato ambo i membri otteniamo l'equazione diofantea p² = 2q².",
+        "en": "Assume for contradiction that √2 ∈ ℚ. By the lowest-terms lemma (11J72.0.1), there exist coprime integers p, q ∈ ℤ with q ≠ 0 and gcd(p, q) = 1 such that √2 = p / q. Squaring both sides yields the Diophantine equation p² = 2q².",
+        "es": "Supongamos por contradicción que √2 ∈ ℚ. Entonces existen enteros coprimos p, q con q ≠ 0 tales que p² = 2q².",
+        "ar": "نفرض جدلاً أن √2 ∈ ℚ، فيوجد عددان صحيحان أوليان نسبياً p, q مع q ≠ 0 يحققان p² = 2q²."
+      },
+      "symbolic": "√2 = p/q ∧ IsCoprime(p, q) ∧ q ≠ 0  ⇒  p² = 2q²",
+      "lean": {
+        "code": "-- Passo didattico: estrazione della coppia coprima (p, q)\nhave h_eq : ∃ p q : ℤ, q ≠ 0 ∧ IsCoprime p q ∧ p ^ 2 = 2 * q ^ 2 := by sorry",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Rat.reduced",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11J72.0",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11J72.1.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Parità del numeratore p",
+        "en": "Parity of the numerator p",
+        "es": "Paridad del numerador p",
+        "ar": "زوجية البسط p"
+      },
+      "natural": {
+        "it": "Dall'uguaglianza p² = 2q² segue che 2 divide p². Poiché il quadrato di ogni intero dispari è dispari (micro-risultato 11J72.1.2.a), per contronominale p deve essere pari: esiste dunque k ∈ ℤ tale che p = 2k.",
+        "en": "From p² = 2q² it follows that 2 divides p². Since the square of any odd integer is odd (micro-result 11J72.1.2.a), by contraposition p must be even: hence there exists k ∈ ℤ such that p = 2k.",
+        "es": "De p² = 2q² se sigue que 2 divide a p². Como el cuadrado de un impar es impar, p debe ser par: existe k ∈ ℤ tal que p = 2k.",
+        "ar": "من العلاقة p² = 2q² نستنتج أن 2 يقسم p²، وبالتالي فإن p عدد زوجي أي p = 2k."
+      },
+      "symbolic": "p² = 2q²  ⇒  2 ∣ p²  ⇒  2 ∣ p  ⇔  ∃ k ∈ ℤ, p = 2k",
+      "lean": {
+        "code": "lemma even_of_sq_eq_two_mul_sq {p q : ℤ} (h : p ^ 2 = 2 * q ^ 2) : 2 ∣ p := by\n  have h2 : (2 : ℤ) ∣ p ^ 2 := ⟨q ^ 2, h⟩\n  exact Prime.dvd_of_dvd_pow Int.prime_two h2",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Int.prime_two",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11J72.1.1",
+          "type": "requires"
+        },
+        {
+          "id": "11J72.1.2.a",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11J72.1.2.a",
+          "kind": "lemma",
+          "title": {
+            "it": "Micro-risultato: Il quadrato di un intero dispari è dispari",
+            "en": "Micro-result: The square of an odd integer is odd",
+            "es": "Microrresultado: El cuadrado de un entero impar es impar",
+            "ar": "نتيجة جزئية: مربع العدد الفردي هو عدد فردي"
+          },
+          "natural": {
+            "it": "Se p = 2m + 1 con m ∈ ℤ, allora p² = (2m + 1)² = 4m² + 4m + 1 = 2(2m² + 2m) + 1, che ha resto 1 nella divisione per 2 ed è pertanto dispari.",
+            "en": "If p = 2m + 1 with m ∈ ℤ, then p² = (2m + 1)² = 4m² + 4m + 1 = 2(2m² + 2m) + 1, which leaves remainder 1 mod 2 and is therefore odd.",
+            "es": "Si p = 2m + 1, entonces (2m + 1)² = 2(2m² + 2m) + 1 es impar.",
+            "ar": "إذا كان p = 2m + 1 فإن (2m + 1)² = 2(2m² + 2m) + 1 وهو عدد فردي."
+          },
+          "symbolic": "∀ m ∈ ℤ, (2m + 1)² = 2(2m² + 2m) + 1 ≡ 1 (mod 2)",
+          "lean": {
+            "code": "theorem odd_sq_algebraic (m : ℤ) :\n    (2 * m + 1) ^ 2 = 2 * (2 * m ^ 2 + 2 * m) + 1 := by\n  ring",
+            "status": "compiled",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Odd.pow",
+            "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+            "verified_at": "2026-10-20T12:00:00Z"
+          },
+          "deps": []
+        }
+      ]
+    },
+    {
+      "id": "11J72.1.3",
+      "kind": "lemma",
+      "title": {
+        "it": "Parità del denominatore q",
+        "en": "Parity of the denominator q",
+        "es": "Paridad del denominador q",
+        "ar": "زوجية المقام q"
+      },
+      "natural": {
+        "it": "Sostituendo p = 2k in p² = 2q² si ottiene (2k)² = 4k² = 2q². Dividendo per 2 nell'anello integrale ℤ risulta q² = 2k². Applicando lo stesso lemma del passo 11J72.1.2 a q, deduciamo che 2 divide q.",
+        "en": "Substituting p = 2k into p² = 2q² gives (2k)² = 4k² = 2q². Cancelling 2 in the integral domain ℤ yields q² = 2k². Applying step 11J72.1.2 to q, we deduce that 2 also divides q.",
+        "es": "Sustituyendo p = 2k en p² = 2q² obtenemos 4k² = 2q², luego q² = 2k² y por tanto 2 divide también a q.",
+        "ar": "بتعويض p = 2k نحصل على 4k² = 2q² ومنه q² = 2k²، وبالتالي فإن 2 يقسم q أيضاً."
+      },
+      "symbolic": "p = 2k ∧ p² = 2q²  ⇒  4k² = 2q²  ⇒  q² = 2k²  ⇒  2 ∣ q",
+      "lean": {
+        "code": "lemma q_sq_eq_two_mul_sq {p q k : ℤ} (h : p ^ 2 = 2 * q ^ 2) (hk : p = 2 * k) :\n    q ^ 2 = 2 * k ^ 2 := by\n  linarith [ sq_nonneg k, show p ^ 2 = 4 * k ^ 2 by rw [hk]; ring ]",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Int.dvd_of_mul_dvd_mul_left",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11J72.1.2",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11J72.1.4",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione con la coprimalità di p e q",
+        "en": "Contradiction with the coprimality of p and q",
+        "es": "Contradicción con la coprimalidad de p y q",
+        "ar": "التناقض مع كون p و q أوليين نسبياً"
+      },
+      "natural": {
+        "it": "Abbiamo dimostrato che 2 ∣ p e 2 ∣ q. Pertanto 2 divide un'unità (perché IsCoprime p q implica l'esistenza di u, v ∈ ℤ tali che u·p + v·q = 1, dunque 2 ∣ 1), il che è assurdo in ℤ. Quindi √2 ∉ ℚ.",
+        "en": "We have shown that 2 ∣ p and 2 ∣ q. Hence 2 is a common divisor of p and q, which contradicts IsCoprime p q (since 2 would divide u·p + v·q = 1, impossible in ℤ). Thus √2 ∉ ℚ.",
+        "es": "Hemos demostrado que 2 divide tanto a p como a q, contradiciendo que mcd(p, q) = 1. Por tanto √2 ∉ ℚ.",
+        "ar": "بما أن 2 يقسم كلاً من p و q فهذا يناقض فرض أن القاسم المشترك الأكبر لهما هو 1. إذن √2 غير قياسي."
+      },
+      "symbolic": "(2 ∣ p ∧ 2 ∣ q) ⇒ 2 ∣ gcd(p, q) = 1 ⇒ ⊥",
+      "lean": {
+        "code": "lemma not_coprime_of_two_dvd {p q : ℤ} (hp : 2 ∣ p) (hq : 2 ∣ q) :\n    ¬ IsCoprime p q := by\n  intro hcop\n  have hunit : IsUnit (2 : ℤ) := hcop.isUnit_of_dvd' hp hq\n  exact Int.not_isUnit_two hunit",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "IsCoprime.isUnit_of_dvd'",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11J72.1.2",
+          "type": "requires"
+        },
+        {
+          "id": "11J72.1.3",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "id": "11J72.1.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Incommensurabilità tra lato e diagonale del quadrato unitario",
+        "en": "Figure 1: Incommensurability of the unit square's side and diagonal"
+      },
+      "caption": {
+        "it": "Per il teorema di Pitagora la diagonale d del quadrato di lato 1 soddisfa d² = 1² + 1² = 2, dunque d = √2.",
+        "en": "By Pythagoras' theorem, the diagonal d of the unit square satisfies d² = 1² + 1² = 2, hence d = √2."
+      },
+      "svg": "<svg viewBox=\"0 0 360 190\" width=\"360\" height=\"190\" role=\"img\" aria-label=\"Quadrato unitario con diagonale radice di 2\"><rect x=\"30\" y=\"25\" width=\"130\" height=\"130\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"30\" y1=\"155\" x2=\"160\" y2=\"25\" stroke=\"var(--ac)\" stroke-width=\"2\"/><text x=\"90\" y=\"174\">q = 1</text><text x=\"168\" y=\"95\">q = 1</text><text x=\"72\" y=\"82\" style=\"fill:var(--ac);font-weight:bold\">d = √2</text><text x=\"205\" y=\"65\">d² = 1² + 1² = 2</text><text x=\"205\" y=\"92\">p² = 2q²</text><text x=\"205\" y=\"119\">∀ (p,q) ∈ ℤ² \\ {(0,0)}:</text><text x=\"205\" y=\"144\">|p² - 2q²| ≥ 1</text></svg>"
+    },
+    {
+      "id": "11J72.1.plot2d",
+      "kind": "plot2d",
+      "title": {
+        "it": "Grafico 2D: Reticolo intero (q, p) ∈ ℤ² e retta di pendenza irrazionale p = √2·q",
+        "en": "2D Plot: Integer lattice (q, p) ∈ ℤ² and irrational slope line p = √2·q"
+      },
+      "caption": {
+        "it": "La retta p = √2·q non interseca alcun punto del reticolo intero ℤ² \\ {(0,0)}. I punti evidenziati sono i convergenti di Pell (q, p) ∈ {(1,1), (2,3), (5,7), (12,17)} dove p² - 2q² = ±1.",
+        "en": "The line p = √2·q misses every integer lattice point in ℤ² \\ {(0,0)}. Highlighted points are Pell convergents (q, p) ∈ {(1,1), (2,3), (5,7), (12,17)} where p² - 2q² = ±1."
+      },
+      "preset": "pell_lattice_2d"
+    },
+    {
+      "id": "11J72.1.scene3d",
+      "kind": "scene3d",
+      "title": {
+        "it": "Scena 3D (Lazy Load): Superficie diofantea z = p² - 2q²",
+        "en": "3D Scene (Lazy Load): Diophantine saddle surface z = p² - 2q²"
+      },
+      "caption": {
+        "it": "Paraboloide iperbolico z = p² - 2q² sezionato dal piano z = 0: nessun nodo intero non banale giace a quota z = 0.",
+        "en": "Hyperbolic paraboloid z = p² - 2q² sliced by the plane z = 0: no non-trivial integer lattice node lies at height z = 0."
+      },
+      "preset": "diophantine_saddle_3d"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Euclide, Elementi, Libro X (Appendice 27) & Aristotele, Analitici Primi I.23",
+      "citation": "Dimostrazione pitagorica classica per pari e dispari (pubblico dominio)",
+      "license_note": "Pubblico dominio → riformulato sotto CC-BY-SA-4.0"
+    },
+    {
+      "title": "Mathlib4 — Mathlib.Data.Real.Irrational",
+      "citation": "irrational_sqrt_two",
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Real/Irrational.html#irrational_sqrt_two",
+      "license_note": "Apache-2.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

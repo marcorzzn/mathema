@@ -1,0 +1,148 @@
+{
+  "id": "11A41.2",
+  "msc": "11A41",
+  "kind": "proof",
+  "title": {
+    "it": "Infinità dei primi — Dimostrazione II (Numeri di Fermat coprimi, Goldbach 1730)",
+    "en": "Infinitude of primes — Proof II (Pairwise coprime Fermat numbers, Goldbach 1730)",
+    "es": "Infinitud de los primos — Demostración II (Números de Fermat coprimos, Goldbach 1730)",
+    "ar": "لانهائية الأعداد الأولية — البرهان الثاني (أعداد فيرما الأولية نسبياً، غولدباخ 1730)"
+  },
+  "natural": {
+    "it": "I numeri di Fermat Fₙ = 2^(2ⁿ) + 1 (n ∈ ℕ) soddisfano l'identità ricorsiva ∏_{k=0}^{n-1} Fₖ = Fₙ - 2. Da ciò segue che per ogni m < n qualsiasi divisore comune di Fₘ e Fₙ divide 2, ma essendo tutti gli Fₙ dispari risulta MCD(Fₘ, Fₙ) = 1. Scelto per ogni n un divisore primo pₙ di Fₙ, la successione (pₙ)_{n∈ℕ} è formata da numeri primi tutti distinti.",
+    "en": "The Fermat numbers Fₙ = 2^(2ⁿ) + 1 (n ∈ ℕ) satisfy the recurrence ∏_{k=0}^{n-1} Fₖ = Fₙ - 2. Consequently, for any m < n, any common divisor of Fₘ and Fₙ divides 2; since every Fₙ is odd, gcd(Fₘ, Fₙ) = 1. Picking a prime divisor pₙ ∣ Fₙ for each n yields an infinite sequence of pairwise distinct primes.",
+    "es": "Los números de Fermat Fₙ = 2^(2ⁿ) + 1 verifican ∏_{k<n} Fₖ = Fₙ - 2, por lo que son coprimos dos a dos y sus factores primos pₙ ∣ Fₙ son infinitos y distintos.",
+    "ar": "تحقق أعداد فيرما Fₙ = 2^(2ⁿ) + 1 العلاقة ∏_{k<n} Fₖ = Fₙ - 2، مما يجعلها أولية نسبياً مثنى مثنى ويعطي متتالية غير منتهية من العوامل الأولية المختلفة."
+  },
+  "symbolic": "Fₙ := 2^(2ⁿ) + 1  ⇒  (∀ m < n, Fₘ ∣ Fₙ - 2)  ⇒  gcd(Fₘ, Fₙ) = 1  ⇒  #{pₙ : Prime(pₙ) ∧ pₙ ∣ Fₙ} = ∞",
+  "lean": {
+    "code": "def fermatNumber (n : ℕ) : ℕ := 2 ^ (2 ^ n) + 1\n\ntheorem fermatNumber_step_identity (n : ℕ) :\n    (fermatNumber n - 1) ^ 2 + 1 = fermatNumber (n + 1) := by\n  simp [fermatNumber, ← pow_mul, pow_succ]",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "fermatNumber",
+    "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11A41.1",
+      "type": "alternative_proof_of"
+    },
+    {
+      "id": "11A41.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11A41.2.1",
+    "11A41.2.2",
+    "11A41.2.3"
+  ],
+  "steps": [
+    {
+      "id": "11A41.2.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Identità telescopica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "en": "Telescoping identity ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "es": "Identidad telescópica ∏_{k=0}^{n-1} Fₖ = Fₙ - 2",
+        "ar": "المتطابقة التلسكوبية ∏_{k=0}^{n-1} Fₖ = Fₙ - 2"
+      },
+      "natural": {
+        "it": "Per induzione su n ≥ 1: per n = 1 vale F₀ = 3 = 5 - 2 = F₁ - 2. Nel passo induttivo, (Fₙ - 2)·Fₙ = (2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = 2^(2^(n+1)) - 1 = F_{n+1} - 2.",
+        "en": "By induction on n ≥ 1: for n = 1 we have F₀ = 3 = 5 - 2 = F₁ - 2. For the inductive step, (Fₙ - 2)·Fₙ = (2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = 2^(2^(n+1)) - 1 = F_{n+1} - 2.",
+        "es": "Por inducción, (Fₙ - 2)·Fₙ = (2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = F_{n+1} - 2.",
+        "ar": "بالاستقراء الرياضي نجد أن (Fₙ - 2)·Fₙ = F_{n+1} - 2."
+      },
+      "symbolic": "(2^(2ⁿ) - 1)(2^(2ⁿ) + 1) = 2^(2^(n+1)) - 1 = F_{n+1} - 2",
+      "lean": {
+        "code": "theorem fermat_diff_squares (x : ℤ) : (x - 1) * (x + 1) = x ^ 2 - 1 := by ring",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "sq_sub_sq",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    },
+    {
+      "id": "11A41.2.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Mutua coprimalità: MCD(Fₘ, Fₙ) = 1 per m ≠ n",
+        "en": "Pairwise coprimality: gcd(Fₘ, Fₙ) = 1 for m ≠ n",
+        "es": "Coprimalidad mutua: mcd(Fₘ, Fₙ) = 1 para m ≠ n",
+        "ar": "الأولية النسبية المثنى: gcd(Fₘ, Fₙ) = 1 عندما m ≠ n"
+      },
+      "natural": {
+        "it": "Se m < n, allora Fₘ compare nel prodotto ∏_{k<n} Fₖ = Fₙ - 2, quindi Fₘ divide Fₙ - 2. Ogni divisore comune d di Fₘ e Fₙ divide pertanto Fₙ - (Fₙ - 2) = 2; poiché Fₙ è dispari, d = 1.",
+        "en": "If m < n, then Fₘ divides ∏_{k<n} Fₖ = Fₙ - 2. Any common divisor d of Fₘ and Fₙ therefore divides Fₙ - (Fₙ - 2) = 2; since Fₙ is odd, d = 1.",
+        "es": "Si m < n, cualquier divisor común d de Fₘ y Fₙ divide a Fₙ - (Fₙ - 2) = 2; como Fₙ es impar, d = 1.",
+        "ar": "إذا كان m < n فإن أي قاسم مشترك d لـ Fₘ و Fₙ يقسم الفرق 2، وبما أن Fₙ فردي فإن d = 1."
+      },
+      "symbolic": "d ∣ Fₘ ∧ d ∣ Fₙ (m < n)  ⇒  d ∣ 2 ∧ Odd(Fₙ)  ⇒  d = 1",
+      "lean": {
+        "code": "-- Passo di coprimalità mutua dei numeri di Fermat\nlemma fermat_coprime {m n : ℕ} (h : m < n) : Nat.Coprime (fermatNumber m) (fermatNumber n) := by sorry",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.Coprime",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A41.2.1",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11A41.2.3",
+      "kind": "proof",
+      "title": {
+        "it": "Iniettività della mappa n ↦ minFac(Fₙ)",
+        "en": "Injectivity of the map n ↦ minFac(Fₙ)",
+        "es": "Inyectividad de la aplicación n ↦ minFac(Fₙ)",
+        "ar": "تباين الدالة n ↦ minFac(Fₙ)"
+      },
+      "natural": {
+        "it": "Poiché Fₙ ≥ 3 per ogni n ∈ ℕ, pₙ = minFac(Fₙ) è primo (11A41.0.1). Se fosse pₘ = pₙ per m ≠ n, pₘ dividerebbe sia Fₘ sia Fₙ contro MCD(Fₘ, Fₙ) = 1. Dunque (pₙ)_{n∈ℕ} è una successione iniettiva di numeri primi.",
+        "en": "Since Fₙ ≥ 3 for all n ∈ ℕ, pₙ = minFac(Fₙ) is prime (11A41.0.1). If pₘ = pₙ for m ≠ n, then pₘ would divide both Fₘ and Fₙ, contradicting gcd(Fₘ, Fₙ) = 1. Hence (pₙ)_{n∈ℕ} is an injective sequence of primes.",
+        "es": "La sucesión pₙ = minFac(Fₙ) es inyectiva en el conjunto de los números primos.",
+        "ar": "المتتالية pₙ = minFac(Fₙ) متباينة وتعطي عدداً لا نهائياً من الأعداد الأولية."
+      },
+      "symbolic": "m ≠ n  ⇒  minFac(Fₘ) ≠ minFac(Fₙ)",
+      "lean": {
+        "code": "#check Set.infinite_of_injective_forall_mem",
+        "status": "statement_only",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Set.infinite_of_injective_forall_mem",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A41.0",
+          "type": "requires"
+        },
+        {
+          "id": "11A41.2.2",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "Christian Goldbach, Lettera a Leonhard Euler (20 luglio 1730)",
+      "citation": "Dimostrazione dell'infinità dei primi mediante i numeri di Fermat (pubblico dominio)",
+      "license_note": "Pubblico dominio → riformulato sotto CC-BY-SA-4.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

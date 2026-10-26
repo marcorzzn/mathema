@@ -1,0 +1,72 @@
+{
+  "id": "11J72.0",
+  "msc": "11J72",
+  "kind": "definition",
+  "title": {
+    "it": "Numero razionale e numero irrazionale",
+    "en": "Rational and irrational number",
+    "es": "Número racional y número irracional",
+    "ar": "العدد القياسي والعدد غير القياسي"
+  },
+  "natural": {
+    "it": "Un numero reale x si dice razionale se appartiene all'immagine dell'immersione canonica di ℚ in ℝ, ossia se esistono due interi p, q ∈ ℤ con q ≠ 0 tali che x = p / q. Un numero reale si dice irrazionale se non appartiene a tale immagine (x ∉ Set.range ((↑) : ℚ → ℝ)).",
+    "en": "A real number x is called rational if it belongs to the range of the canonical cast from ℚ to ℝ, i.e., if there exist integers p, q ∈ ℤ with q ≠ 0 such that x = p / q. A real number is called irrational if it does not belong to that range (x ∉ Set.range ((↑) : ℚ → ℝ)).",
+    "es": "Un número real x se llama racional si pertenece a la imagen de la inclusión canónica de ℚ en ℝ (existen p, q ∈ ℤ con q ≠ 0 tales que x = p / q). Se llama irracional si no es racional.",
+    "ar": "يُسمى العدد الحقيقي x قياسياً إذا كان ينتمي إلى مدى الغمر القانوني من ℚ إلى ℝ، ويُسمى غير قياسي (أصم) إذا لم يكن كذلك."
+  },
+  "symbolic": "Irrational(x) :⇔ x ∈ ℝ \\ ℚ ⇔ ¬(∃ q ∈ ℚ, (q : ℝ) = x) ⇔ ∀ p, q ∈ ℤ, q ≠ 0 ⇒ x ≠ p / q",
+  "lean": {
+    "code": "import Mathlib.Data.Real.Irrational\n\n-- In Mathlib, Irrational x è definito esattamente come x ∉ Set.range ((↑) : ℚ → ℝ)\n#check Irrational\n\ntheorem mathema_irrational_iff (x : ℝ) :\n    Irrational x ↔ ∀ q : ℚ, (q : ℝ) ≠ x := by\n  simpa [Irrational, Set.mem_range, not_exists] using Iff.rfl",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Irrational",
+    "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [],
+  "children": [
+    "11J72.0.1"
+  ],
+  "steps": [
+    {
+      "id": "11J72.0.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Rappresentazione ridotta ai minimi termini",
+        "en": "Representation in lowest terms",
+        "es": "Representación en términos irreducibles",
+        "ar": "التمثيل في أبسط صورة"
+      },
+      "natural": {
+        "it": "Ogni numero razionale q ∈ ℚ possiede un'unica scrittura ridotta q = n / d con n ∈ ℤ, d ∈ ℕ, d > 0 e IsCoprime n d (ossia MCD(|n|, d) = 1).",
+        "en": "Every rational number q ∈ ℚ has a canonical reduced representation q = n / d with n ∈ ℤ, d ∈ ℕ, d > 0, and IsCoprime n d (i.e., gcd(|n|, d) = 1).",
+        "es": "Todo número racional q ∈ ℚ posee una representación irreducible única q = n / d con mcd(|n|, d) = 1.",
+        "ar": "كل عدد قياسي q يمتلك تمثيلاً مختزلاً وحيداً بحيث يكون البسط والمقام أوليين نسبياً."
+      },
+      "symbolic": "∀ q ∈ ℚ, ∃! (n, d) ∈ ℤ × ℕ₊ : q = n / d ∧ gcd(|n|, d) = 1",
+      "lean": {
+        "code": "example (q : ℚ) : q.num.natAbs.Coprime q.den := q.reduced",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Rat.reduced",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "Mathlib4 — Mathlib.Data.Real.Irrational",
+      "citation": "The mathlib Community (2026), Irrational definition",
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Real/Irrational.html",
+      "license_note": "Apache-2.0 (compatibile)"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

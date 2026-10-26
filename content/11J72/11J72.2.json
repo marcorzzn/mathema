@@ -1,0 +1,182 @@
+{
+  "id": "11J72.2",
+  "msc": "11J72",
+  "kind": "proof",
+  "title": {
+    "it": "Irrazionalità di √2 — Dimostrazione II (Valutazione 2-adica e fattorizzazione unica)",
+    "en": "Irrationality of √2 — Proof II (2-adic valuation and unique factorization)",
+    "es": "Irracionalidad de √2 — Demostración II (Valuación 2-ádica y factorización única)",
+    "ar": "لاقياسية √2 — البرهان الثاني (التقييم 2-adic والتحليل الوحيد)"
+  },
+  "natural": {
+    "it": "Per il Teorema Fondamentale dell'Aritmetica (11A51.1), ogni intero positivo n ≥ 1 possiede un esponente ben definito v₂(n) ∈ ℕ con cui il primo 2 compare nella sua fattorizzazione. Nell'identità p² = 2q², l'esponente di 2 a sinistra è pari (2·v₂(p)) mentre a destra è dispari (2·v₂(q) + 1): contraddizione senza bisogno di assumere p e q coprimi.",
+    "en": "By the Fundamental Theorem of Arithmetic (11A51.1), every positive integer n ≥ 1 has a well-defined exponent v₂(n) ∈ ℕ of the prime 2 in its prime factorization. In p² = 2q², the exponent of 2 on the left is even (2·v₂(p)) whereas on the right it is odd (2·v₂(q) + 1): a direct contradiction without even assuming p and q are coprime.",
+    "es": "Por el Teorema Fundamental de la Aritmética (11A51.1), en p² = 2q² el exponente del primo 2 a la izquierda es par (2·v₂(p)) y a la derecha es impar (2·v₂(q) + 1): contradicción inmediata.",
+    "ar": "بموجب المبرهنة الأساسية في الحساب (11A51.1)، أس العدد الأولي 2 في الطرف الأيسر من p² = 2q² زوجي وفي الطرف الأيمن فردي، وهو تناقض مباشر."
+  },
+  "symbolic": "p² = 2q²  ⇒  v₂(p²) = v₂(2q²)  ⇒  2·v₂(p) = 2·v₂(q) + 1  ⇒  ⊥",
+  "lean": {
+    "code": "import Mathlib.Data.Nat.PrimeFin\n\n/-- In ℕ, due doppi non possono differire di 1: 2 * a ≠ 2 * b + 1. -/\ntheorem two_adic_parity_contradiction (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by\n  omega",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Nat.Prime.irrational_sqrt",
+    "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11J72.1",
+      "type": "alternative_proof_of"
+    },
+    {
+      "id": "11A51.1",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11J72.2.1",
+    "11J72.2.2",
+    "11J72.2.3"
+  ],
+  "steps": [
+    {
+      "id": "11J72.2.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Additività della valutazione 2-adica v₂ sul prodotto",
+        "en": "Additivity of the 2-adic valuation v₂ on products",
+        "es": "Aditividad de la valuación 2-ádica v₂",
+        "ar": "جمعية التقييم 2-adic على الجداء"
+      },
+      "natural": {
+        "it": "Per l'unicità della fattorizzazione in primi (11A51.1), per ogni a, b ∈ ℕ₊ vale v₂(a·b) = v₂(a) + v₂(b). In particolare v₂(p²) = 2·v₂(p) e v₂(2q²) = v₂(2) + v₂(q²) = 1 + 2·v₂(q).",
+        "en": "By uniqueness of prime factorization (11A51.1), for all a, b ∈ ℕ₊ we have v₂(a·b) = v₂(a) + v₂(b). In particular, v₂(p²) = 2·v₂(p) and v₂(2q²) = v₂(2) + v₂(q²) = 1 + 2·v₂(q).",
+        "es": "Por la unicidad de la factorización prima (11A51.1), v₂(p²) = 2·v₂(p) y v₂(2q²) = 1 + 2·v₂(q).",
+        "ar": "بوحدانية التحليل الأولي، لدينا v₂(p²) = 2·v₂(p) وكذلك v₂(2q²) = 1 + 2·v₂(q)."
+      },
+      "symbolic": "∀ p, q ∈ ℕ₊ : v₂(p²) = 2·v₂(p)  ∧  v₂(2q²) = 2·v₂(q) + 1",
+      "lean": {
+        "code": "-- Enunciato sulla molteplicità del fattore primo 2 in Mathlib\n#check Nat.factorization_mul",
+        "status": "statement_only",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.factorization_mul",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A51.1",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11J72.2.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Confronto di parità degli esponenti in ℕ",
+        "en": "Parity comparison of exponents in ℕ",
+        "es": "Comparación de paridad de los exponentes en ℕ",
+        "ar": "مقارنة زوجية الأسس في ℕ"
+      },
+      "natural": {
+        "it": "Se p² = 2q² con p, q ≥ 1, l'unicità della fattorizzazione impone 2·v₂(p) = 2·v₂(q) + 1. Ma in ℕ nessun numero pari coincide con un numero dispari.",
+        "en": "If p² = 2q² with p, q ≥ 1, unique factorization forces 2·v₂(p) = 2·v₂(q) + 1. Yet in ℕ no even integer equals an odd integer.",
+        "es": "Si p² = 2q², entonces 2·v₂(p) = 2·v₂(q) + 1, imposible en ℕ.",
+        "ar": "إذا كان p² = 2q² فإن 2·v₂(p) = 2·v₂(q) + 1 وهذا مستحيل في ℕ."
+      },
+      "symbolic": "∀ a, b ∈ ℕ : 2a ≠ 2b + 1",
+      "lean": {
+        "code": "example (a b : ℕ) : 2 * a ≠ 2 * b + 1 := by omega",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.even_iff_not_odd",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11J72.2.1",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11J72.2.2.a",
+          "kind": "remark",
+          "title": {
+            "it": "Micro-risultato: Generalizzazione a √p per ogni primo p",
+            "en": "Micro-result: Generalization to √p for every prime p",
+            "es": "Microrresultado: Generalización a √p para todo primo p",
+            "ar": "نتيجة جزئية: التعميم إلى √p لكل عدد أولي p"
+          },
+          "natural": {
+            "it": "Sostituendo v₂ con la valutazione p-adica v_p per qualunque primo p (11A41.0), la stessa identità 2·v_p(a) = 2·v_p(b) + 1 dimostra che √p è irrazionale per ogni numero primo p.",
+            "en": "Replacing v₂ with the p-adic valuation v_p for any prime p (11A41.0), the exact same identity 2·v_p(a) = 2·v_p(b) + 1 proves that √p is irrational for every prime p.",
+            "es": "Sustituyendo v₂ por v_p se demuestra inmediatamente que √p es irracional para todo primo p.",
+            "ar": "باستبدال التقييم v₂ بالتقييم v_p يثبت بنفس الطريقة أن √p غير قياسي لكل عدد أولي p."
+          },
+          "symbolic": "∀ p primo : v_p(a²) = 2v_p(a) ≠ 2v_p(b) + 1 = v_p(p·b²)  ⇒  √p ∉ ℚ",
+          "lean": {
+            "code": "#check Nat.Prime.irrational_sqrt",
+            "status": "statement_only",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Nat.Prime.irrational_sqrt",
+            "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+            "verified_at": null
+          },
+          "deps": [
+            {
+              "id": "11A41.0",
+              "type": "requires"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11J72.2.3",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione dell'irrazionalità",
+        "en": "Conclusion of irrationality",
+        "es": "Conclusión de la irracionalidad",
+        "ar": "استنتاج اللاقياسية"
+      },
+      "natural": {
+        "it": "L'equazione p² = 2q² non ammette dunque alcuna soluzione intera non nulla (p, q) ∈ ℤ² \\ {(0,0)}, da cui √2 ∉ ℚ.",
+        "en": "Therefore the equation p² = 2q² admits no non-zero integer solution (p, q) ∈ ℤ² \\ {(0,0)}, whence √2 ∉ ℚ.",
+        "es": "La ecuación p² = 2q² no admite soluciones enteras no nulas, luego √2 ∉ ℚ.",
+        "ar": "إذن المعادلة p² = 2q² لا تقبل أي حل صحيح غير صفري، ومنه √2 ∉ ℚ."
+      },
+      "symbolic": "¬(∃ p, q ∈ ℕ₊, p² = 2q²)  ⇒  √2 ∉ ℚ",
+      "lean": {
+        "code": "theorem sqrt2_irrational_via_prime : Irrational (Real.sqrt 2) :=\n  Nat.Prime.irrational_sqrt Nat.prime_two",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.Prime.irrational_sqrt",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11J72.2.2",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "G. H. Hardy & E. M. Wright, An Introduction to the Theory of Numbers",
+      "citation": "Cap. 4, Teorema 43 — parafrasi originale compatibile CC-BY-SA-4.0",
+      "license_note": "Parafrasi originale CC-BY-SA-4.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

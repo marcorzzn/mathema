@@ -1,0 +1,72 @@
+{
+  "id": "11A41.0",
+  "msc": "11A41",
+  "kind": "definition",
+  "title": {
+    "it": "Numero primo in ℕ e minimo divisore primo",
+    "en": "Prime number in ℕ and least prime divisor",
+    "es": "Número primo en ℕ y menor divisor primo",
+    "ar": "العدد الأولي في ℕ وأصغر قاسم أولي"
+  },
+  "natural": {
+    "it": "Un numero naturale p ∈ ℕ si dice primo se p ≥ 2 e i suoi unici divisori positivi sono 1 e p (ossia è un elemento irriducibile nel monoide commutativo (ℕ, ·)). Ogni intero n ≥ 2 ammette un minimo divisore maggiore di 1, indicato con minFac(n), che è necessariamente primo.",
+    "en": "A natural number p ∈ ℕ is called prime if p ≥ 2 and its only positive divisors are 1 and p (equivalently, it is an irreducible element in the commutative monoid (ℕ, ·)). Every integer n ≥ 2 has a smallest divisor greater than 1, denoted minFac(n), which is necessarily prime.",
+    "es": "Un número natural p ∈ ℕ es primo si p ≥ 2 y sus únicos divisores en ℕ son 1 y p. Todo entero n ≥ 2 posee un menor divisor mayor que 1, que es necesariamente primo.",
+    "ar": "يُسمى العدد الطبيعي p أولياً إذا كان p ≥ 2 وكانت قواسمه الموجبة الوحيدة هي 1 و p. كل عدد صحيح n ≥ 2 يمتلك قاسماً أولياً أصغر."
+  },
+  "symbolic": "Prime(p) :⇔ p ≥ 2 ∧ (∀ d ∈ ℕ, d ∣ p ⇒ d = 1 ∨ d = p)",
+  "lean": {
+    "code": "import Mathlib.Data.Nat.Prime.Basic\n\n-- In Mathlib4, Nat.Prime p coincide con Irreducible p in ℕ\n#check Nat.Prime\n\ntheorem mathema_exists_prime_dvd {n : ℕ} (hn : n ≠ 1) :\n    ∃ p : ℕ, p.Prime ∧ p ∣ n :=\n  Nat.exists_prime_and_dvd hn",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Nat.Prime",
+    "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [],
+  "children": [
+    "11A41.0.1"
+  ],
+  "steps": [
+    {
+      "id": "11A41.0.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Esistenza di un divisore primo per ogni n ≠ 1",
+        "en": "Existence of a prime divisor for every n ≠ 1",
+        "es": "Existencia de un divisor primo para todo n ≠ 1",
+        "ar": "وجود قاسم أولي لكل n ≠ 1"
+      },
+      "natural": {
+        "it": "Sia n ∈ ℕ con n ≠ 1. Se n = 0, allora 2 ∣ 0; se n ≥ 2, il minimo elemento dell'insieme non vuoto {d ∈ ℕ | d ≥ 2 ∧ d ∣ n} è primo: se fosse composto d = a·b con 2 ≤ a < d, anche a dividerebbe n per transitività, contraddicendo la minimalità di d.",
+        "en": "Let n ∈ ℕ with n ≠ 1. If n = 0, then 2 ∣ 0; if n ≥ 2, the least element of the non-empty set {d ∈ ℕ | d ≥ 2 ∧ d ∣ n} is prime: if it were composite d = a·b with 2 ≤ a < d, then a would also divide n by transitivity, contradicting the minimality of d.",
+        "es": "Si n ≠ 1, el menor divisor d ≥ 2 de n es necesariamente primo por minimalidad en ℕ.",
+        "ar": "إذا كان n ≠ 1 فإن أصغر قاسم d ≥ 2 للعدد n يكون أولياً بالضرورة."
+      },
+      "symbolic": "∀ n ∈ ℕ, n ≠ 1  ⇒  Prime(minFac(n)) ∧ minFac(n) ∣ n",
+      "lean": {
+        "code": "example {n : ℕ} (hn : n ≠ 1) : n.minFac.Prime ∧ n.minFac ∣ n :=\n  ⟨Nat.minFac_prime hn, Nat.minFac_dvd n⟩",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.minFac_prime",
+        "lean_file": "lean/Mathema/NumberTheory/InfinitudePrimes.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "Mathlib4 — Mathlib.Data.Nat.Prime.Basic",
+      "citation": "Nat.Prime & Nat.minFac_prime",
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Nat/Prime/Basic.html",
+      "license_note": "Apache-2.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

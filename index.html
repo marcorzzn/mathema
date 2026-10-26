@@ -1,21 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Mathema — Grafo Aperto della Conoscenza Matematica</title>
-    <meta name="description" content="Infrastruttura aperta, multilingue, verificabile e navigabile della conoscenza matematica, fisica e informatica con ponte bidirezionale NL ↔ Lean 4. Manifesto e Blueprint di Marco Razzano." />
+    <meta
+      name="description"
+      content="Piattaforma minimale, multilingue e verificabile per organizzare la conoscenza matematica secondo MSC2020 e Lean 4."
+    />
     <meta property="og:title" content="Mathema — Grafo Aperto della Conoscenza Matematica" />
-    <meta property="og:description" content="Infrastruttura aperta, multilingue, verificabile e navigabile della conoscenza matematica, fisica e informatica con ponte bidirezionale NL ↔ Lean 4. Manifesto e Blueprint di Marco Razzano." />
+    <meta
+      property="og:description"
+      content="Piattaforma minimale, multilingue e verificabile per organizzare la conoscenza matematica secondo MSC2020 e Lean 4."
+    />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Mathema" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   </head>
-  <body class="bg-[#FBF9F5] text-[#1C1917] antialiased selection:bg-[#1E3A8A]/15 selection:text-[#1E3A8A]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <a class="skip-link" href="#main">Vai al contenuto principale</a>
+    <header role="banner">
+      <button id="nav-toggle" type="button" aria-expanded="true" aria-controls="nav" title="Mostra/nascondi albero MSC (Tasto [)">
+        ☰ MSC
+      </button>
+      <a href="#" class="brand" aria-label="Mathema — Pagina iniziale"><b>Mathema</b></a>
+      <div class="search-wrap" role="search">
+        <input
+          id="q"
+          type="search"
+          autocomplete="off"
+          placeholder="Codice o parola (es. 11J72, primi, fattorizzazione)…"
+          aria-label="Cerca per codice MSC, parola o teorema"
+        />
+        <select id="kind-filter" aria-label="Filtra per tipo di nodo">
+          <option value="">Tutti i tipi</option>
+          <option value="definition">Definizione</option>
+          <option value="lemma">Lemma</option>
+          <option value="theorem">Teorema</option>
+          <option value="proof">Dimostrazione</option>
+          <option value="remark">Osservazione</option>
+        </select>
+        <div id="search-results" class="search-dropdown" role="listbox" hidden></div>
+      </div>
+      <span id="lang-bar" role="group" aria-label="Lingua"></span>
+      <span role="group" aria-label="Modalità di visualizzazione">
+        <button id="vt" type="button" aria-pressed="true">Testo</button>
+        <button id="vg" type="button" aria-pressed="false">Grafo</button>
+        <button id="vh" type="button" aria-pressed="false">Ibrida</button>
+      </span>
+      <button id="theme-btn" type="button" title="Commuta tema chiaro/scuro">◐</button>
+      <button id="pwa-install-btn" type="button" hidden>↓ Installa</button>
+    </header>
+
+    <div id="offline-banner" class="offline-banner" role="status" aria-live="polite" hidden></div>
+
+    <div class="wrap" id="layout-wrap">
+      <nav id="nav" aria-label="Classificazione Matematica MSC2020"></nav>
+      <main id="main" tabindex="-1"></main>
+    </div>
+
+    <div id="ios-pwa-modal" class="modal-backdrop" role="dialog" aria-modal="true" hidden>
+      <div class="modal-box">
+        <strong>Installa Mathema su iPhone / iPad</strong>
+        <p>1. Tocca il pulsante <b>Condividi</b> nella barra di Safari.<br />2. Seleziona <b>Aggiungi alla schermata Home</b>.</p>
+        <button id="ios-pwa-close" type="button">Chiudi</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
-

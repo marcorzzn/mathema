@@ -1,0 +1,158 @@
+{
+  "id": "11J72.3",
+  "msc": "11J72",
+  "kind": "proof",
+  "title": {
+    "it": "Irrazionalità di √2 — Dimostrazione III (Tappeto geometrico di Tennenbaum e discesa infinita)",
+    "en": "Irrationality of √2 — Proof III (Tennenbaum's geometric carpet and infinite descent)",
+    "es": "Irracionalidad de √2 — Demostración III (Alfombra geométrica de Tennenbaum y descenso infinito)",
+    "ar": "لاقياسية √2 — البرهان الثالث (برهان تيننباوم الهندسي والنزول اللانهائي)"
+  },
+  "natural": {
+    "it": "Se esistono interi positivi p, q > 0 con p² = 2q², per il principio del buon ordinamento di ℕ esiste una coppia con denominatore q > 0 minimo possibile. Sovrapponendo due quadrati di lato q negli angoli opposti di un quadrato di lato p, il quadrato centrale di sovrapposizione ha lato p' = 2q - p e i due quadrati scoperti hanno lato q' = p - q, fornendo una soluzione intera positiva più piccola (p')² = 2(q')² con 0 < q' < q: contraddizione.",
+    "en": "If positive integers p, q > 0 satisfy p² = 2q², by well-ordering of ℕ we can pick a pair with minimal q > 0. Placing two squares of side q in opposite corners of a square of side p, the central overlap square has side p' = 2q - p and the two uncovered corner squares have side q' = p - q, yielding a strictly smaller positive integer solution (p')² = 2(q')² with 0 < q' < q: contradiction.",
+    "es": "Si p² = 2q² con q > 0 mínimo, entonces p' = 2q - p y q' = p - q satisfacen (p')² = 2(q')² con 0 < q' < q, contradiciendo la minimalidad de q.",
+    "ar": "بوضع مربعين طول ضلعهما q داخل مربع طول ضلعه p نحصل على حل أصغر p' = 2q - p و q' = p - q يحقق (p')² = 2(q')² مع 0 < q' < q، مما يناقض أصغرية q."
+  },
+  "symbolic": "p² = 2q² ∧ 1 < p/q < 2  ⇒  (2q - p)² = 2(p - q)² ∧ 0 < p - q < q",
+  "lean": {
+    "code": "-- Identità algebrica esatta della discesa di Tennenbaum verificata da ring\ntheorem tennenbaum_descent_identity (p q : ℤ) (h : p ^ 2 = 2 * q ^ 2) :\n    (2 * q - p) ^ 2 = 2 * (p - q) ^ 2 := by\n  calc (2 * q - p) ^ 2\n    _ = 4 * q ^ 2 - 4 * p * q + p ^ 2 := by ring\n    _ = 4 * q ^ 2 - 4 * p * q + 2 * q ^ 2 := by rw [h]\n    _ = 2 * (2 * q ^ 2 - 2 * p * q + q ^ 2) := by ring\n    _ = 2 * (p ^ 2 - 2 * p * q + q ^ 2) := by rw [← h]\n    _ = 2 * (p - q) ^ 2 := by ring",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "WellFounded.min",
+    "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11J72.1",
+      "type": "alternative_proof_of"
+    }
+  ],
+  "children": [
+    "11J72.3.1",
+    "11J72.3.2",
+    "11J72.3.3"
+  ],
+  "steps": [
+    {
+      "id": "11J72.3.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Stima d'ordine: q < p < 2q",
+        "en": "Order bound: q < p < 2q",
+        "es": "Cota de orden: q < p < 2q",
+        "ar": "متباينة الترتيب: q < p < 2q"
+      },
+      "natural": {
+        "it": "Poiché q > 0 e p² = 2q², si ha q² < 2q² = p² < 4q² = (2q)². Essendo p, q > 0, la monotonia del quadrato implica q < p < 2q, ossia 0 < p - q < q e 0 < 2q - p.",
+        "en": "Since q > 0 and p² = 2q², we have q² < 2q² = p² < 4q² = (2q)². Since p, q > 0, monotonicity of squaring gives q < p < 2q, hence 0 < p - q < q and 0 < 2q - p.",
+        "es": "Como q² < p² = 2q² < (2q)², se deduce que q < p < 2q y por tanto 0 < p - q < q.",
+        "ar": "بما أن q² < p² = 2q² < (2q)² فإن q < p < 2q ومنه 0 < p - q < q."
+      },
+      "symbolic": "p, q > 0 ∧ p² = 2q²  ⇒  q < p < 2q  ⇒  0 < p - q < q",
+      "lean": {
+        "code": "lemma tennenbaum_bounds {p q : ℤ} (hp : 0 < p) (hq : 0 < q) (h : p ^ 2 = 2 * q ^ 2) :\n    0 < p - q ∧ p - q < q := by\n  constructor <;> nlinarith",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "sq_lt_sq",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": []
+    },
+    {
+      "id": "11J72.3.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Identità algebrica del quadrato sovrapposto",
+        "en": "Algebraic identity of the overlapping square",
+        "es": "Identidad algebraica del cuadrado superpuesto",
+        "ar": "المتطابقة الجبرية للمربع المتداخل"
+      },
+      "natural": {
+        "it": "Poniamo p' = 2q - p e q' = p - q. Allora (p')² = (2q - p)² = 4q² - 4pq + p² = 2p² - 4pq + 2q² = 2(p - q)² = 2(q')².",
+        "en": "Set p' = 2q - p and q' = p - q. Then (p')² = (2q - p)² = 4q² - 4pq + p² = 2p² - 4pq + 2q² = 2(p - q)² = 2(q')².",
+        "es": "Definiendo p' = 2q - p y q' = p - q se cumple (p')² = 2(q')².",
+        "ar": "بوضع p' = 2q - p و q' = p - q تتحقق المتطابقة (p')² = 2(q')²."
+      },
+      "symbolic": "(2q - p)² - 2(p - q)² = 2q² - p² = 0",
+      "lean": {
+        "code": "example (p q : ℤ) (h : p ^ 2 = 2 * q ^ 2) : (2 * q - p) ^ 2 = 2 * (p - q) ^ 2 :=\n  tennenbaum_descent_identity p q h",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "tennenbaum_descent_identity",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11J72.3.1",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11J72.3.3",
+      "kind": "proof",
+      "title": {
+        "it": "Contraddizione con la minimalità in ℕ",
+        "en": "Contradiction with minimality in ℕ",
+        "es": "Contradicción con la minimalidad en ℕ",
+        "ar": "التناقض مع الأصغرية في ℕ"
+      },
+      "natural": {
+        "it": "La nuova coppia (p', q') = (2q - p, p - q) soddisfa (p')² = 2(q')² con 0 < q' < q, violando la scelta di q come minimo intero positivo. Pertanto non esiste alcuna soluzione intera positiva.",
+        "en": "The new pair (p', q') = (2q - p, p - q) satisfies (p')² = 2(q')² with 0 < q' < q, violating the choice of q as the smallest positive denominator. Hence no positive integer solution exists.",
+        "es": "El par (p', q') viola la minimalidad de q > 0. Por tanto no existe solución entera positiva.",
+        "ar": "الزوج الجديد (p', q') يناقض كون q أصغر مقام موجب ممكن."
+      },
+      "symbolic": "q = min { x ∈ ℕ₊ : ∃ y, y² = 2x² }  ∧  q' < q  ⇒  ⊥",
+      "lean": {
+        "code": "-- Conclusione per induzione forte / discesa su q : ℕ\n#check Nat.strong_induction_on",
+        "status": "statement_only",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.strong_induction_on",
+        "lean_file": "lean/Mathema/NumberTheory/Sqrt2.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11J72.3.1",
+          "type": "requires"
+        },
+        {
+          "id": "11J72.3.2",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "id": "11J72.3.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura: Tappeto geometrico di Stanley Tennenbaum",
+        "en": "Figure: Stanley Tennenbaum's geometric carpet"
+      },
+      "caption": {
+        "it": "Due quadrati di lato q posti negli angoli opposti di un quadrato di lato p si sovrappongono al centro in un quadrato di lato 2q - p, lasciando scoperti due quadrati d'angolo di lato p - q.",
+        "en": "Two squares of side q placed in opposite corners of a square of side p overlap in a central square of side 2q - p, leaving two uncovered corner squares of side p - q."
+      },
+      "svg": "<svg viewBox=\"0 0 380 190\" width=\"380\" height=\"190\" role=\"img\" aria-label=\"Tappeto geometrico di Tennenbaum\"><rect x=\"25\" y=\"15\" width=\"150\" height=\"150\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><rect x=\"25\" y=\"15\" width=\"105\" height=\"105\" fill=\"var(--sf)\" stroke=\"var(--ac)\" stroke-width=\"1.2\"/><rect x=\"70\" y=\"60\" width=\"105\" height=\"105\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"1.2\"/><rect x=\"70\" y=\"60\" width=\"60\" height=\"60\" fill=\"var(--bg)\" stroke=\"var(--ok)\" stroke-width=\"2\"/><text x=\"76\" y=\"94\" style=\"fill:var(--ok);font-weight:bold\">2q-p</text><text x=\"134\" y=\"42\">p-q</text><text x=\"34\" y=\"146\">p-q</text><text x=\"200\" y=\"52\">Area totale: p² = 2q²</text><text x=\"200\" y=\"82\">Sovrapposizione centrale:</text><text x=\"200\" y=\"106\">(2q - p)² = 2(p - q)²</text><text x=\"200\" y=\"138\">Discesa: 0 &lt; p - q &lt; q</text></svg>"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Stanley Tennenbaum (anni '50), citato in J. H. Conway, The Power of Mathematics",
+      "citation": "Riformulazione algebrica e geometrica originale sotto CC-BY-SA-4.0",
+      "license_note": "Testo e SVG originali CC-BY-SA-4.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

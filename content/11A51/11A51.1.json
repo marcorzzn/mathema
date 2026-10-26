@@ -1,0 +1,282 @@
+{
+  "id": "11A51.1",
+  "msc": "11A51",
+  "kind": "theorem",
+  "title": {
+    "it": "Teorema Fondamentale dell'Aritmetica (Esistenza e unicità della fattorizzazione in primi)",
+    "en": "Fundamental Theorem of Arithmetic (Existence and uniqueness of prime factorization)",
+    "es": "Teorema Fundamental de la Aritmética (Existencia y unicidad de la factorización prima)",
+    "ar": "المبرهنة الأساسية في الحساب (وجود ووحدانية التحليل إلى عوامل أولية)"
+  },
+  "natural": {
+    "it": "Ogni numero naturale n ≥ 2 (o più in generale ogni intero positivo n ≠ 0) si scrive come prodotto finito di numeri primi n = p₁ · p₂ · … · pₖ, e tale decomposizione è unica a meno dell'ordine dei fattori (ossia il multinsieme dei fattori primi è univocamente determinato da n).",
+    "en": "Every natural number n ≥ 2 (or more generally every positive integer n ≠ 0) can be written as a finite product of prime numbers n = p₁ · p₂ · … · pₖ, and this decomposition is unique up to the order of the factors (i.e., the multiset of prime factors is uniquely determined by n).",
+    "es": "Todo número natural n ≥ 2 se descompone como producto finito de números primos, y dicha descomposición es única salvo el orden de los factores.",
+    "ar": "كل عدد طبيعي n ≥ 2 يُكتب كجداء منتهٍ لأعداد أولية، وهذا التحليل وحيد بغض النظر عن ترتيب العوامل."
+  },
+  "symbolic": "∀ n ∈ ℕ, n ≥ 2  ⇒  ∃! M ∈ Multiset(ℙ) : (∀ p ∈ M, Prime(p)) ∧ ∏_{p ∈ M} p = n",
+  "lean": {
+    "code": "import Mathlib.Data.Nat.Factors\n\n/-- Esistenza: il prodotto della lista dei fattori primi di n ≠ 0 restituisce n. -/\ntheorem mathema_primeFactorsList_prod {n : ℕ} (hn : n ≠ 0) :\n    n.primeFactorsList.prod = n :=\n  Nat.prod_primeFactorsList hn\n\n/-- Unicità a meno di permutazioni (Relazione List.Perm) in Mathlib4. -/\ntheorem mathema_primeFactorsList_unique {n : ℕ} {l : List ℕ}\n    (hprod : l.prod = n) (hprime : ∀ p ∈ l, p.Prime) :\n    l ~ n.primeFactorsList :=\n  Nat.primeFactorsList_unique hprod hprime",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Nat.primeFactorsList_unique",
+    "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11A41.0",
+      "type": "requires"
+    },
+    {
+      "id": "11A51.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11A51.1.1",
+    "11A51.1.2",
+    "11A51.1.3",
+    "11A51.1.4"
+  ],
+  "steps": [
+    {
+      "id": "11A51.1.1",
+      "kind": "proof",
+      "title": {
+        "it": "Esistenza della fattorizzazione per induzione forte su n",
+        "en": "Existence of factorization by strong induction on n",
+        "es": "Existencia de la factorización por inducción fuerte sobre n",
+        "ar": "وجود التحليل بالاستقراء القوي على n"
+      },
+      "natural": {
+        "it": "Procediamo per induzione forte su n ≥ 2. Se n è primo, la lista [n] ha un solo fattore primo. Se n non è primo, per il lemma 11A41.0.1 poniamo p = minFac(n) e m = n / p: allora p è primo, 2 ≤ m < n e per ipotesi induttiva m è prodotto di primi, dunque n = p · m è prodotto di primi.",
+        "en": "Proceed by strong induction on n ≥ 2. If n is prime, the singleton list [n] works. Otherwise, by lemma 11A41.0.1 let p = minFac(n) and m = n / p: then p is prime, 2 ≤ m < n, and by the inductive hypothesis m is a product of primes, so n = p · m is a product of primes.",
+        "es": "Por inducción fuerte: extrayendo p = minFac(n) se tiene m = n / p < n, y aplicando la hipótesis inductiva a m se obtiene la descomposición de n = p · m.",
+        "ar": "بالاستقراء القوي: نأخذ p = minFac(n) فيكون m = n / p < n، وبتطبيق فرض الاستقراء على m نحصل على تحليل n = p · m."
+      },
+      "symbolic": "n = minFac(n) · (n / minFac(n))  ∧  n / minFac(n) < n",
+      "lean": {
+        "code": "theorem prod_primeFactorsList_rec {n : ℕ} (hn : n ≠ 0) :\n    (∀ p ∈ n.primeFactorsList, p.Prime) ∧ n.primeFactorsList.prod = n :=\n  ⟨fun _ hp => Nat.prime_of_mem_primeFactorsList hp, Nat.prod_primeFactorsList hn⟩",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.prod_primeFactorsList",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A41.0",
+          "type": "requires"
+        },
+        {
+          "id": "11A51.1.1.a",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11A51.1.1.a",
+          "kind": "lemma",
+          "title": {
+            "it": "Micro-risultato: Stretta decrescenza del quoziente n / minFac(n) < n",
+            "en": "Micro-result: Strict decrease of the quotient n / minFac(n) < n",
+            "es": "Microrresultado: Decrecimiento estricto n / minFac(n) < n",
+            "ar": "نتيجة جزئية: التناقص الفعلي لخارج القسمة n / minFac(n) < n"
+          },
+          "natural": {
+            "it": "Poiché n ≥ 2 implica minFac(n) ≥ 2 > 1, la divisione intera per minFac(n) produce un quoziente strettamente minore di n, garantendo la terminazione ben fondata della ricorsione.",
+            "en": "Since n ≥ 2 implies minFac(n) ≥ 2 > 1, integer division by minFac(n) yields a quotient strictly smaller than n, ensuring well-founded termination of the recursion.",
+            "es": "Como minFac(n) ≥ 2, el cociente n / minFac(n) < n garantiza la terminación bien fundada.",
+            "ar": "بما أن minFac(n) ≥ 2 فإن خارج القسمة أصغر قطعا من n مما يضمن انتهاء العودية."
+          },
+          "symbolic": "n ≥ 2  ⇒  minFac(n) ≥ 2  ⇒  n / minFac(n) < n",
+          "lean": {
+            "code": "example {n : ℕ} (hn : 2 ≤ n) : n / n.minFac < n :=\n  Nat.div_lt_self (by omega) (Nat.minFac_prime (by omega)).one_lt",
+            "status": "compiled",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Nat.div_lt_self",
+            "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+            "verified_at": "2026-10-20T12:00:00Z"
+          },
+          "deps": []
+        }
+      ]
+    },
+    {
+      "id": "11A51.1.2",
+      "kind": "lemma",
+      "title": {
+        "it": "Estensione del Lemma di Euclide a prodotti finiti: p ∣ ∏ qⱼ ⇒ ∃ j, p = qⱼ",
+        "en": "Extension of Euclid's Lemma to finite products: p ∣ ∏ qⱼ ⇒ ∃ j, p = qⱼ",
+        "es": "Extensión del Lema de Euclides a productos finitos",
+        "ar": "تعميم تمهيدية إقليدس إلى الجداءات المنتهية"
+      },
+      "natural": {
+        "it": "Per induzione sulla lunghezza della lista [q₁, …, qₘ] e per il Lemma di Euclide (11A51.0), se un primo p divide il prodotto q₁⋯qₘ di numeri primi, allora p divide almeno uno dei fattori qⱼ; essendo anche qⱼ primo, deve valere p = qⱼ.",
+        "en": "By induction on the length of the list [q₁, …, qₘ] and Euclid's Lemma (11A51.0), if a prime p divides a product q₁⋯qₘ of primes, then p divides at least one factor qⱼ; since qⱼ is also prime, p = qⱼ.",
+        "es": "Si un primo p divide a un producto de primos q₁⋯qₘ, entonces p divide a algún qⱼ y por tanto p = qⱼ.",
+        "ar": "إذا قسم عدد أولي p جداء أعداد أولية q₁⋯qₘ فإنه يقسم أحدها qⱼ وبالتالي يساويه p = qⱼ."
+      },
+      "symbolic": "Prime(p) ∧ (∀ j, Prime(qⱼ)) ∧ p ∣ ∏_{j=1}^m qⱼ  ⇒  ∃ j, p = qⱼ",
+      "lean": {
+        "code": "#check Prime.dvd_of_dvd_prod",
+        "status": "statement_only",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Prime.dvd_of_dvd_prod",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A51.0",
+          "type": "requires"
+        }
+      ]
+    },
+    {
+      "id": "11A51.1.3",
+      "kind": "proof",
+      "title": {
+        "it": "Cancellazione induttiva del fattore primo comune p₁ = qⱼ",
+        "en": "Inductive cancellation of the common prime factor p₁ = qⱼ",
+        "es": "Cancelación inductiva del factor primo común p₁ = qⱼ",
+        "ar": "الاختزال الاستقرائي للعامل الأولي المشترك p₁ = qⱼ"
+      },
+      "natural": {
+        "it": "Date due fattorizzazioni p₁⋯pₖ = q₁⋯qₘ = n, il primo p₁ divide q₁⋯qₘ e quindi per il passo 11A51.1.2 esiste j tale che p₁ = qⱼ. Riordinando i q e cancellando p₁ > 0 da ambo i membri in ℕ (micro-risultato 11A51.1.3.a), si ottiene p₂⋯pₖ = q₁⋯q̂ⱼ⋯qₘ.",
+        "en": "Given two factorizations p₁⋯pₖ = q₁⋯qₘ = n, the prime p₁ divides q₁⋯qₘ so by step 11A51.1.2 there exists j with p₁ = qⱼ. Reordering the q's and cancelling p₁ > 0 from both sides in ℕ (micro-result 11A51.1.3.a) yields p₂⋯pₖ = q₁⋯q̂ⱼ⋯qₘ.",
+        "es": "Como p₁ = qⱼ para algún j, cancelando p₁ > 0 en ambos miembros se reduce a un producto con un factor menos.",
+        "ar": "بما أن p₁ = qⱼ لبعض j، نختزل p₁ > 0 من الطرفين فنحصل على جداء أقصر."
+      },
+      "symbolic": "p₁ · (p₂⋯pₖ) = p₁ · (∏_{i≠j} qᵢ) ∧ p₁ > 0  ⇒  p₂⋯pₖ = ∏_{i≠j} qᵢ",
+      "lean": {
+        "code": "theorem cancel_prime_factor {p a b : ℕ} (hp : p.Prime) (h : p * a = p * b) : a = b :=\n  Nat.eq_of_mul_eq_mul_left hp.pos h",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.eq_of_mul_eq_mul_left",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A51.1.2",
+          "type": "requires"
+        },
+        {
+          "id": "11A51.1.3.a",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11A51.1.3.a",
+          "kind": "lemma",
+          "title": {
+            "it": "Micro-risultato: Legge di cancellazione moltiplicativa in ℕ per fattori positivi",
+            "en": "Micro-result: Multiplicative cancellation law in ℕ for positive factors",
+            "es": "Microrresultado: Ley de cancelación multiplicativa en ℕ",
+            "ar": "نتيجة جزئية: قانون الاختزال الضربي في ℕ للعوامل الموجبة"
+          },
+          "natural": {
+            "it": "Per ogni c, a, b ∈ ℕ con c > 0, se c·a = c·b allora a = b.",
+            "en": "For all c, a, b ∈ ℕ with c > 0, if c·a = c·b then a = b.",
+            "es": "Para todo c > 0 en ℕ, c·a = c·b implica a = b.",
+            "ar": "لكل c > 0 في ℕ، إذا كان c·a = c·b فإن a = b."
+          },
+          "symbolic": "∀ c, a, b ∈ ℕ : c > 0 ∧ c·a = c·b  ⇒  a = b",
+          "lean": {
+            "code": "example {c a b : ℕ} (hc : 0 < c) (h : c * a = c * b) : a = b :=\n  Nat.eq_of_mul_eq_mul_left hc h",
+            "status": "compiled",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Nat.eq_of_mul_eq_mul_left",
+            "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+            "verified_at": "2026-10-20T12:00:00Z"
+          },
+          "deps": []
+        }
+      ]
+    },
+    {
+      "id": "11A51.1.4",
+      "kind": "proof",
+      "title": {
+        "it": "Conclusione dell'unicità a meno di permutazione",
+        "en": "Conclusion of uniqueness up to permutation",
+        "es": "Conclusión de la unicidad salvo permutación",
+        "ar": "استنتاج الوحدانية حتى تبديل العوامل"
+      },
+      "natural": {
+        "it": "Iterando la cancellazione del passo 11A51.1.3 per induzione sul numero di fattori k, le due liste [p₁, …, pₖ] e [q₁, …, qₘ] hanno la stessa lunghezza k = m e sono una permutazione l'una dell'altra.",
+        "en": "Iterating the cancellation in step 11A51.1.3 by induction on the number of factors k, the two lists [p₁, …, pₖ] and [q₁, …, qₘ] have the same length k = m and are permutations of one another.",
+        "es": "Por inducción sobre k, las dos listas tienen la misma longitud y son permutaciones entre sí.",
+        "ar": "بتكرار الاختزال بالاستقراء على k نجد أن القائمتين لهما نفس الطول وأن إحداهما تبديل للأخرى."
+      },
+      "symbolic": "∏_{i=1}^k pᵢ = ∏_{j=1}^m qⱼ  ⇒  [p₁,…,pₖ] ~ [q₁,…,qₘ]",
+      "lean": {
+        "code": "theorem unique_factorization_perm {l₁ l₂ : List ℕ}\n    (h₁ : ∀ p ∈ l₁, p.Prime) (h₂ : ∀ p ∈ l₂, p.Prime) (heq : l₁.prod = l₂.prod) :\n    l₁ ~ l₂ :=\n  Nat.factors_unique heq h₁ h₂",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.primeFactorsList_unique",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A51.1.1",
+          "type": "requires"
+        },
+        {
+          "id": "11A51.1.3",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "id": "11A51.1.fig1",
+      "kind": "svg",
+      "title": {
+        "it": "Figura 1: Albero di fattorizzazione e decomposizione canonica di 60 = 2² · 3¹ · 5¹",
+        "en": "Figure 1: Factorization tree and canonical decomposition of 60 = 2² · 3¹ · 5¹"
+      },
+      "caption": {
+        "it": "Qualunque scelta dell'ordine di divisione (60 = 2·30 = 2·2·15 = 2·2·3·5 oppure 60 = 6·10 = (2·3)·(2·5)) produce lo stesso multinsieme di fattori primi {2, 2, 3, 5}.",
+        "en": "Any choice of splitting order (60 = 2·30 = 2·2·15 = 2·2·3·5 or 60 = 6·10 = (2·3)·(2·5)) yields the exact same multiset of prime factors {2, 2, 3, 5}."
+      },
+      "svg": "<svg viewBox=\"0 0 420 175\" width=\"420\" height=\"175\" role=\"img\" aria-label=\"Albero di fattorizzazione di 60\"><rect x=\"175\" y=\"10\" width=\"60\" height=\"28\" rx=\"3\"/><text x=\"196\" y=\"29\">60</text><line x1=\"190\" y1=\"38\" x2=\"105\" y2=\"68\" stroke=\"currentColor\"/><line x1=\"220\" y1=\"38\" x2=\"305\" y2=\"68\" stroke=\"currentColor\"/><rect x=\"75\" y=\"68\" width=\"60\" height=\"28\" rx=\"3\"/><text x=\"91\" y=\"87\">2 · 30</text><rect x=\"275\" y=\"68\" width=\"60\" height=\"28\" rx=\"3\"/><text x=\"291\" y=\"87\">6 · 10</text><line x1=\"105\" y1=\"96\" x2=\"195\" y2=\"130\" stroke=\"var(--ac)\"/><line x1=\"305\" y1=\"96\" x2=\"215\" y2=\"130\" stroke=\"var(--ac)\"/><rect x=\"130\" y=\"130\" width=\"150\" height=\"32\" rx=\"3\" style=\"stroke:var(--ok);stroke-width:1.8\"/><text x=\"144\" y=\"151\" style=\"fill:var(--ok);font-weight:bold\">2² · 3¹ · 5¹ = 60</text></svg>"
+    },
+    {
+      "id": "11A51.1.scene3d",
+      "kind": "scene3d",
+      "title": {
+        "it": "Scena 3D (Lazy Load): Reticolo degli esponenti primi (v₂, v₃, v₅) ∈ ℕ³ per i divisori di 60",
+        "en": "3D Scene (Lazy Load): Prime exponent lattice (v₂, v₃, v₅) ∈ ℕ³ for the divisors of 60"
+      },
+      "caption": {
+        "it": "Il Teorema Fondamentale dell'Aritmetica stabilisce un isomorfismo di monoidi (ℕ₊, ·) ≅ ⨁_{p primo} ℕ: i 12 divisori di 60 formano il parallelepipedo [0,2] × [0,1] × [0,1] in ℕ³.",
+        "en": "The Fundamental Theorem of Arithmetic establishes a monoid isomorphism (ℕ₊, ·) ≅ ⨁_{p prime} ℕ: the 12 divisors of 60 form the box [0,2] × [0,1] × [0,1] in ℕ³."
+      },
+      "preset": "prime_exponent_lattice_3d"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Carl Friedrich Gauss, Disquisitiones Arithmeticae (1801), Art. 16",
+      "citation": "Prima formulazione e dimostrazione moderna completa del Teorema Fondamentale dell'Aritmetica (pubblico dominio)",
+      "license_note": "Pubblico dominio → testo e formalizzazione CC-BY-SA-4.0 / Apache-2.0"
+    },
+    {
+      "title": "Mathlib4 — Mathlib.Data.Nat.Factors",
+      "citation": "Nat.prod_primeFactorsList & Nat.primeFactorsList_unique",
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Nat/Factors.html",
+      "license_note": "Apache-2.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}

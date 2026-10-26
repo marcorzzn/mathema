@@ -1,0 +1,37 @@
+name: Verifica Onesta Lean 4 & Aggiornamento Stato Nodi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lean/**'
+      - 'content/**'
+      - 'scripts/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-lean:
+    name: Compila progetto Lake (Lean 4 + Mathlib) e sincronizza status
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Installa elan e Lean 4 toolchain
+        uses: leanprover/lean-action@v1
+        with:
+          project-path: lean
+          use-mathlib-cache: true
+          build: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Sincronizza stato di verifica Lean nei file JSON e valida schema
+        run: |
+          node scripts/sync-lean-status.mjs --from-ci
+          node scripts/build-content.mjs

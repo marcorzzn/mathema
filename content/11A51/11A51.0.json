@@ -1,0 +1,145 @@
+{
+  "id": "11A51.0",
+  "msc": "11A51",
+  "kind": "lemma",
+  "title": {
+    "it": "Lemma di Euclide (Elementi VII.30): se p primo divide a·b, allora p divide a oppure p divide b",
+    "en": "Euclid's Lemma (Elements VII.30): if a prime p divides a·b, then p divides a or p divides b",
+    "es": "Lema de Euclides (Elementos VII.30): si p primo divide a a·b, entonces p divide a a o a b",
+    "ar": "تمهيدية إقليدس (الأصول VII.30): إذا قسم عدد أولي p الجداء a·b فإنه يقسم a أو يقسم b"
+  },
+  "natural": {
+    "it": "Sia p ∈ ℕ un numero primo e siano a, b ∈ ℕ. Se p divide il prodotto a·b, allora p divide a oppure p divide b. Ciò equivale a dire che in ℕ ogni elemento irriducibile è primo.",
+    "en": "Let p ∈ ℕ be a prime number and let a, b ∈ ℕ. If p divides the product a·b, then p divides a or p divides b. Equivalently, in ℕ every irreducible element is prime.",
+    "es": "Sea p ∈ ℕ un número primo y a, b ∈ ℕ. Si p divide a a·b, entonces p divide a a o p divide a b.",
+    "ar": "ليكن p عدداً أولياً و a, b عددين طبيعيين. إذا كان p يقسم الجداء a·b فإن p يقسم a أو يقسم b."
+  },
+  "symbolic": "∀ p, a, b ∈ ℕ : Prime(p) ∧ p ∣ a·b  ⇒  p ∣ a ∨ p ∣ b",
+  "lean": {
+    "code": "import Mathlib.Data.Nat.Prime.Basic\n\ntheorem mathema_euclid_lemma {p a b : ℕ} (hp : p.Prime) (h : p ∣ a * b) :\n    p ∣ a ∨ p ∣ b :=\n  hp.dvd_mul.mp h",
+    "status": "compiled",
+    "mathlib_version": "v4.15.0",
+    "mathlib_name": "Nat.Prime.dvd_mul",
+    "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+    "verified_at": "2026-10-20T12:00:00Z"
+  },
+  "deps": [
+    {
+      "id": "11A41.0",
+      "type": "requires"
+    }
+  ],
+  "children": [
+    "11A51.0.1",
+    "11A51.0.2"
+  ],
+  "steps": [
+    {
+      "id": "11A51.0.1",
+      "kind": "lemma",
+      "title": {
+        "it": "Dicotomia di coprimalità per un primo p: p ∣ a oppure MCD(p, a) = 1",
+        "en": "Coprimality dichotomy for a prime p: p ∣ a or gcd(p, a) = 1",
+        "es": "Dicotomía de coprimalidad: p ∣ a o mcd(p, a) = 1",
+        "ar": "ثنائية الأولية النسبية: إما p ∣ a أو gcd(p, a) = 1"
+      },
+      "natural": {
+        "it": "Poiché MCD(p, a) divide p e gli unici divisori positivi del primo p sono 1 e p, si ha MCD(p, a) = p (ossia p ∣ a) oppure MCD(p, a) = 1 (p e a sono coprimi).",
+        "en": "Since gcd(p, a) divides p and the only positive divisors of the prime p are 1 and p, either gcd(p, a) = p (so p ∣ a) or gcd(p, a) = 1 (p and a are coprime).",
+        "es": "Como mcd(p, a) divide a p, o bien mcd(p, a) = p (p ∣ a) o bien mcd(p, a) = 1.",
+        "ar": "بما أن القاسم المشترك الأكبر gcd(p, a) يقسم العدد الأولي p، فإما أن يكون p (أي p ∣ a) أو 1."
+      },
+      "symbolic": "Prime(p)  ⇒  (p ∣ a  ∨  gcd(p, a) = 1)",
+      "lean": {
+        "code": "example {p a : ℕ} (hp : p.Prime) : p ∣ a ∨ p.Coprime a :=\n  (Nat.Prime.coprime_iff_not_dvd hp).symm.imp_right id |> by\n    intro _; exact Or.symm ( hp.coprime_iff_not_dvd.mpr.mt |> by tauto )",
+        "status": "has_sorry",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.Prime.coprime_iff_not_dvd",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": null
+      },
+      "deps": [
+        {
+          "id": "11A41.0",
+          "type": "requires"
+        }
+      ],
+      "substeps": [
+        {
+          "id": "11A51.0.1.a",
+          "kind": "lemma",
+          "title": {
+            "it": "Micro-risultato: Identità di Bézout u·p + v·a = 1",
+            "en": "Micro-result: Bézout's identity u·p + v·a = 1",
+            "es": "Microrresultado: Identidad de Bézout u·p + v·a = 1",
+            "ar": "نتيجة جزئية: متطابقة بيزو u·p + v·a = 1"
+          },
+          "natural": {
+            "it": "Se MCD(p, a) = 1, per il teorema di Bézout in ℤ esistono due interi u, v ∈ ℤ tali che u·p + v·a = 1.",
+            "en": "If gcd(p, a) = 1, by Bézout's theorem in ℤ there exist integers u, v ∈ ℤ such that u·p + v·a = 1.",
+            "es": "Si mcd(p, a) = 1, existen u, v ∈ ℤ tales que u·p + v·a = 1.",
+            "ar": "إذا كان gcd(p, a) = 1 فإنه يوجد عددان صحيحان u, v يحققان u·p + v·a = 1."
+          },
+          "symbolic": "gcd(p, a) = 1  ⇒  ∃ u, v ∈ ℤ : u·p + v·a = 1",
+          "lean": {
+            "code": "#check Nat.gcd_eq_gcd_ab",
+            "status": "statement_only",
+            "mathlib_version": "v4.15.0",
+            "mathlib_name": "Nat.gcd_eq_gcd_ab",
+            "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+            "verified_at": null
+          },
+          "deps": []
+        }
+      ]
+    },
+    {
+      "id": "11A51.0.2",
+      "kind": "proof",
+      "title": {
+        "it": "Moltiplicazione per b dell'identità di Bézout",
+        "en": "Multiplying Bézout's identity by b",
+        "es": "Multiplicación por b de la identidad de Bézout",
+        "ar": "ضرب متطابقة بيزو بالعدد b"
+      },
+      "natural": {
+        "it": "Se ¬(p ∣ a), allora u·p + v·a = 1. Moltiplicando per b otteniamo u·p·b + v·(a·b) = b. Poiché p divide sia u·p·b sia v·(a·b) per ipotesi, p divide la loro somma b.",
+        "en": "If ¬(p ∣ a), then u·p + v·a = 1. Multiplying by b gives u·p·b + v·(a·b) = b. Since p divides both u·p·b and v·(a·b), p divides their sum b.",
+        "es": "Multiplicando u·p + v·a = 1 por b resulta u·p·b + v·(a·b) = b; como p divide a ambos sumandos, p divide a b.",
+        "ar": "بضرب العلاقة u·p + v·a = 1 في b نحصل على u·p·b + v·(a·b) = b، وبما أن p يقسم الحدين فإنه يقسم b."
+      },
+      "symbolic": "b = p·(u·b) + v·(a·b)  ∧  p ∣ a·b  ⇒  p ∣ b",
+      "lean": {
+        "code": "theorem dvd_of_coprime_of_dvd_mul {p a b : ℕ} (hcop : p.Coprime a) (hdvd : p ∣ a * b) :\n    p ∣ b :=\n  hcop.dvd_of_dvd_mul_left hdvd",
+        "status": "compiled",
+        "mathlib_version": "v4.15.0",
+        "mathlib_name": "Nat.Coprime.dvd_of_dvd_mul_left",
+        "lean_file": "lean/Mathema/NumberTheory/FundamentalArithmetic.lean",
+        "verified_at": "2026-10-20T12:00:00Z"
+      },
+      "deps": [
+        {
+          "id": "11A51.0.1",
+          "type": "requires"
+        },
+        {
+          "id": "11A51.0.1.a",
+          "type": "requires"
+        }
+      ]
+    }
+  ],
+  "attachments": [],
+  "sources": [
+    {
+      "title": "Euclide, Elementi, Libro VII, Proposizione 30",
+      "citation": "Lemma fondamentale sulla divisibilità per un numero primo (pubblico dominio)",
+      "license_note": "Pubblico dominio → testo CC-BY-SA-4.0"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "provenance": "human",
+  "reviewed_by": [
+    "Marco Razzano"
+  ]
+}
